@@ -1,5 +1,5 @@
 # Reseller-Web
- An application for selling used clothes with an instagram type interface, each user has a profile with their objects for sale and a system of followers plus an option that includes a system for checking the originality of high-end clothes.
+ Reseller is an application for selling used clothes with an instagram type interface, each user having it's own profile with their items for sale and a system of followers. Our motivation is striving to offer a more sustainable alternative to staying trendy, encouraging people to buy fewer new clothes. 
  
 ## Team Members
 
@@ -9,4 +9,4 @@
 
 ## Product Presentation
 
-* [GitHub Wiki Page](https://github.com/tavi22/Reseller-Web/wiki)
+* [GitHub Wiki Page](https://github.com/inginerie-software-22-23/proiect-inginerie-software-0x15/wiki)
