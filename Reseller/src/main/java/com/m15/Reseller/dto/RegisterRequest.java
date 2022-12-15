@@ -1,12 +1,13 @@
 package com.m15.Reseller.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@EqualsAndHashCode
+@ToString
 public class RegisterRequest {
     private String email;
     private String username;

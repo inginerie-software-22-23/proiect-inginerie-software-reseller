@@ -7,8 +7,9 @@ import com.m15.Reseller.repository.UserRepository;
 import com.m15.Reseller.repository.VerificationTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,12 +18,21 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class AuthService {
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
 
     @Transactional
-    public void register(RegisterRequest registerRequest) {
+    public ResponseEntity<String> register(RegisterRequest registerRequest) {
+
+        boolean userExists = userRepository
+                .findByEmail(registerRequest.getEmail())
+                .isPresent();
+
+        if (userExists) {
+            return new ResponseEntity<>("This email is already in use", HttpStatus.OK);
+        }
+
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
@@ -33,6 +43,8 @@ public class AuthService {
         userRepository.save(user);
 
         generateVerificationToken(user);
+
+        return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
     }
 
     private String generateVerificationToken(User user) {
@@ -44,5 +56,4 @@ public class AuthService {
         verificationTokenRepository.save(verificationToken);
         return token;
     }
-
 }
