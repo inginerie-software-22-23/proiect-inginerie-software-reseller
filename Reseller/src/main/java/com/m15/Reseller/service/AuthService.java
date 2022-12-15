@@ -2,6 +2,7 @@ package com.m15.Reseller.service;
 
 import com.m15.Reseller.dto.RegisterRequest;
 import com.m15.Reseller.model.User;
+import com.m15.Reseller.model.UserRole;
 import com.m15.Reseller.model.VerificationToken;
 import com.m15.Reseller.repository.UserRepository;
 import com.m15.Reseller.repository.VerificationTokenRepository;
@@ -37,6 +38,7 @@ public class AuthService {
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        user.setUserRole(UserRole.USER);
         user.setCreated(Instant.now());
         user.setEnabled(false);
 

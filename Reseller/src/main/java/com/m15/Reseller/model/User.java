@@ -2,6 +2,8 @@ package com.m15.Reseller.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,6 +22,7 @@ import java.util.Collections;
 @Setter
 @EqualsAndHashCode
 @Entity
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
