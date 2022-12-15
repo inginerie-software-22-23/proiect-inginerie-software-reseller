@@ -14,11 +14,11 @@ export class SignupComponent implements OnInit {
   signupRequestPayload!: SignupRequestPayload;
 
   constructor(private authService: AuthService) { 
-    // this.signupRequestPayload = {
-    //   username: '',
-    //   email: '',
-    //   password: ''
-    // };
+    this.signupRequestPayload = {
+      username: '',
+      email: '',
+      password: ''
+    };
    }
 
   ngOnInit() {

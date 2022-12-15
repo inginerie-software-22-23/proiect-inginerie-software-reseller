@@ -1,5 +1,6 @@
 package com.m15.Reseller.config;
 
+import com.m15.Reseller.repository.UserRepository;
 import com.m15.Reseller.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +47,7 @@ public class SecurityConfigs {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .userDetailsService(userService)
                 .logout(LogoutConfigurer::permitAll)
                 .authenticationProvider(daoAuthenticationProvider())
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class);
@@ -60,20 +62,10 @@ public class SecurityConfigs {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider =
+        final DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(userService);
         return provider;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                return null;
-            }
-        };
     }
 }

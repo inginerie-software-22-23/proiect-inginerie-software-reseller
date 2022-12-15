@@ -1,6 +1,7 @@
 package com.m15.Reseller.service;
 
 import com.m15.Reseller.config.JwtUtils;
+import com.m15.Reseller.dto.AuthenticationResponse;
 import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.RegisterRequest;
 import com.m15.Reseller.exception.SpringResellerException;
@@ -39,6 +40,7 @@ public class AuthService {
     private final EmailSender emailSender;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
+    private final UserService userService;
 
     @Transactional
     public ResponseEntity<String> register(RegisterRequest registerRequest) {
@@ -72,11 +74,13 @@ public class AuthService {
         return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
     }
 
+    @Transactional
     public ResponseEntity<String> login(LoginRequest loginRequest) {
 
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
+
         String token = jwtUtils.generateToken((UserDetails) userRepository);
         final Optional<User> user = userRepository.findByUsername(loginRequest.getUsername());
         if (user.isPresent()) {
@@ -106,4 +110,6 @@ public class AuthService {
         user.setEnabled(true);
         userRepository.save(user);
     }
+
+
 }
