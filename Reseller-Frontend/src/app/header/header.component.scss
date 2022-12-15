@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .logo {
+    width: 70px;
+  }
+  
+  li {
+    padding: 14px;
+    border-right: 2px solid;
+    background-color: white;
+  }
+  
+  li:hover {
+    background-color: lightcoral;
+    cursor: pointer;
+  }
+  
+  li:first-child {
+    border-radius: 5px 0px 0px 5px;
+  }
+  
+  li:last-child {
+    border-right: none;
+    border-radius: 0px 5px 5px 0px;
+  }
+  
+  .routerLinkActive {
+    background-color:lightcoral ;
+  }
