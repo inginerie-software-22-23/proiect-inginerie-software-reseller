@@ -1,5 +1,6 @@
 package com.m15.Reseller.controller;
 
+import com.m15.Reseller.dto.AuthenticationResponse;
 import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.RegisterRequest;
 import com.m15.Reseller.service.AuthService;
@@ -19,15 +20,16 @@ public class AuthController {
         return authService.register(registerRequest);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> authenticate(@RequestBody AuthenticationResponse authenticationResponse) {
+        return authService.authenticate(authenticationResponse);
+    }
+
     @GetMapping("accountVerification/{token}")
     public ResponseEntity<String> verifyAccount(@PathVariable String token) {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account Activated Successfully", HttpStatus.OK);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        return authService.login(loginRequest);
-    }
 
 }

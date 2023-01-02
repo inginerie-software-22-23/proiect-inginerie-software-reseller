@@ -4,7 +4,7 @@ import com.m15.Reseller.config.JwtUtils;
 import com.m15.Reseller.dto.AuthenticationResponse;
 import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.RegisterRequest;
-import com.m15.Reseller.exception.SpringResellerException;
+import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.helper.EmailSender;
 import com.m15.Reseller.model.User;
 import com.m15.Reseller.model.UserRole;
@@ -13,19 +13,18 @@ import com.m15.Reseller.repository.UserRepository;
 import com.m15.Reseller.repository.VerificationTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -74,19 +73,16 @@ public class AuthService {
         return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
     }
 
-    @Transactional
-    public ResponseEntity<String> login(LoginRequest loginRequest) {
+    public ResponseEntity<String> authenticate(AuthenticationResponse request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+        );
 
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
-                loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-
-        String token = jwtUtils.generateToken((UserDetails) userRepository);
-        final Optional<User> user = userRepository.findByUsername(loginRequest.getUsername());
-        if (user.isPresent()) {
-            return new ResponseEntity<>("User Login Successful\n Token: " + token, HttpStatus.OK);
+        final User user = userService.loadUserByUsername(request.getUsername());
+        if (user != null) {
+            return ResponseEntity.ok(jwtUtils.generateToken(user));
         }
-        return new ResponseEntity<>("Login failed", HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(400).body("Error while logging in");
     }
 
     private String generateVerificationToken(User user) {
@@ -106,7 +102,7 @@ public class AuthService {
 
     private void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
-        User user = (User) userRepository.findByUsername(username).orElseThrow(() -> new SpringResellerException("User " + username + " not found"));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new SpringResellerException("User " + username + " not found"));
         user.setEnabled(true);
         userRepository.save(user);
     }
