@@ -10,12 +10,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
 @EnableTransactionManagement
-public class AppConfig implements WebMvcConfigurer {
+public class AppConfig {
 
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilterBean() {
@@ -35,7 +34,5 @@ public class AppConfig implements WebMvcConfigurer {
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
-
-
 
 }
