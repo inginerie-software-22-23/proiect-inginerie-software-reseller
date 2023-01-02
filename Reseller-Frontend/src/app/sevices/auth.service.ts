@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
-    return this.httpClient.post<LoginResponse>('http://localhost:8070/api/auth/login', loginRequestPayload)
+    return this.httpClient.post<LoginResponse>('http://localhost:8070/api/auth/login', loginRequestPayload, {responseType: 'text' as 'json'})
       .pipe(map(data => {
         this.localStorage.store('authenticationToken', data.authenticationToken);
         this.localStorage.store('username', data.username);
