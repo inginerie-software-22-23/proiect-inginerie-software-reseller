@@ -38,8 +38,10 @@ public class SecurityConfigs {
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/home/admin").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
+
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

@@ -3,6 +3,7 @@ package com.m15.Reseller.service;
 import com.m15.Reseller.config.JwtUtils;
 import com.m15.Reseller.dto.AuthenticationResponse;
 import com.m15.Reseller.dto.LoginRequest;
+import com.m15.Reseller.dto.RefreshTokenRequest;
 import com.m15.Reseller.dto.RegisterRequest;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.helper.EmailSender;
@@ -13,18 +14,14 @@ import com.m15.Reseller.repository.UserRepository;
 import com.m15.Reseller.repository.VerificationTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -32,6 +29,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -40,8 +38,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final UserService userService;
+    private final RefreshTokenService refreshTokenService;
 
-    @Transactional
     public ResponseEntity<String> register(RegisterRequest registerRequest) {
 
         boolean userExists = userRepository
@@ -73,16 +71,20 @@ public class AuthService {
         return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
     }
 
-    public ResponseEntity<String> authenticate(AuthenticationResponse request) {
-        authenticationManager.authenticate(
+    public AuthenticationResponse authenticate(LoginRequest request) {
+        Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
 
         final User user = userService.loadUserByUsername(request.getUsername());
-        if (user != null) {
-            return ResponseEntity.ok(jwtUtils.generateToken(user));
-        }
-        return ResponseEntity.status(400).body("Error while logging in");
+        String token = jwtUtils.generateToken(user);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return AuthenticationResponse.builder()
+                .authenticationToken(token)
+                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                .expiresAt(jwtUtils.extractExpiration(token))
+                .username(request.getUsername())
+                .build();
     }
 
     private String generateVerificationToken(User user) {
@@ -108,4 +110,14 @@ public class AuthService {
     }
 
 
+    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
+        String token = jwtUtils.generateToken(userService.loadUserByUsername(refreshTokenRequest.getUsername()));
+        return AuthenticationResponse.builder()
+                .authenticationToken(token)
+                .refreshToken(refreshTokenRequest.getRefreshToken())
+                .expiresAt(jwtUtils.extractExpiration(token))
+                .username(refreshTokenRequest.getUsername())
+                .build();
+    }
 }
