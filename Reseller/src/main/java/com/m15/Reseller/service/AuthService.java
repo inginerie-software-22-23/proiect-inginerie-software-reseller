@@ -46,9 +46,19 @@ public class AuthService {
                 .findByEmail(registerRequest.getEmail())
                 .isPresent();
 
+        boolean nameTaken = userRepository
+                .findByUsername(registerRequest.getUsername())
+                .isPresent();
+
         if (userExists) {
-            return new ResponseEntity<>("This email is already in use", HttpStatus.OK);
+            return new ResponseEntity<>("This email is already in use", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        if (nameTaken) {
+            return new ResponseEntity<>("This username is already in use", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
 
         User user = new User();
         user.setUsername(registerRequest.getUsername());

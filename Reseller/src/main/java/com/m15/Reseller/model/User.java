@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +23,6 @@ import java.util.Collections;
 @Setter
 @EqualsAndHashCode
 @Entity
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +38,25 @@ public class User implements UserDetails {
     private UserRole userRole;
     private Instant created;
     private boolean enabled;
+    @ManyToMany
+    @JoinTable(
+            name = "followers_following",
+            joinColumns = @JoinColumn(name = "follower_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<Follower> followers;
+    @ManyToMany
+    @JoinTable(
+            name = "wishlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id")
+
+    )
+    private Set<Post> wishlist;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole. name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(authority);
     }
 
