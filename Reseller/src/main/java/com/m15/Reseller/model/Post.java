@@ -1,6 +1,7 @@
 package com.m15.Reseller.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.Instant;
@@ -20,6 +21,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
     private String imageUrl;
+    @NotBlank(message = "Community name is required")
     private String title;
     private String description;
     private Integer price;

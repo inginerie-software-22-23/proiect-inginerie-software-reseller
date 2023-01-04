@@ -7,20 +7,27 @@ import com.m15.Reseller.dto.RefreshTokenRequest;
 import com.m15.Reseller.dto.RegisterRequest;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.helper.EmailSender;
+import com.m15.Reseller.model.Profile;
 import com.m15.Reseller.model.User;
 import com.m15.Reseller.model.UserRole;
 import com.m15.Reseller.model.VerificationToken;
+import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
 import com.m15.Reseller.repository.VerificationTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -33,6 +40,7 @@ import java.util.UUID;
 public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final VerificationTokenRepository verificationTokenRepository;
     private final EmailSender emailSender;
     private final AuthenticationManager authenticationManager;
@@ -69,6 +77,13 @@ public class AuthService {
         user.setEnabled(false);
 
         userRepository.save(user);
+
+        Profile profile = new Profile();
+        profile.setDescription("New to Reseller");
+        profile.setUsername(user.getUsername());
+        profile.setUser(user);
+
+        profileRepository.save(profile);
 
         String token = generateVerificationToken(user);
 
@@ -129,5 +144,12 @@ public class AuthService {
                 .expiresAt(jwtUtils.extractExpiration(token))
                 .username(refreshTokenRequest.getUsername())
                 .build();
+    }
+
+
+    public User getCurrentUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(user.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
     }
 }

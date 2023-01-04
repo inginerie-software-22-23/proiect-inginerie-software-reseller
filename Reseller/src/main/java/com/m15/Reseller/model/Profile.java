@@ -20,7 +20,7 @@ public class Profile {
     private String fullName;
     private String description;
     private String imageUrl;
-    private boolean isActive;
+    private boolean isActive = false;
     @OneToOne(fetch = LAZY)
     private User user;
 }
