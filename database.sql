@@ -18,6 +18,175 @@ USE `reseller`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comment` (
+  `comment_id` bigint NOT NULL AUTO_INCREMENT,
+  `created_date` datetime(6) DEFAULT NULL,
+  `text` varchar(255) DEFAULT NULL,
+  `post_id` bigint DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `FKs1slvnkuemjsq2kj4h3vhx7i1` (`post_id`),
+  KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
+  CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKs1slvnkuemjsq2kj4h3vhx7i1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `follower`
+--
+
+DROP TABLE IF EXISTS `follower`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `follower` (
+  `follow_id` bigint NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`follow_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `follower`
+--
+
+LOCK TABLES `follower` WRITE;
+/*!40000 ALTER TABLE `follower` DISABLE KEYS */;
+/*!40000 ALTER TABLE `follower` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `followers_following`
+--
+
+DROP TABLE IF EXISTS `followers_following`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `followers_following` (
+  `follower_id` bigint NOT NULL,
+  `user_id` bigint NOT NULL,
+  PRIMARY KEY (`follower_id`,`user_id`),
+  KEY `FK41gjdu8bc14wefdkydxqd3jbl` (`user_id`),
+  CONSTRAINT `FK41gjdu8bc14wefdkydxqd3jbl` FOREIGN KEY (`user_id`) REFERENCES `follower` (`follow_id`),
+  CONSTRAINT `FK9rfuwyqsyq3o1yfwy62k4uofr` FOREIGN KEY (`follower_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `followers_following`
+--
+
+LOCK TABLES `followers_following` WRITE;
+/*!40000 ALTER TABLE `followers_following` DISABLE KEYS */;
+/*!40000 ALTER TABLE `followers_following` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `likes`
+--
+
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `likes` (
+  `like_id` bigint NOT NULL AUTO_INCREMENT,
+  `post_id` bigint NOT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`like_id`),
+  KEY `FKowd6f4s7x9f3w50pvlo6x3b41` (`post_id`),
+  KEY `FKi2wo4dyk4rok7v4kak8sgkwx0` (`user_id`),
+  CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKowd6f4s7x9f3w50pvlo6x3b41` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `likes`
+--
+
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post`
+--
+
+DROP TABLE IF EXISTS `post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post` (
+  `post_id` bigint NOT NULL AUTO_INCREMENT,
+  `created_date` datetime(6) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`post_id`),
+  KEY `FK72mt33dhhs48hf9gcqrq4fxte` (`user_id`),
+  CONSTRAINT `FK72mt33dhhs48hf9gcqrq4fxte` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (2,'2023-01-04 17:01:26.229308','Foarte de calitate, bune, bune!!','testing',10,'Vand sosete',4),(3,'2023-01-04 17:08:05.107539','Marime 36','still testing',120,'Rochie de vara',4);
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profile`
+--
+
+DROP TABLE IF EXISTS `profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `profile` (
+  `profile_id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `is_active` bit(1) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `user_user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`profile_id`),
+  KEY `FKj1eifqha612nl7d01avbpe4ft` (`user_user_id`),
+  CONSTRAINT `FKj1eifqha612nl7d01avbpe4ft` FOREIGN KEY (`user_user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profile`
+--
+
+LOCK TABLES `profile` WRITE;
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES (1,'New to Reseller',NULL,NULL,_binary '\0','bigtima',2),(2,'New to Reseller',NULL,NULL,_binary '\0','mama',4);
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `refresh_token`
 --
 
@@ -29,7 +198,7 @@ CREATE TABLE `refresh_token` (
   `created_date` datetime(6) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +207,7 @@ CREATE TABLE `refresh_token` (
 
 LOCK TABLES `refresh_token` WRITE;
 /*!40000 ALTER TABLE `refresh_token` DISABLE KEYS */;
-INSERT INTO `refresh_token` VALUES (2,'2023-01-03 20:37:09.585759','9cf1870e-b62f-4a8c-8a45-731060e1daa7'),(3,'2023-01-03 20:37:20.959339','a1af6b4a-ae2f-4c01-9adc-14e2b3b929ca');
+INSERT INTO `refresh_token` VALUES (1,'2023-01-04 15:25:19.135464','b1c712e9-64e8-40ab-9af0-e073d57f55d3'),(2,'2023-01-04 16:52:30.208431','67998299-7b72-4415-b02f-3b9ae6728052');
 /*!40000 ALTER TABLE `refresh_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,8 +225,8 @@ CREATE TABLE `token` (
   `user_user_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK79keudebybjlldk2o4i0nwqev` (`user_user_id`),
-  CONSTRAINT `FK79keudebybjlldk2o4i0nwqev` FOREIGN KEY (`user_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK79keudebybjlldk2o4i0nwqev` FOREIGN KEY (`user_user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +235,7 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES (1,NULL,'49838773-1c44-4f54-8d43-c9c83a89599f',1),(2,NULL,'47e72dd9-09d9-4937-858b-45995afb6a74',2),(3,NULL,'626f6012-68a7-4735-8814-6b539ccfd9be',3),(4,NULL,'db05273e-929b-413d-a642-13d02d664ece',4),(5,NULL,'4cb9740f-07d0-4ec5-a095-843b05256721',5),(6,NULL,'a2ed9053-4a6f-4820-b887-b12a624a852b',6),(7,NULL,'04cd665e-ca25-4cf1-8dc5-959cdca9ee76',7);
+INSERT INTO `token` VALUES (1,NULL,'008a8937-f22a-498f-aa0b-602c2312f47e',2),(3,NULL,'2e30a41f-7c43-432d-ba6f-21506209cab4',4);
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +255,7 @@ CREATE TABLE `user` (
   `user_role` varchar(255) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,8 +264,34 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'2022-12-15 16:02:45.764064','test2@mail.ro',_binary '\0','$2a$10$hjJFD3ZcIHic2AYHnVBtA.HtI1ZEsHKgo0UTvLun82nsW2DtZWOXO','USER','test2'),(2,'2022-12-15 18:37:28.421725','hatz@mail.ro',_binary '\0','$2a$10$YYdM8Ex1QmeDqlmCM6NoV.dWQ51639AobgzBGyXodNggrDLn5nEA6','USER','mimi'),(3,'2022-12-15 18:59:34.502385','verif@mail.ro',_binary '','$2a$10$lL4vzbIbsc7HYLwc8GFOBOM5FBG304TtIpGIr7YZ18CuqSZXMVdUG','USER','accVerificationTest'),(4,'2022-12-15 20:53:38.301228','gion@fakemail.com',_binary '\0','$2a$10$yJo.bFuBkMaCE3p4aIgoOek0YbYksvCs0kzUV4RlrZSbKtxzLj786','USER','gioni'),(5,'2023-01-03 17:03:53.552088','big@mail.ro',_binary '','$2a$10$DiaYUv8Z/ooHelGAe.U9weVkfrX7Be3llK8Mr3RN6FOVbiFGdyw8a','USER','jaja'),(6,'2023-01-03 17:11:15.013178','salutare@mai.com',_binary '','$2a$10$qGbfyOGpd.C5dkLc2h2YW.cf8JuWSMdi9WtAj6wDZ2nQPEbP3KA1e','USER','mama'),(7,'2023-01-03 17:41:56.662389','bigt@mail.ro',_binary '','$2a$10$n/nu5tdarS.EfMsnT3Xffu0ltaebv0FnBH5nXI6TbQBcB0C9ED8c.','ADMIN','bigtima');
+INSERT INTO `user` VALUES (2,'2023-01-04 13:40:14.938178','big@ma2il.ro',_binary '','$2a$10$DpExD2L.pMFTZbCxWkDNhuWlUDXOSJyaVnX.iWxyig3yZ2N0gj.iS','ADMIN','bigtima'),(4,'2023-01-04 15:42:08.189071','ta@mail.ro',_binary '','$2a$10$p1aKbWT7uwouivwIzdYu8O2nIFWklnO/ZmVxPwug2.QFR9YvQ51MK','USER','mama');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wishlist`
+--
+
+DROP TABLE IF EXISTS `wishlist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wishlist` (
+  `user_id` bigint NOT NULL,
+  `post_id` bigint NOT NULL,
+  PRIMARY KEY (`user_id`,`post_id`),
+  KEY `FKceor61aistecmo62mqb8b8dgd` (`post_id`),
+  CONSTRAINT `FKceor61aistecmo62mqb8b8dgd` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  CONSTRAINT `FKd4r80jm8s41fgoa0xv9yy5lo8` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+LOCK TABLES `wishlist` WRITE;
+/*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -108,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-03 22:39:03
+-- Dump completed on 2023-01-05 15:59:03
