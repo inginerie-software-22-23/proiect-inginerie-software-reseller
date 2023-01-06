@@ -61,7 +61,7 @@ public class PostService {
                 .collect(toList());
     }
 
-    public PostResponse mapToDto(Post post) {
+    private PostResponse mapToDto(Post post) {
         PostResponse response = new PostResponse();
         response.setId(post.getPostId());
         response.setUsername(post.getUser().getUsername());
