@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostModel } from '../models/post-model';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  post: PostModel | undefined;
 
   constructor() { }
 
