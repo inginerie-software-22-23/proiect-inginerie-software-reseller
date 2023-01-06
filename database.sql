@@ -35,7 +35,7 @@ CREATE TABLE `comment` (
   KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
   CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKs1slvnkuemjsq2kj4h3vhx7i1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,'2023-01-06 12:06:36.176970','Marele comentariu',3,4),(2,'2023-01-06 12:09:21.438231','Marele comentariu v2',2,4),(3,'2023-01-06 12:16:09.511912','Marele comentariu v2',2,4);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +199,7 @@ CREATE TABLE `refresh_token` (
   `created_date` datetime(6) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +208,7 @@ CREATE TABLE `refresh_token` (
 
 LOCK TABLES `refresh_token` WRITE;
 /*!40000 ALTER TABLE `refresh_token` DISABLE KEYS */;
-INSERT INTO `refresh_token` VALUES (1,'2023-01-04 15:25:19.135464','b1c712e9-64e8-40ab-9af0-e073d57f55d3'),(2,'2023-01-04 16:52:30.208431','67998299-7b72-4415-b02f-3b9ae6728052');
+INSERT INTO `refresh_token` VALUES (1,'2023-01-04 15:25:19.135464','b1c712e9-64e8-40ab-9af0-e073d57f55d3'),(2,'2023-01-04 16:52:30.208431','67998299-7b72-4415-b02f-3b9ae6728052'),(3,'2023-01-06 12:06:24.459941','aa1fe83d-827c-4471-8708-4f9391ec0c49'),(4,'2023-01-06 12:23:57.410194','cb43c531-91fe-487e-bd9e-30fa0c020122'),(5,'2023-01-06 12:29:45.636844','134fe068-2d6e-4e42-a9b4-4aa60dd310d6'),(6,'2023-01-06 12:32:21.471779','ab598dd1-9a14-4a00-9025-5ec2de1bd211');
 /*!40000 ALTER TABLE `refresh_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-05 15:59:03
+-- Dump completed on 2023-01-06 14:35:11
