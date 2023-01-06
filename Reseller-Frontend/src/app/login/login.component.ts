@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginRequestPayload } from '../models/login-request.payload';
 import { AuthService } from '../sevices/auth.service';
 
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginRequestPayload!: LoginRequestPayload;
 isError: any;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginRequestPayload = {
       username: '',
       password: ''
@@ -33,6 +34,12 @@ isError: any;
 
     this.authService.login(this.loginRequestPayload).subscribe(data => {
       console.log('Login successful');
-    });
+      
+      
+      this.router.navigate(['/home']);
+
+    },
+
+    );
   }
 }
