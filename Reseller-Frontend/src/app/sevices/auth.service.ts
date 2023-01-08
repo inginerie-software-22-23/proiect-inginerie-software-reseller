@@ -15,6 +15,7 @@ export class AuthService {
   }
 
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
+
     return this.httpClient.post('http://localhost:8070/api/auth/register', signupRequestPayload, { responseType: 'text' });
   }
 
