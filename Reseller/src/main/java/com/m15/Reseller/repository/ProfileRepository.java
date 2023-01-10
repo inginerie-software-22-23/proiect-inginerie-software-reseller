@@ -8,5 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
-    List<Profile> findByUser(User user);
+    Profile findByUser(User user);
+    List<Profile> findByUsernameStartingWith(String username);
+
 }

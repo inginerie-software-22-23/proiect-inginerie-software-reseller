@@ -31,9 +31,7 @@ public class ProfileService {
     }
 
     public List<ProfileDto> getProfilesByUsername(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
-        return profileRepository.findByUser(user)
+        return profileRepository.findByUsernameStartingWith(username)
                 .stream()
                 .map(this::mapToDto)
                 .collect(toList());
