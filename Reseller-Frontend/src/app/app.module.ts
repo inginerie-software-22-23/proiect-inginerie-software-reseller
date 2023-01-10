@@ -7,11 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { ForYouComponent } from './for-you/for-you.component';
+import { TokenInterceptor } from './token-interceptor.service';
+import { PostTileComponent } from './post-tile/post-tile.component';
+import { ViewPostComponent } from './post/view-post/view-post.component';
+import { PostFormComponent } from './post/post-form/post-form.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 
@@ -23,18 +28,27 @@ import { ForYouComponent } from './for-you/for-you.component';
     HeaderComponent,
     ProfileComponent,
     HomeComponent,
-    ForYouComponent
+    ForYouComponent,
+    PostTileComponent,
+    ViewPostComponent,
+    PostFormComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    
 
    
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

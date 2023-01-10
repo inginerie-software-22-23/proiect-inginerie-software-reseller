@@ -1,14 +1,29 @@
-<table >
+<!-- <table >
     <tr>
         <tr
-        *ngFor="let p of posts; let i = index"
+        *ngFor="let p of posts;"
 
       >
-      <td>{{ i }}</td>
+
       <td>{{p.username}}</td>
       <td>{{ p.title }}</td>
       <td>{{ p.imageUrl}}</td>
       <td>{{ p.description}}</td>
       <td>{{ p.price }}</td>
     </tr>
-  </table>
+  </table> -->
+
+  <div class="reddit-body">
+    <div class="container">
+      <div class="row">
+        <hr />
+        <div class="col-md-9">
+          <app-post-tile [posts]="posts"></app-post-tile>
+        </div>
+        <div class="col-md-3">
+          <!-- <app-side-bar></app-side-bar>
+          <app-subreddit-side-bar></app-subreddit-side-bar> -->
+        </div>
+      </div>
+    </div>
+  </div>
