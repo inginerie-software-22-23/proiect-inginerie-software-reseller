@@ -5,19 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2a9069-e857-4051-be86-4a13745e7c32" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Reseller.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/LikesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/LikeDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/LikesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/LikesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/helper/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/helper/EmailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Likes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Likes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/repository/ProfileRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/repository/ProfileRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/service/EmailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/service/EmailService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -37,17 +50,26 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2JxCVaSGrd6fexgjjSv3p956ejC" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.m15.Reseller.dto" />
+      <recent name="com.m15.Reseller.service" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.ResellerApplication">
     <configuration name="ResellerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-17" />

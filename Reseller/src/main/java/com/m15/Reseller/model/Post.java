@@ -29,7 +29,7 @@ public class Post {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
     private Instant createdDate;
-
+    private Integer likesCount;
     @ManyToMany(mappedBy = "wishlist")
     private Set<User> users;
 }

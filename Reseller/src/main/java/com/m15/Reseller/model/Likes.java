@@ -13,6 +13,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Setter
 @EqualsAndHashCode
 @Entity
+@Builder
 public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
