@@ -14,7 +14,8 @@ public class PostResponse {
     private String description;
     private String username;
     private Integer price;
-//    private Integer likesCount;
-//    private Integer commentCount;
-//    private boolean isLiked;
+    private Integer likesCount;
+    private Integer commentCount;
+    private String age;
+
 }

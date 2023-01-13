@@ -1,10 +1,12 @@
 package com.m15.Reseller.service;
 
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.dto.exception.PostNotFoundException;
 import com.m15.Reseller.model.Post;
 import com.m15.Reseller.model.User;
+import com.m15.Reseller.repository.CommentRepository;
 import com.m15.Reseller.repository.PostRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +29,7 @@ public class PostService {
     private final AuthService authService;
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
     public String save(PostRequest postRequest) {
         Post newPost = new Post();
         newPost.setImageUrl(postRequest.getImageUrl());
@@ -69,6 +72,9 @@ public class PostService {
         response.setDescription(post.getDescription());
         response.setImageUrl(post.getImageUrl());
         response.setPrice(post.getPrice());
+        response.setCommentCount(commentRepository.findByPost(post).size());
+        response.setLikesCount(post.getLikesCount());
+        response.setAge(TimeAgo.using(post.getCreatedDate().toEpochMilli()));
         return response;
     }
 }
