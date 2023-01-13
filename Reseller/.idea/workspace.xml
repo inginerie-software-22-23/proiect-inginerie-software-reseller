@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2a9069-e857-4051-be86-4a13745e7c32" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/post-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/post-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/posts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/posts.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,25 +47,26 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2JxCVaSGrd6fexgjjSv3p956ejC" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
-  }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.m15.Reseller.dto" />
-      <recent name="com.m15.Reseller.service" />
-    </key>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="Application.ResellerApplication">
     <configuration name="ResellerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
