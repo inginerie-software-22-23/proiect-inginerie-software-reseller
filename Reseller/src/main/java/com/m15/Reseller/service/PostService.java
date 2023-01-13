@@ -38,7 +38,6 @@ public class PostService {
         newPost.setPrice(postRequest.getPrice());
         newPost.setUser(authService.getCurrentUser());
         newPost.setCreatedDate(Instant.now());
-        newPost.setLikesCount(0);
         postRepository.save(newPost);
         return "Success";
     }
