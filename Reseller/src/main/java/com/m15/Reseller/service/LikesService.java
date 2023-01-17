@@ -5,13 +5,19 @@ import com.m15.Reseller.dto.exception.PostNotFoundException;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Likes;
 import com.m15.Reseller.model.Post;
+import com.m15.Reseller.model.User;
 import com.m15.Reseller.repository.LikesRepository;
 import com.m15.Reseller.repository.PostRepository;
+import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +25,7 @@ import java.util.Optional;
 public class LikesService {
     private final PostRepository postRepository;
     private final LikesRepository likesRepository;
+    private final UserRepository userRepository;
     private final AuthService authService;
     public String likePost(LikeDto likeDto) {
         Post post = postRepository.findById(likeDto.getPostId())
@@ -41,5 +48,11 @@ public class LikesService {
                 .post(post)
                 .user(authService.getCurrentUser())
                 .build();
+    }
+
+    public List<LikeDto> getLikesByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        return likesRepository.findByUser(user).stream().toList();
     }
 }

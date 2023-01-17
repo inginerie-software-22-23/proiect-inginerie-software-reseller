@@ -3,6 +3,8 @@ package com.m15.Reseller.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.util.Set;
@@ -25,11 +27,11 @@ public class Post {
     private String title;
     private String description;
     private Integer price;
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
     private Instant createdDate;
     private Integer likesCount = 0;
-    @ManyToMany(mappedBy = "wishlist")
-    private Set<User> users;
+    private Integer savedCount = 0;
 }

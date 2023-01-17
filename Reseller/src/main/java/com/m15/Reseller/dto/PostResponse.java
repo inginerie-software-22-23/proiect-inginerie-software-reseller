@@ -16,6 +16,7 @@ public class PostResponse {
     private Integer price;
     private Integer likesCount;
     private Integer commentCount;
+    private Integer savedCount;
     private String age;
 
 }
