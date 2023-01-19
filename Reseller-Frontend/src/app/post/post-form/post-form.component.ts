@@ -33,11 +33,6 @@ export class PostFormComponent implements OnInit {
       price: new FormControl(0, Validators.required),
       description: new FormControl('', Validators.required),
     });
-    // this.subredditService.getAllSubreddits().subscribe((data) => {
-    //   this.subreddits = data;
-    // }, error => {
-    //   throwError(error);
-    // });
   }
 
   createPost() {
@@ -48,9 +43,7 @@ export class PostFormComponent implements OnInit {
 
     this.postService.createPost(this.postPayload).subscribe((data) => {
       this.router.navigateByUrl('/');
-    }, error => {
-      throwError(error);
-    })
+    }, error => { })
   }
 
   discardPost() {

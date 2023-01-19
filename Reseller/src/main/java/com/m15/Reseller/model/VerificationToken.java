@@ -20,6 +20,7 @@ public class VerificationToken {
     private Long id;
     private String token;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
     private Instant expiryDate;

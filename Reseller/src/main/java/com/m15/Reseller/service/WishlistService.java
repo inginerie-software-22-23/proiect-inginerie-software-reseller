@@ -1,14 +1,17 @@
 package com.m15.Reseller.service;
 
 import com.m15.Reseller.dto.LikeDto;
+import com.m15.Reseller.dto.WishlistDto;
 import com.m15.Reseller.dto.exception.PostNotFoundException;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Likes;
 import com.m15.Reseller.model.Post;
 import com.m15.Reseller.model.User;
+import com.m15.Reseller.model.Wishlist;
 import com.m15.Reseller.repository.LikesRepository;
 import com.m15.Reseller.repository.PostRepository;
 import com.m15.Reseller.repository.UserRepository;
+import com.m15.Reseller.repository.WishlistRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,51 +20,49 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 @AllArgsConstructor
 @Transactional
-public class LikesService {
+public class WishlistService {
     private final PostRepository postRepository;
-    private final LikesRepository likesRepository;
+    private final WishlistRepository wishlistRepository;
     private final UserRepository userRepository;
     private final AuthService authService;
-    public String likePost(LikeDto likeDto) {
-        Post post = postRepository.findById(likeDto.getPostId())
-                .orElseThrow(() -> new PostNotFoundException("Post with id " + likeDto.getPostId() + " not found!"));
+    public String savePost(WishlistDto wishlistDto) {
+        Post post = postRepository.findById(wishlistDto.getPostId())
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + wishlistDto.getPostId() + " not found!"));
 
-        Optional<Likes> likeByPostAndUser = likesRepository.findTopByPostAndUserOrderByLikeIdDesc(post, authService.getCurrentUser());
+        Optional<Wishlist> wishlistByPostAndUser = wishlistRepository.findTopByPostAndUserOrderByWishlistIdDesc(post, authService.getCurrentUser());
 
-        if (likeByPostAndUser.isPresent()) {
-            throw new SpringResellerException("You have already liked this post!");
+        if (wishlistByPostAndUser.isPresent()) {
+            throw new SpringResellerException("You have already saved this post!");
         }
 
-        post.setLikesCount(post.getLikesCount() + 1);
-        likesRepository.save(mapToLike(likeDto, post));
+        post.setSavedCount(post.getSavedCount() + 1);
+        wishlistRepository.save(mapToWishlist(wishlistDto, post));
         postRepository.save(post);
         return "Success";
     }
 
-    public List<LikeDto> getLikesByUsername(String username) {
+    public List<WishlistDto> getSavesByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
-        return likesRepository.findByUser(user)
+        return wishlistRepository.findByUser(user)
                 .stream()
                 .map(this::mapToDto)
                 .toList();
     }
 
-    private LikeDto mapToDto(Likes likes) {
-        LikeDto dto = new LikeDto();
-        dto.setPostId(likes.getPost().getPostId());
-        return dto;
-    }
-
-    private Likes mapToLike(LikeDto likeDto, Post post) {
-        return Likes.builder()
+    private Wishlist mapToWishlist(WishlistDto wishlistDto, Post post) {
+        return Wishlist.builder()
                 .post(post)
                 .user(authService.getCurrentUser())
                 .build();
+    }
+
+    private WishlistDto mapToDto(Wishlist wishlist) {
+        WishlistDto dto = new WishlistDto();
+        dto.setPostId(wishlist.getPost().getPostId());
+        return dto;
     }
 }
