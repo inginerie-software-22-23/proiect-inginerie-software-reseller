@@ -19,13 +19,13 @@ import static org.springframework.http.ResponseEntity.status;
 public class WishlistController {
     private final WishlistService wishlistService;
     @PostMapping
-    public ResponseEntity<String> like(@RequestBody WishlistDto wishlistDto) {
+    public ResponseEntity<String> wishlist(@RequestBody WishlistDto wishlistDto) {
 
         return status(HttpStatus.OK).body(wishlistService.savePost(wishlistDto));
     }
 
     @GetMapping("by-user/{username}")
-    public ResponseEntity<List<WishlistDto>> getLikesByUsername(@PathVariable String username) {
+    public ResponseEntity<List<WishlistDto>> getWishlistsByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(wishlistService.getSavesByUsername(username));
     }
 }

@@ -36,13 +36,6 @@ public class User implements UserDetails {
     private UserRole userRole;
     private Instant created;
     private boolean enabled;
-    @ManyToMany
-    @JoinTable(
-            name = "followers_following",
-            joinColumns = @JoinColumn(name = "follower_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<Follower> followers;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

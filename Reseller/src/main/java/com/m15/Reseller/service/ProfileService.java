@@ -41,10 +41,10 @@ public class ProfileService {
         ProfileDto profileDto = new ProfileDto();
         profileDto.setId(profile.getProfileId());
         profileDto.setUsername(profile.getUsername());
-        profileDto.setDescription(profileDto.getDescription());
+        profileDto.setDescription(profile.getDescription());
         profileDto.setFullName(profile.getFullName());
         profileDto.setImageUrl(profile.getImageUrl());
-        profileDto.setActive(profileDto.isActive());
+        profileDto.setActive(profile.isActive());
         return profileDto;
     }
 }
