@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface LikesRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findTopByPostAndUserOrderByLikeIdDesc(Post post, User user);
 
-    List<LikeDto> findByUser(User user);
+    List<Likes> findByUser(User user);
 }
