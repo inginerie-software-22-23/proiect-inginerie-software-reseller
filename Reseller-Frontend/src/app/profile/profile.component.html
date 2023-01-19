@@ -1,26 +1,24 @@
 <div class="container">
     <div class="bio">
-       <b>{{name}}</b>
+      <tr>
+        <th>Username</th>
+        <th>Full name</th>
+        <th>Image</th>
+        <th>Description</th>
+      </tr>
+      <tr >
+  
+          <td>{{name }}</td>
+          <td>{{users[0].fullName }}</td>
+          <td>{{users[0].imageUrl }}</td>
+          <td>{{users[0].description}}</td>
+       
+        </tr>
     </div>
     <div class="bio">
         <br />Posts: <b>{{postLength}}</b> 
     </div>
     <hr />
     <app-post-tile [posts]="posts"></app-post-tile>
-    <hr />
-    <!-- <div>
-      Your Comments:
     </div>
-    <div *ngFor="let comment of comments">
-      <div class="comment">
-        <div class="username">
-          <a routerLink="/user/comment.username">{{comment.username}}</a>
-        </div>
-        <div>
-          <p>{{comment.duration}}</p>
-        </div>
-        <b>{{comment.text}}</b>
-      </div> -->
-      <hr />
-    </div>
-  <!-- </div> -->
+

@@ -4,6 +4,7 @@ import { Authguard } from './authguard';
 import { ForYouComponent } from './for-you/for-you.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PostFormComponent } from './post/post-form/post-form.component';
 import { ViewPostComponent } from './post/view-post/view-post.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -13,7 +14,7 @@ const routes: Routes = [ {path: 'sign-up', component: SignupComponent},
 { path: '', component: LoginComponent },
 { path: 'view-post/:id', component: ViewPostComponent },
 { path: 'user/:name', component: ProfileComponent, canActivate: [Authguard] },
-//{ path: 'list-subreddits', component: ListSubredditsComponent },
+{ path: 'my-profile', component: MyProfileComponent },
 { path: 'create-post', component: PostFormComponent, canActivate: [Authguard] },
 { path: 'login', component: LoginComponent },
 {path: 'home', component: HomeComponent},

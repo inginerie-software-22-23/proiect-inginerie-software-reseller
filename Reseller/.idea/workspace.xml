@@ -18,136 +18,7 @@
       <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/authguard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/authguard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/for-you/for-you.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/for-you/for-you.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/for-you/for-you.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/for-you/for-you.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/header/header.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/home/home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/login/login.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/comment.payload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/comment.payload.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/create-post.payload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/create-post.payload.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/login-request.payload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/login-request.payload.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/login-response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/login-response.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/post-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/post-model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/signup-request.payload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/models/signup-request.payload.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/my-profile/my-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/my-profile/my-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/my-profile/my-profile.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/my-profile/my-profile.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/my-profile/my-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/my-profile/my-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post-tile/post-tile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post-tile/post-tile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post-tile/post-tile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post-tile/post-tile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post-tile/post-tile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post-tile/post-tile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/post-form/post-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/post-form/post-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/post-form/post-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/post-form/post-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/view-post/view-post.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/view-post/view-post.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/view-post/view-post.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/view-post/view-post.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/view-post/view-post.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/post/view-post/view-post.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/profile/profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/profile/profile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/comments.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/comments.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/posts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/sevices/posts.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/signup/signup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/signup/signup.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/signup/signup.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/signup/signup.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/signup/signup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/signup/signup.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/token-interceptor.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/token-interceptor.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/environments/environment.prod.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/environments/environment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/polyfills.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/tsconfig.app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/tsconfig.spec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/tsconfig.spec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Reseller.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/ResellerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/ResellerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/JwtAthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/JwtAthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/JwtUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/SecurityConfigs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/config/SecurityConfigs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/LikesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/LikesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/CommentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/CommentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/LikeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/LikeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/ProfileDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/ProfileDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/RefreshTokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/RefreshTokenRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/exception/CommentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/exception/CommentNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/exception/PostNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/exception/PostNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/exception/SpringResellerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/exception/SpringResellerException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/helper/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/helper/EmailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Email.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Follower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Follower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Likes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Likes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/RefreshToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/RefreshToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/VerificationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/VerificationToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/CommentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/LikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/LikesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/ProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/ProfileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/RefereshTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/RefereshTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/VerificationTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/VerificationTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/LikesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/LikesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/ProfileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/RefreshTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mailTemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mailTemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/m15/Reseller/ResellerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/m15/Reseller/ResellerApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/ResellerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/ResellerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/dto/PostResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/dto/PostResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Likes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Likes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/service/PostService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/mailTemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/mailTemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../database.sql" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +121,7 @@
       <workItem from="1673174144787" duration="4134000" />
       <workItem from="1673264805080" duration="4166000" />
       <workItem from="1673349430611" duration="1222000" />
-      <workItem from="1673625699483" duration="2791000" />
+
     </task>
     <servers />
   </component>
