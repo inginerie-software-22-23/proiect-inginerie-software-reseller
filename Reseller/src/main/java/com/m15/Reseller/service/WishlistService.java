@@ -35,7 +35,7 @@ public class WishlistService {
         Optional<Wishlist> wishlistByPostAndUser = wishlistRepository.findTopByPostAndUserOrderByWishlistIdDesc(post, authService.getCurrentUser());
 
         if (wishlistByPostAndUser.isPresent()) {
-            throw new SpringResellerException("You have already liked this post!");
+            throw new SpringResellerException("You have already saved this post!");
         }
 
         post.setSavedCount(post.getSavedCount() + 1);
