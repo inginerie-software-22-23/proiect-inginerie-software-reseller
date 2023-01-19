@@ -74,6 +74,7 @@ public class PostService {
         response.setPrice(post.getPrice());
         response.setCommentCount(post.getCommentCount());
         response.setLikesCount(post.getLikesCount());
+        response.setSavedCount(post.getSavedCount());
         response.setAge(TimeAgo.using(post.getCreatedDate().toEpochMilli()));
         return response;
     }
