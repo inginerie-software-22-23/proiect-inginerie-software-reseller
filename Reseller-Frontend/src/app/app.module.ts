@@ -40,6 +40,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
+
     
 
    
