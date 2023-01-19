@@ -16,12 +16,10 @@ import static org.springframework.http.ResponseEntity.status;
 @RequestMapping("/api/likes")
 @AllArgsConstructor
 public class LikesController {
-
     private final LikesService likesService;
 
     @PostMapping
     public ResponseEntity<String> like(@RequestBody LikeDto likeDto) {
-
         return status(HttpStatus.OK).body(likesService.likePost(likeDto));
     }
     @GetMapping("by-user/{username}")

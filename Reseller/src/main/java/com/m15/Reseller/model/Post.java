@@ -34,4 +34,5 @@ public class Post {
     private Instant createdDate;
     private Integer likesCount = 0;
     private Integer savedCount = 0;
+    private Integer commentCount = 0;
 }

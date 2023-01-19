@@ -1,10 +1,12 @@
 package com.m15.Reseller.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -15,19 +17,18 @@ import static jakarta.persistence.FetchType.LAZY;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Builder
-public class Wishlist {
+public class Follow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long wishlistId;
-    @NotNull
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "postId", referencedColumnName = "postId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Post post;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private Long id;
 
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "follower_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User follower;
+
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "followed_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User followed;
 }
