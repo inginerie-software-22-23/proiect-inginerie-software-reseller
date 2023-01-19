@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommentPayload } from '../models/comment.payload';
 import { PostModel } from '../models/post-model';
+import { User } from '../models/user';
 import { CommentsService } from '../sevices/comments.service';
 import { PostsService } from '../sevices/posts.service';
+import { ProfileService } from '../sevices/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,22 +19,29 @@ export class ProfileComponent implements OnInit {
   comments: CommentPayload[]=[];
   postLength: number=0;
   commentLength: number=0;
+  users: User[]= [];
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostsService,
-    private commentService: CommentsService) {
-    this.name = this.activatedRoute.snapshot.params['name'];
+  constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
+    private _commentService: CommentsService, private _profileService: ProfileService) {
 
-    this.postService.getAllPostsByUser(this.name).subscribe(data => {
-      this.posts = data;
-      this.postLength = data.length;
-    });
-    this.commentService.getAllCommentsByUser(this.name).subscribe(data => {
-      this.comments = data;
-      this.commentLength = data.length;
-    });
   }
 
   ngOnInit(): void {
+    this.name = this._activatedRoute.snapshot.params['name'];
+
+    this._postService.getAllPostsByUser(this.name).subscribe(data => {
+      this.posts = data;
+      this.postLength = data.length;
+    });
+    this._commentService.getAllCommentsByUser(this.name).subscribe(data => {
+      this.comments = data;
+      this.commentLength = data.length;
+    });
+
+    this._profileService.getUserByUsername(this.name).subscribe(user => {
+      this.users = user;
+      console.log(this.users);
+    });
   }
 
 }

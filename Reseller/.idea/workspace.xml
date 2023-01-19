@@ -5,23 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2a9069-e857-4051-be86-4a13745e7c32" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/WishlistController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Wishlist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/LikesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/controller/LikesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/dto/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Likes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Likes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/VerificationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/model/VerificationToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/LikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/repository/LikesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/LikesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/m15/Reseller/service/LikesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/dto/PostResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/dto/PostResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Likes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Likes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/model/Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/m15/Reseller/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/m15/Reseller/service/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/.browserslistrc" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/.browserslistrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/.vscode/extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/.vscode/extensions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/.vscode/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/.vscode/tasks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/karma.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/karma.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Reseller-Frontend/src/app/app-routing.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +122,7 @@
       <workItem from="1673174144787" duration="4134000" />
       <workItem from="1673264805080" duration="4166000" />
       <workItem from="1673349430611" duration="1222000" />
-      <workItem from="1673625699483" duration="2791000" />
+
     </task>
     <servers />
   </component>

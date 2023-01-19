@@ -4,27 +4,16 @@
     <!-- Section to Display Post Information-->
     <div class="col-md-11">
       <span class="post-info">
-        <span class="post-title"><a class="posturl" routerLink="">{{post.title}}</a></span>
+        <button class="post-title" (click)="goToPost(post.id)">{{post.title}}</button>
         <span> . Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
-        <!-- <span> . {{post.imageUrl}}</span> -->
       </span>
       <hr />
       <div class="post-title">
         <a class="postname">{{post.imageUrl}}</a>
       </div>
       <div>
-        <!-- <a class="postname">{{post.description}}</a> -->
         <p class="post-text" [innerHtml]="post.description"></p>
       </div>
       <hr />
-      <span>
-        <!-- <a class="btnCommments" role="button">
-          <fa-icon [icon]="faComments"></fa-icon>
-          Comments({{post.commentCount}})
-        </a> -->
-        <button class="login" (click)="goToPost(post.id)">
-          Read Post
-        </button>
-      </span>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { map, Observable, tap, throwError } from 'rxjs';
 import { LoginRequestPayload } from '../models/login-request.payload';
 import { LoginResponse } from '../models/login-response';
 import { SignupRequestPayload } from '../models/signup-request.payload';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -86,4 +87,7 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
   }
+
+
+
 }

@@ -44,13 +44,13 @@ export class ViewPostComponent implements OnInit {
     {  next : data => {
       this.commentForm.get('text')?.setValue('');
       this.getCommentsForPost();
-      location.reload();
+      
     }, 
     error: () => {
-      //throwError(error);
     }
-  }
+  } 
     )
+    window.location.reload();
   }
 
   private getPostById() {
@@ -59,7 +59,7 @@ export class ViewPostComponent implements OnInit {
       this.post = data;
     },
      error: () => {
-      //throwError(error);
+  
     }}
     );
   }

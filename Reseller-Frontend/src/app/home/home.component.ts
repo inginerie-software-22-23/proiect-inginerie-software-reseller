@@ -21,24 +21,10 @@ export class HomeComponent implements OnInit {
   }); }
 
   ngOnInit(): void {
-    
-    // this.subscriptionList.push(this._postService.getAllPosts().subscribe(
-    //   (productList: PostModel[]) => {this.posts = productList}
-    // ))
-  
+
 
   }
 
-  // ngOnDestroy(): void {
-  //   this.subscriptionList.forEach((sub) => sub.unsubscribe())
-  // }
 
-  // private getPostById() {
-  //   this._postService.getPost(this.postId).subscribe(data => {
-  //     this.post = data;
-  //   }, error => {
-  //     throwError(error);
-  //   });
-  // }
 
 }
