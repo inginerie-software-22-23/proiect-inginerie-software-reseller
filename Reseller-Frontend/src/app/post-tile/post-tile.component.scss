@@ -24,10 +24,10 @@
 
 }
 
-// .commments:hover{
-   
-//     cursor: pointer;
-// }
+.btns{
+    display: flex;
+    column-gap: 2em ;
+}
 
 .post-title{
     background: none;
@@ -49,9 +49,4 @@
 
 .post-text{
     margin-top: 10px;
-}
-.aligned-with-icon{
-    position: relative;
-    top: -5px;
-    margin-left: 5px; /* optional */
 }

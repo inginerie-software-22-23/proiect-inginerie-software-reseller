@@ -29,7 +29,7 @@ export class MyProfileComponent implements OnInit {
  
 
 
-  constructor(private _profileService: ProfileService,  private authServ: AuthService, private _activatedRoute: ActivatedRoute, private _postService: PostsService,
+  constructor(private router: Router,private _profileService: ProfileService,  private authServ: AuthService, private _activatedRoute: ActivatedRoute, private _postService: PostsService,
     private _commentService: CommentsService) { }
 
 
@@ -49,6 +49,10 @@ export class MyProfileComponent implements OnInit {
       this.users = user;
       console.log(this.users);
     });
+   }
+   logout(){
+    this.authServ.logout();
+    this.router.navigateByUrl('/login');
    }
 
 
