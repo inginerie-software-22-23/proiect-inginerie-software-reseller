@@ -1,7 +1,9 @@
 package com.m15.Reseller.controller;
 
+import com.m15.Reseller.dto.CommentDto;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.PostResponse;
+import com.m15.Reseller.dto.ProfileDto;
 import com.m15.Reseller.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,8 +36,13 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getAllPosts());
     }
 
-    @GetMapping("by-user/{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<List<PostResponse>> getPostsByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(postService.getPostsByUsername(username));
+    }
+
+    @GetMapping("/{id}/likes")
+    public ResponseEntity<List<ProfileDto>> getLikesForPost(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(postService.getLikesForPost(id));
     }
 }
