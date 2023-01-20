@@ -8,17 +8,17 @@ import { CommentPayload } from '../models/comment.payload';
 })
 export class CommentsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) { }
 
   getAllCommentsForPost(postId: number): Observable<CommentPayload[]> {
-    return this.httpClient.get<CommentPayload[]>('http://localhost:8070/api/comment/by-post/' + postId);
+    return this._httpClient.get<CommentPayload[]>('http://localhost:8070/api/comment/by-post/' + postId);
   }
 
   postComment(commentPayload: CommentPayload): Observable<any> {
-    return this.httpClient.post<any>('http://localhost:8070/api/comment', commentPayload);
+    return this._httpClient.post<any>('http://localhost:8070/api/comment', commentPayload);
   }
 
   getAllCommentsByUser(name: string) {
-    return this.httpClient.get<CommentPayload[]>('http://localhost:8070/api/comment/by-user/' + name);
+    return this._httpClient.get<CommentPayload[]>('http://localhost:8070/api/comment/by-user/' + name);
   }
 }
