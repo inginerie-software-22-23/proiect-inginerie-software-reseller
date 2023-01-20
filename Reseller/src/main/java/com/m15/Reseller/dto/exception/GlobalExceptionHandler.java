@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-//@ControllerAdvice
-//public class GlobalExceptionHandler implements HandlerExceptionResolver {
-//
-//    @ExceptionHandler(Exception.class)
-//    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-//        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//        return new ModelAndView("error");
-//    }
-//}
+@ControllerAdvice
+public class GlobalExceptionHandler implements HandlerExceptionResolver {
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        return new ModelAndView("error");
+    }
+}
