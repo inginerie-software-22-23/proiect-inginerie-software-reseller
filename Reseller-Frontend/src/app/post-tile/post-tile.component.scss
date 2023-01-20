@@ -17,16 +17,17 @@
     color: lightcoral ;
 }
 
-.btnCommments{
-    border-radius: 2px solid;
-    color: #878A8C;
-    opacity: 1;
+.commments{
+    background: white;
+    border: none;
+    padding: 0;
+
 }
 
-.btnCommments:hover{
-    opacity: 0.65;
-    cursor: pointer;
-}
+// .commments:hover{
+   
+//     cursor: pointer;
+// }
 
 .post-title{
     background: none;
@@ -48,4 +49,9 @@
 
 .post-text{
     margin-top: 10px;
+}
+.aligned-with-icon{
+    position: relative;
+    top: -5px;
+    margin-left: 5px; /* optional */
 }

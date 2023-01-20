@@ -75,4 +75,15 @@ export class ViewPostComponent implements OnInit {
     );
   }
 
+  private getLikesForPost() {
+    this.commentService.getAllCommentsForPost(this.postId).subscribe(
+      {next :data => {
+      this.comments = data;
+    }, 
+    error:() => {
+      //throwError(error);
+    }}
+    );
+  }
+
 }

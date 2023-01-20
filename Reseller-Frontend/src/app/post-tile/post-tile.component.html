@@ -1,7 +1,4 @@
-<!-- Display Posts-->
 <div class="row post" *ngFor="let post of posts">
-    <!-- <app-vote-button [post]="post"></app-vote-button> -->
-    <!-- Section to Display Post Information-->
     <div class="col-md-11">
       <span class="post-info">
         <button class="post-title" (click)="goToPost(post.id)">{{post.title}}</button>
@@ -14,6 +11,9 @@
       <div>
         <p class="post-text" [innerHtml]="post.description"></p>
       </div>
-      <hr />
+      <div >
+        <button class="comments" (click)="goToPost(post.id)"><mat-icon>comments</mat-icon><span class="aligned-with-icon">{{post.commentCount}}</span></button>
+        <button class="comments" > <mat-icon>thumb_up_alt</mat-icon><span class="aligned-with-icon">{{post.likesCount}}</span>  </button>
+      </div>
     </div>
   </div>
