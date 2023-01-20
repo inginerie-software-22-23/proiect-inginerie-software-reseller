@@ -1,9 +1,12 @@
 package com.m15.Reseller.service;
 
-import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.dto.ProfileDto;
+import com.m15.Reseller.dto.exception.PostNotFoundException;
+import com.m15.Reseller.dto.exception.SpringResellerException;
+import com.m15.Reseller.model.Follow;
 import com.m15.Reseller.model.Profile;
 import com.m15.Reseller.model.User;
+import com.m15.Reseller.repository.FollowRepository;
 import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -11,7 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -22,6 +25,7 @@ import static java.util.stream.Collectors.toList;
 public class ProfileService {
     private final ProfileRepository profileRepository;
     private final UserRepository userRepository;
+    private final FollowRepository followRepository;
 
     public List<ProfileDto> getAllProfiles() {
         return profileRepository.findAll()
@@ -30,9 +34,38 @@ public class ProfileService {
                 .collect(toList());
     }
 
-    public List<ProfileDto> getProfilesByUsername(String username) {
-        return profileRepository.findByUsernameStartingWith(username)
-                .stream()
+    public ProfileDto getProfileByUsername(String username) {
+        return mapToDto(profileRepository.findByUsername(username)
+                .orElseThrow(() -> new SpringResellerException("Profile not found!")));
+    }
+
+    public List<ProfileDto> getFollowing(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        List<Follow> follows = followRepository.findAllByFollower(user);
+        List<Profile> profiles = new LinkedList<>();
+        for (Follow follow : follows) {
+            profiles.add(profileRepository.findById(follow.getFollowed().getUserId())
+                    .orElseThrow(() -> new SpringResellerException("Profile not found!")));
+        }
+
+        return profiles.stream()
+                .map(this::mapToDto)
+                .collect(toList());
+    }
+
+    public List<ProfileDto> getFollowers(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+
+        List<Follow> follows = followRepository.findAllByFollowed(user);
+        List<Profile> profiles = new LinkedList<>();
+        for (Follow follow : follows) {
+            profiles.add(profileRepository.findById(follow.getFollower().getUserId())
+                    .orElseThrow(() -> new SpringResellerException("Profile not found!")));
+        }
+
+        return profiles.stream()
                 .map(this::mapToDto)
                 .collect(toList());
     }
@@ -47,4 +80,5 @@ public class ProfileService {
         profileDto.setActive(profile.isActive());
         return profileDto;
     }
+
 }
