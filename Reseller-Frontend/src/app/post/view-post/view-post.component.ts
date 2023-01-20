@@ -44,13 +44,13 @@ export class ViewPostComponent implements OnInit {
     {  next : data => {
       this.commentForm.get('text')?.setValue('');
       this.getCommentsForPost();
-      location.reload();
+      
     }, 
     error: () => {
-      //throwError(error);
     }
-  }
+  } 
     )
+    window.location.reload();
   }
 
   private getPostById() {
@@ -59,12 +59,23 @@ export class ViewPostComponent implements OnInit {
       this.post = data;
     },
      error: () => {
-      //throwError(error);
+  
     }}
     );
   }
 
   private getCommentsForPost() {
+    this.commentService.getAllCommentsForPost(this.postId).subscribe(
+      {next :data => {
+      this.comments = data;
+    }, 
+    error:() => {
+      //throwError(error);
+    }}
+    );
+  }
+
+  private getLikesForPost() {
     this.commentService.getAllCommentsForPost(this.postId).subscribe(
       {next :data => {
       this.comments = data;

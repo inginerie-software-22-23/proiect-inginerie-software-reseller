@@ -11,7 +11,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/notification")
 @AllArgsConstructor
 public class NotificationController {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long notificationId;
 }

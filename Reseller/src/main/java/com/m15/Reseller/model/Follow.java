@@ -5,6 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static jakarta.persistence.FetchType.LAZY;
 
 @Data
@@ -14,17 +17,18 @@ import static jakarta.persistence.FetchType.LAZY;
 @Setter
 @EqualsAndHashCode
 @Entity
-public class Profile {
+public class Follow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long profileId;
-    private String username;
-    private String fullName;
-    private String description;
-    private String imageUrl;
-    private boolean isActive = false;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private Long id;
+
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "follower_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private User follower;
+
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "followed_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User followed;
 }

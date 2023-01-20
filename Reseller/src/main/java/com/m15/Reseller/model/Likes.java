@@ -3,6 +3,8 @@ package com.m15.Reseller.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -19,10 +21,12 @@ public class Likes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeId;
     @NotNull
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 }

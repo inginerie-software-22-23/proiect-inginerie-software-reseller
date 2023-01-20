@@ -4,5 +4,8 @@ export class PostModel {
     imageUrl: string ='';
     description: string | undefined;
     username: string | undefined;
-    price: number | undefined
+    price: number | undefined;
+    commentCount: number =0;
+    likesCount: number =0;
+    savedCount: number = 0;
 }

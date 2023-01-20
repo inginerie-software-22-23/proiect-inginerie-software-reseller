@@ -17,6 +17,8 @@ import { PostTileComponent } from './post-tile/post-tile.component';
 import { ViewPostComponent } from './post/view-post/view-post.component';
 import { PostFormComponent } from './post/post-form/post-form.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon'
 
 
 
@@ -40,6 +42,9 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
+    BrowserAnimationsModule,
+    MatIconModule
+
     
 
    
