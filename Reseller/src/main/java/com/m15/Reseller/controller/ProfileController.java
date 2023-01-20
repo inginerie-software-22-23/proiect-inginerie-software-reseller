@@ -1,8 +1,6 @@
 package com.m15.Reseller.controller;
 
-import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.dto.ProfileDto;
-import com.m15.Reseller.model.Profile;
 import com.m15.Reseller.service.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,8 +24,18 @@ public class ProfileController {
         return status(HttpStatus.OK).body(profileService.getAllProfiles());
     }
 
-    @GetMapping("by-user/{username}")
-    public ResponseEntity<List<ProfileDto>> getProfilesByUsername(@PathVariable String username) {
-        return status(HttpStatus.OK).body(profileService.getProfilesByUsername(username));
+    @GetMapping("/{username}")
+    public ResponseEntity<ProfileDto> getProfilesByUsername(@PathVariable String username) {
+        return status(HttpStatus.OK).body(profileService.getProfileByUsername(username));
+    }
+
+    @GetMapping("/{username}/followers")
+    public ResponseEntity<List<ProfileDto>> getFollowers(@PathVariable String username) {
+        return status(HttpStatus.OK).body(profileService.getFollowers(username));
+    }
+
+    @GetMapping("/{username}/following")
+    public ResponseEntity<List<ProfileDto>> getFollowing(@PathVariable String username) {
+        return status(HttpStatus.OK).body(profileService.getFollowing(username));
     }
 }
