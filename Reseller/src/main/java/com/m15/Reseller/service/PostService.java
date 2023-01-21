@@ -79,7 +79,7 @@ public class PostService {
         List<Profile> profiles = new LinkedList<>();
 
         for (Likes like: likes) {
-            profiles.add(profileRepository.findByUser(like.getUser())
+            profiles.add(profileRepository.findByUsername(like.getUser().getUsername())
                     .orElseThrow(() -> new SpringResellerException("Profile not found!")));
         }
 
