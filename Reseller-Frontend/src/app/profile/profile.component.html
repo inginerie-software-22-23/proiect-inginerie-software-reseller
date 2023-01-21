@@ -15,6 +15,15 @@
        
         </tr>
     </div>
+
+    <form>
+
+      <button [ngClass]="{'followup' : isFollow == true,
+          'unfollow' : isFollow== false }" 
+          (click)="onClick()">
+          {{isFollow == true ? 'Unfollow' : (isFollow == false ? 'Follow' : '')}}
+      </button>
+      </form>
     <div class="bio">
         <br />Posts: <b>{{postLength}}</b> 
     </div>
