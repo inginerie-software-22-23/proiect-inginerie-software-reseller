@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   postLength: number=0;
   commentLength: number=0;
   users: User[]= [];
+  public isFollow: boolean = false;
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
     private _commentService: CommentsService, private _profileService: ProfileService) {
@@ -43,5 +44,11 @@ export class ProfileComponent implements OnInit {
       console.log(this.users);
     });
   }
+
+  onClick(){
+    this.isFollow = !this.isFollow;
+
+  }
+
 
 }
