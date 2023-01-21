@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
-    Profile findByUser(User user);
+    Optional<Profile> findByUser(User user);
     Optional<Profile> findByUsername(String username);
 
 }

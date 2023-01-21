@@ -61,7 +61,7 @@ public class ProfileService {
         List<Follow> follows = followRepository.findAllByFollowed(user);
         List<Profile> profiles = new LinkedList<>();
         for (Follow follow : follows) {
-            profiles.add(profileRepository.findById(follow.getFollower().getUserId())
+            profiles.add(profileRepository.findByUser(follow.getFollower())
                     .orElseThrow(() -> new SpringResellerException("Profile not found!")));
         }
 
@@ -70,7 +70,7 @@ public class ProfileService {
                 .collect(toList());
     }
 
-    private ProfileDto mapToDto(Profile profile) {
+    public ProfileDto mapToDto(Profile profile) {
         ProfileDto profileDto = new ProfileDto();
         profileDto.setId(profile.getProfileId());
         profileDto.setUsername(profile.getUsername());
