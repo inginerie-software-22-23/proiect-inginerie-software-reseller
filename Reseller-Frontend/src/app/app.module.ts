@@ -18,7 +18,9 @@ import { ViewPostComponent } from './post/view-post/view-post.component';
 import { PostFormComponent } from './post/post-form/post-form.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import { LikeButtonComponent } from './like-button/like-button.component'
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -34,7 +36,9 @@ import {MatIconModule} from '@angular/material/icon'
     PostTileComponent,
     ViewPostComponent,
     PostFormComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    LikeButtonComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ import {MatIconModule} from '@angular/material/icon'
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot(),
 
     
 
