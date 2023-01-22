@@ -5,11 +5,10 @@ import com.m15.Reseller.service.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.status;
@@ -25,7 +24,7 @@ public class ProfileController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<ProfileDto> getProfilesByUsername(@PathVariable String username) {
+    public ResponseEntity<ProfileDto> getProfileByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(profileService.getProfileByUsername(username));
     }
 
@@ -37,5 +36,15 @@ public class ProfileController {
     @GetMapping("/{username}/following")
     public ResponseEntity<List<ProfileDto>> getFollowing(@PathVariable String username) {
         return status(HttpStatus.OK).body(profileService.getFollowing(username));
+    }
+
+    @PostMapping("/{username}/profile-picture")
+    public ResponseEntity<String> uploadProfilePicture(@PathVariable("username") String username, @RequestParam("file") MultipartFile file) {
+        return status(HttpStatus.OK).body(profileService.uploadProfilePicture(username, file));
+    }
+
+    @GetMapping("/{username}/profile-picture")
+    public ResponseEntity<byte[]> getProfilePicture(@PathVariable("username") String username) throws IOException {
+        return status(HttpStatus.OK).body(profileService.getProfilePicture(username));
     }
 }
