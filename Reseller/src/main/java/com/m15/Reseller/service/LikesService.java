@@ -3,10 +3,9 @@ package com.m15.Reseller.service;
 import com.m15.Reseller.dto.LikeDto;
 import com.m15.Reseller.dto.exception.PostNotFoundException;
 import com.m15.Reseller.dto.exception.SpringResellerException;
-import com.m15.Reseller.model.Likes;
-import com.m15.Reseller.model.Post;
-import com.m15.Reseller.model.User;
+import com.m15.Reseller.model.*;
 import com.m15.Reseller.repository.LikesRepository;
+import com.m15.Reseller.repository.NotificationRepository;
 import com.m15.Reseller.repository.PostRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -14,10 +13,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -26,6 +24,7 @@ public class LikesService {
     private final PostRepository postRepository;
     private final LikesRepository likesRepository;
     private final UserRepository userRepository;
+    private final NotificationRepository notificationRepository;
     private final AuthService authService;
     public String likePost(LikeDto likeDto) {
         Post post = postRepository.findById(likeDto.getPostId())
@@ -40,6 +39,17 @@ public class LikesService {
         post.setLikesCount(post.getLikesCount() + 1);
         likesRepository.save(mapToLike(likeDto, post));
         postRepository.save(post);
+
+        Notification notification = new Notification();
+        notification.setText(authService.getCurrentUser().getUsername() + " just liked your post");
+        notification.setPost(true);
+        notification.setSender(authService.getCurrentUser());
+        notification.setRecipient(post.getUser());
+        notification.setInteractionPost(post);
+        notification.setType(NotificationType.LIKE);
+        notification.setTimestamp(LocalDateTime.now());
+        notificationRepository.save(notification);
+
         return "Success";
     }
 

@@ -4,14 +4,18 @@ import com.m15.Reseller.dto.FollowDto;
 import com.m15.Reseller.dto.exception.FollowNotFound;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Follow;
+import com.m15.Reseller.model.Notification;
+import com.m15.Reseller.model.NotificationType;
 import com.m15.Reseller.model.User;
 import com.m15.Reseller.repository.FollowRepository;
+import com.m15.Reseller.repository.NotificationRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Service
@@ -21,6 +25,7 @@ public class FollowService {
 
     private final FollowRepository followRepository;
     private final UserRepository userRepository;
+    private final NotificationRepository notificationRepository;
     private final AuthService authService;
 
     public String followUser(FollowDto followDto) {
@@ -41,6 +46,16 @@ public class FollowService {
         follow.setFollower(follower);
         follow.setFollowed(followed);
         followRepository.save(follow);
+
+        Notification notification = new Notification();
+        notification.setText(follower.getUsername() + " started following you");
+        notification.setPost(false);
+        notification.setSender(follower);
+        notification.setRecipient(followed);
+        notification.setType(NotificationType.FOLLOW);
+        notification.setTimestamp(LocalDateTime.now());
+        notificationRepository.save(notification);
+
         return "Success";
     }
 
