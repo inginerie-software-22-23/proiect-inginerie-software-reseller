@@ -39,6 +39,9 @@ public class CommentService {
         comment.setUser(authService.getCurrentUser());
         comment.setCreatedDate(Instant.now());
         commentRepository.save(comment);
+        post.setCommentCount(post.getCommentCount() + 1);
+        postRepository.save(post);
+
         emailSender.send(post.getUser().getEmail(),
                 emailSender.buildCommentNotificationEmail(post.getUser(), dto.getText()), "New comment on your post");
 

@@ -26,6 +26,7 @@ export class PostFormComponent implements OnInit {
     }
   }
 
+
   ngOnInit() {
     this.createPostForm = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -42,12 +43,13 @@ export class PostFormComponent implements OnInit {
     this.postPayload.description = this.createPostForm.get('description')?.value;
 
     this.postService.createPost(this.postPayload).subscribe((data) => {
-      this.router.navigateByUrl('/');
+     
     }, error => { })
+    this.router.navigateByUrl('/my-profile');
   }
 
   discardPost() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/my-profile');
   }
 
 }

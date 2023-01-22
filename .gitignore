@@ -2,3 +2,7 @@ Reseller/.idea/misc.xml
 Reseller/.idea/workspace.xml
 Reseller/.idea/dataSources.local.xml
 
+Reseller.iml
+Reseller/pom.xml
+Reseller/src/main/java/com/m15/Reseller/controller/PostController.java
+Reseller/src/main/resources/application.properties

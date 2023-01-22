@@ -20,6 +20,7 @@ const routes: Routes = [ {path: 'sign-up', component: SignupComponent},
 {path: 'home', component: HomeComponent},
 {path: 'profile', component: ProfileComponent},
 {path: 'for-you', component: ForYouComponent},
+{ path: 'create-post', component: PostFormComponent, canActivate: [Authguard] },
 ];
 
 @NgModule({

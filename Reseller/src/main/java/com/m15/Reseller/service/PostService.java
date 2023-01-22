@@ -1,13 +1,19 @@
 package com.m15.Reseller.service;
 
 import com.github.marlonlom.utilities.timeago.TimeAgo;
+import com.m15.Reseller.dto.CommentDto;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.PostResponse;
+import com.m15.Reseller.dto.ProfileDto;
 import com.m15.Reseller.dto.exception.PostNotFoundException;
+import com.m15.Reseller.dto.exception.SpringResellerException;
+import com.m15.Reseller.model.Likes;
 import com.m15.Reseller.model.Post;
+import com.m15.Reseller.model.Profile;
 import com.m15.Reseller.model.User;
-import com.m15.Reseller.repository.CommentRepository;
+import com.m15.Reseller.repository.LikesRepository;
 import com.m15.Reseller.repository.PostRepository;
+import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -15,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.LinkedList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -26,7 +33,10 @@ public class PostService {
     private final AuthService authService;
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final CommentRepository commentRepository;
+    private final LikesRepository likesRepository;
+    private final ProfileRepository profileRepository;
+    private final ProfileService profileService;
+
     public String save(PostRequest postRequest) {
         Post newPost = new Post();
         newPost.setImageUrl(postRequest.getImageUrl());
@@ -58,6 +68,23 @@ public class PostService {
         return postRepository.findByUser(user)
                 .stream()
                 .map(this::mapToDto)
+                .collect(toList());
+    }
+
+    public List<ProfileDto> getLikesForPost(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException(id.toString()));
+
+        List<Likes> likes = likesRepository.findAllByPost(post);
+        List<Profile> profiles = new LinkedList<>();
+
+        for (Likes like: likes) {
+            profiles.add(profileRepository.findByUsername(like.getUser().getUsername())
+                    .orElseThrow(() -> new SpringResellerException("Profile not found!")));
+        }
+
+        return profiles.stream()
+                .map(profileService::mapToDto)
                 .collect(toList());
     }
 

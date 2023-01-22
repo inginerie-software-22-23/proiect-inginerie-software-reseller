@@ -11,9 +11,9 @@
       <div>
         <p class="post-text" [innerHtml]="post.description"></p>
       </div>
-      <div >
-        <button class="comments" (click)="goToPost(post.id)"><mat-icon>comments</mat-icon><span class="aligned-with-icon">{{post.commentCount}}</span></button>
-        <button class="comments" > <mat-icon>thumb_up_alt</mat-icon><span class="aligned-with-icon">{{post.likesCount}}</span>  </button>
+      <div class="btns" >
+        <mat-icon (click)="goToPost(post.id)">comments</mat-icon><span class="aligned-with-icon">{{post.commentCount}}</span>
+        <app-like-button [post]="post"></app-like-button>
       </div>
     </div>
   </div>
