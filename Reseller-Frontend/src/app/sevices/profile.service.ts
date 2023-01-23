@@ -11,7 +11,14 @@ export class ProfileService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   getUserByUsername(username:String){
-    //username= this.getUserName();
-    return this.httpClient.get<User[]>('http://localhost:8070/api/profile/by-user/' + username) ;
+ 
+    return this.httpClient.get<User>('http://localhost:8070/api/profile/' + username) ;
+  }
+  getFollowersByUsername(username:String){
+    return this.httpClient.get<User[]>('http://localhost:8070/api/profile/' + username + '/followers') ;
+  }
+
+  getFollowingByUsername(username:String){
+    return this.httpClient.get<User[]>('http://localhost:8070/api/profile/' + username + '/following') ;
   }
 }
