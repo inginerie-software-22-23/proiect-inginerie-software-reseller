@@ -1,7 +1,6 @@
 package com.m15.Reseller.service;
 
 import com.github.marlonlom.utilities.timeago.TimeAgo;
-import com.m15.Reseller.dto.CommentDto;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.dto.ProfileDto;
@@ -19,7 +18,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class PostService {
     private final LikesRepository likesRepository;
     private final ProfileRepository profileRepository;
     private final ProfileService profileService;
+    private final FirebaseStorageService storageService;
 
     public String save(PostRequest postRequest) {
         Post newPost = new Post();
@@ -101,5 +103,22 @@ public class PostService {
         response.setSavedCount(post.getSavedCount());
         response.setAge(TimeAgo.using(post.getCreatedDate().toEpochMilli()));
         return response;
+    }
+
+    public String uploadProductPicture(Long id, MultipartFile file) {
+        String productUrl = storageService.storeFile(file, "product-images/");
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("Post not found!"));
+
+        post.setImageUrl(productUrl);
+        postRepository.save(post);
+        return "Success";
+    }
+
+    public byte[] getProductPicture(Long id) throws IOException {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("Post not found!"));
+
+        return storageService.getFile(post.getImageUrl());
     }
 }

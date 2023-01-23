@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommentPayload } from '../models/comment.payload';
+import { FollowPayload } from '../models/follow.payload';
 import { PostModel } from '../models/post-model';
 import { User } from '../models/user';
 import { CommentsService } from '../sevices/comments.service';
+import { FollowService } from '../sevices/follow.service';
 import { PostsService } from '../sevices/posts.service';
 import { ProfileService } from '../sevices/profile.service';
 
@@ -19,34 +21,48 @@ export class ProfileComponent implements OnInit {
   comments: CommentPayload[]=[];
   postLength: number=0;
   commentLength: number=0;
-  users: User[]= [];
+  user!: User;
   public isFollow: boolean = false;
+  followRequest: FollowPayload = new FollowPayload;
+  followers: number=0;
+  following: number=0;
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
-    private _commentService: CommentsService, private _profileService: ProfileService) {
+    private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService) {
 
   }
 
   ngOnInit(): void {
     this.name = this._activatedRoute.snapshot.params['name'];
+    
+
 
     this._postService.getAllPostsByUser(this.name).subscribe(data => {
       this.posts = data;
       this.postLength = data.length;
     });
-    this._commentService.getAllCommentsByUser(this.name).subscribe(data => {
-      this.comments = data;
-      this.commentLength = data.length;
-    });
 
     this._profileService.getUserByUsername(this.name).subscribe(user => {
-      this.users = user;
-      console.log(this.users);
+      this.user = user;
+      
     });
+    this._profileService.getFollowersByUsername(this.name).subscribe(data => {
+      this.followers= data.length;
+    });
+
+    this._profileService.getFollowingByUsername(this.name).subscribe(data => {
+      this.following= data.length;
+    });
+
+    
+    console.log(this.user.id)
   }
 
-  onClick(){
-    this.isFollow = !this.isFollow;
+    follow(){
+      this.followRequest.followed =this.user.id;
+      this._followService.postFollow(this.followRequest).subscribe(data=>{
+        
+      })
 
   }
 

@@ -42,12 +42,12 @@ public class ProfileService {
     }
 
     public List<ProfileDto> getFollowing(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
-        List<Follow> follows = followRepository.findAllByFollower(user);
+        Profile profile = profileRepository.findByUsername(username)
+                .orElseThrow(() -> new SpringResellerException("Profile not found!"));
+        List<Follow> follows = followRepository.findAllByFollower(profile);
         List<Profile> profiles = new LinkedList<>();
         for (Follow follow : follows) {
-            profiles.add(profileRepository.findById(follow.getFollowed().getUserId())
+            profiles.add(profileRepository.findById(follow.getFollowed().getProfileId())
                     .orElseThrow(() -> new SpringResellerException("Profile not found!")));
         }
 
@@ -57,13 +57,13 @@ public class ProfileService {
     }
 
     public List<ProfileDto> getFollowers(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        Profile profile = profileRepository.findByUsername(username)
+                .orElseThrow(() -> new SpringResellerException("Profile not found!"));
 
-        List<Follow> follows = followRepository.findAllByFollowed(user);
+        List<Follow> follows = followRepository.findAllByFollowed(profile);
         List<Profile> profiles = new LinkedList<>();
         for (Follow follow : follows) {
-            profiles.add(profileRepository.findByUser(follow.getFollower())
+            profiles.add(profileRepository.findById(follow.getFollower().getProfileId())
                     .orElseThrow(() -> new SpringResellerException("Profile not found!")));
         }
 
@@ -76,6 +76,7 @@ public class ProfileService {
         ProfileDto profileDto = new ProfileDto();
         profileDto.setId(profile.getProfileId());
         profileDto.setUsername(profile.getUsername());
+        profileDto.setUserId(profile.getUser().getUserId());
         profileDto.setDescription(profile.getDescription());
         profileDto.setFullName(profile.getFullName());
         profileDto.setImageUrl(profile.getImageUrl());
@@ -84,7 +85,7 @@ public class ProfileService {
     }
 
     public String uploadProfilePicture(String username, MultipartFile file) {
-        String profilePictureUrl = storageService.storeFile(file);
+        String profilePictureUrl = storageService.storeFile(file, "profile-pictures/");
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
 

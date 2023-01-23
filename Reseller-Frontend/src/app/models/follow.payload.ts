@@ -1,3 +1,3 @@
 export class FollowPayload {
-    follow:number=0;
+    followed:number=0;
 }

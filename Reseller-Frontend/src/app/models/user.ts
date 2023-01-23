@@ -5,4 +5,5 @@ export interface User {
     description:  string ;
     imageUrl:  string ;
     active: boolean;
+    user_id:number;
 }

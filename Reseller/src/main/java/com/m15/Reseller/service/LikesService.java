@@ -42,7 +42,7 @@ public class LikesService {
 
         Notification notification = new Notification();
         notification.setText(authService.getCurrentUser().getUsername() + " just liked your post");
-        notification.setPost(true);
+        notification.setFlag(true);
         notification.setSender(authService.getCurrentUser());
         notification.setRecipient(post.getUser());
         notification.setInteractionPost(post);

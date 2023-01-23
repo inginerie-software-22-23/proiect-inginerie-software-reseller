@@ -22,9 +22,9 @@ public class FirebaseStorageService {
         storage = StorageOptions.newBuilder().setCredentials(GoogleCredentials.fromStream(new FileInputStream("src/main/resources/serviceAccountKey.json"))).build().getService();
     }
 
-    public String storeFile(MultipartFile file) {
+    public String storeFile(MultipartFile file, String folder) {
         try {
-            String fileName = "profile-pictures/" + UUID.randomUUID().toString() + "-" + file.getOriginalFilename().replace(" ", "_");
+            String fileName = folder + UUID.randomUUID().toString() + "-" + file.getOriginalFilename().replace(" ", "_");
             byte[] fileByteArray = file.getBytes();
             Map<String, String> meta = new HashMap<>();
             meta.put("firebaseStorageDownloadTokens", fileName);

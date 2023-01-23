@@ -47,12 +47,13 @@ public class CommentService {
 
         Notification notification = new Notification();
         notification.setText(authService.getCurrentUser().getUsername() + " just commented on your post");
-        notification.setPost(true);
+        notification.setFlag(true);
         notification.setSender(authService.getCurrentUser());
         notification.setRecipient(post.getUser());
         notification.setInteractionPost(post);
         notification.setType(NotificationType.COMMENT);
         notification.setTimestamp(LocalDateTime.now());
+
         notificationRepository.save(notification);
 
         return "Success";

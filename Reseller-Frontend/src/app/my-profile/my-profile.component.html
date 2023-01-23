@@ -5,14 +5,18 @@
       <th>Full name</th>
       <th>Image</th>
       <th>Description</th>
+      <th> Followers</th>
+      <th>Following</th>
       
     </tr>
     <tr >
 
         <td>{{username }}</td>
-        <td>{{users[0].fullName }}</td>
-        <td>{{users[0].imageUrl }}</td>
-        <td>{{users[0].description}}</td>
+        <td>{{user?.fullName }}</td>
+        <td>{{user?.imageUrl }}</td>
+        <td>{{user?.description}}</td>
+        <td>{{followers}}</td>
+        <td>{{following}}</td>
      
       </tr>
      
@@ -21,6 +25,7 @@
     <span> Posts: {{postLength}}</span>
       <mat-icon routerLink="/create-post">control_point</mat-icon>
       <mat-icon (click)="logout()">input</mat-icon>
+      <mat-icon>settings</mat-icon>
   </div>
   <hr />
   <app-post-tile [posts]="posts"></app-post-tile>
