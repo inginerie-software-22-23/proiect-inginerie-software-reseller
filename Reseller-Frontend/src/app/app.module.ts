@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { LikeButtonComponent } from './like-button/like-button.component'
 import { ToastrModule } from 'ngx-toastr';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 
 
@@ -38,6 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     PostFormComponent,
     MyProfileComponent,
     LikeButtonComponent,
+    ProfileFormComponent,
     
   ],
   imports: [

@@ -12,7 +12,7 @@
         <p class="post-text" [innerHtml]="post.description"></p>
       </div>
       <div class="btns" >
-        <mat-icon (click)="goToPost(post.id)">comments</mat-icon><span class="aligned-with-icon">{{post.commentCount}}</span>
+        <mat-icon (click)="goToPost(post.id)">comments</mat-icon><span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>
         <app-like-button [post]="post"></app-like-button>
       </div>
     </div>
