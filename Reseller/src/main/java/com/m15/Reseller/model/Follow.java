@@ -25,10 +25,10 @@ public class Follow {
     @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "follower_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User follower;
+    private Profile follower;
 
     @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "followed_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User followed;
+    private Profile followed;
 }
