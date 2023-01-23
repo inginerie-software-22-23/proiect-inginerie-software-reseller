@@ -1,5 +1,5 @@
 export class LikePayload {
- postId: number = -1;
+ postId: number |undefined;
 }
 
 

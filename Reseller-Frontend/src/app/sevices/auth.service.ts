@@ -85,7 +85,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.getUserName() != null;
+    return this.getJwtToken() != null;
   }
 
 
