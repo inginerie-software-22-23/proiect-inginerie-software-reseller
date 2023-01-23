@@ -54,9 +54,9 @@ public class FollowService {
 
         Notification notification = new Notification();
         notification.setText(follower.getUsername() + " started following you");
-        notification.setPost(false);
-        notification.setSender(follower);
-        notification.setRecipient(followed);
+        notification.setFlag(false);
+        notification.setSender(follower.getUser());
+        notification.setRecipient(followed.getUser());
         notification.setType(NotificationType.FOLLOW);
         notification.setTimestamp(LocalDateTime.now());
         notificationRepository.save(notification);

@@ -38,7 +38,7 @@ public class NotificationService {
         NotificationDto notificationDto = new NotificationDto();
         notificationDto.setNotificationId(notification.getNotificationId());
         notificationDto.setText(notification.getText());
-        notificationDto.setPost(notification.isPost());
+        notificationDto.setPost(notification.isFlag());
         notificationDto.setTimestamp(notification.getTimestamp());
         return notificationDto;
     }

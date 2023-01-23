@@ -19,7 +19,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
     private String text;
-    private boolean isPost;
+    private boolean flag;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
