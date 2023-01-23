@@ -37,10 +37,10 @@ export class LikeButtonComponent implements OnInit{
   }
 
   like() {
-    if (!this.isLoggedIn) {
-      this.toastr.error('You must be logged in to like a post!');
-      return;
-    }
+    // if (!this.isLoggedIn) {
+    //   this.toastr.error('You must be logged in to like a post!');
+    //   return;
+    // }
     this.likePayload.postId = this.post.id;
     this._likeService.postLike(this.likePayload).subscribe(
       (response) => {
