@@ -76,6 +76,7 @@ public class ProfileService {
         ProfileDto profileDto = new ProfileDto();
         profileDto.setId(profile.getProfileId());
         profileDto.setUsername(profile.getUsername());
+        profileDto.setUserId(profile.getUser().getUserId());
         profileDto.setDescription(profile.getDescription());
         profileDto.setFullName(profile.getFullName());
         profileDto.setImageUrl(profile.getImageUrl());
@@ -84,7 +85,7 @@ public class ProfileService {
     }
 
     public String uploadProfilePicture(String username, MultipartFile file) {
-        String profilePictureUrl = storageService.storeFile(file);
+        String profilePictureUrl = storageService.storeFile(file, "profile-pictures/");
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
 

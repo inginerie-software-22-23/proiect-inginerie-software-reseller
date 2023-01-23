@@ -1,6 +1,5 @@
 package com.m15.Reseller.controller;
 
-import com.m15.Reseller.dto.CommentDto;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.dto.ProfileDto;
@@ -9,7 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.status;
@@ -43,5 +44,15 @@ public class PostController {
     @GetMapping("/{id}/likes")
     public ResponseEntity<List<ProfileDto>> getLikesForPost(@PathVariable Long id) {
         return status(HttpStatus.OK).body(postService.getLikesForPost(id));
+    }
+
+    @PostMapping("/{id}/product-picture")
+    public ResponseEntity<String> uploadProductPicture(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) {
+        return status(HttpStatus.OK).body(postService.uploadProductPicture(id, file));
+    }
+
+    @GetMapping("/{id}/product-picture")
+    public ResponseEntity<byte[]> getProductPicture(@PathVariable("id") Long id) throws IOException {
+        return status(HttpStatus.OK).body(postService.getProductPicture(id));
     }
 }
