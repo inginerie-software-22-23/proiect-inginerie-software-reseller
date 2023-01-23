@@ -1,8 +1,6 @@
 package com.m15.Reseller.controller;
 
 import com.m15.Reseller.dto.FollowDto;
-import com.m15.Reseller.dto.PostRequest;
-import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.service.FollowService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,11 +18,11 @@ public class FollowController {
 
     @PostMapping
     public ResponseEntity<String> follow(@RequestBody FollowDto followDto) {
-        return new ResponseEntity<>(followService.followUser(followDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(followService.followProfile(followDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping
     public ResponseEntity<String> unfollow(@RequestBody FollowDto followDto) {
-        return new ResponseEntity<>(followService.unfollowUser(followDto), HttpStatus.OK);
+        return new ResponseEntity<>(followService.unfollowProfile(followDto), HttpStatus.OK);
     }
 }
