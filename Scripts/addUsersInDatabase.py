@@ -5,18 +5,18 @@ import requests
 fake = Faker('ro_RO')
 
 # generate a list of 20 random full names
-name_list = [fake.name() for _ in range(20)]
-name_list = [unidecode.unidecode(name) for name in name_list]
+nameList = [fake.name() for _ in range(20)]
+nameList = [unidecode.unidecode(name) for name in nameList]
 
-ls = []
-for i in range(len(name_list)):
-    ls.append(name_list[i].lower().replace(" ", "."))
+usernameList = []
+for i in range(len(nameList)):
+    usernameList.append(nameList[i].lower().replace(" ", "."))
 
 url = "http://localhost:8070/api/auth/register"
 headers = {'Content-Type': 'application/json'}
 
-for i in range(len(name_list)):
-    data = f'{{\n\t"username": "{ls[i]}",\n\t"email": "{ls[i]}@gmail.com",\n\t"fullName": "{name_list[i]}", ' \
+for i in range(len(nameList)):
+    data = f'{{\n\t"username": "{usernameList[i]}",\n\t"email": "{usernameList[i]}@gmail.com",\n\t"fullName": "{nameList[i]}", ' \
            f'\n\t"password": "1234567"\n}}'
 
     response = requests.post(url, data=data, headers=headers)
