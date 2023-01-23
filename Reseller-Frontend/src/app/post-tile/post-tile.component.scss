@@ -17,15 +17,16 @@
     color: lightcoral ;
 }
 
-.btnCommments{
-    border-radius: 2px solid;
-    color: #878A8C;
-    opacity: 1;
+.commments{
+    background: white;
+    border: none;
+    padding: 0;
+
 }
 
-.btnCommments:hover{
-    opacity: 0.65;
-    cursor: pointer;
+.btns{
+    display: flex;
+    column-gap: 2em ;
 }
 
 .post-title{

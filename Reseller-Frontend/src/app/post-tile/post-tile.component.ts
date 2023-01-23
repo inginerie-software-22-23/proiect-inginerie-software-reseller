@@ -1,6 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CommentPayload } from '../models/comment.payload';
+import { LikePayload } from '../models/like.payload';
 import { PostModel } from '../models/post-model';
+import { CommentsService } from '../sevices/comments.service';
+import { LikesService } from '../sevices/likes.service';
 
 @Component({
   selector: 'app-post-tile',
@@ -8,14 +14,28 @@ import { PostModel } from '../models/post-model';
   styleUrls: ['./post-tile.component.scss']
 })
 export class PostTileComponent implements OnInit {
-  @Input() posts: PostModel[] = [];
 
-  constructor(private router: Router) { }
+  @Input() posts: PostModel[] = [];
+  commentService!: CommentsService;
+  comments: CommentPayload[] = [] ;
+  noOfComments: number = 0;
+  likePayload!: LikePayload;
+  
+
+  constructor(private _router: Router,private _http: HttpClient) {
+
+   }
 
   ngOnInit(): void {
   }
 
   goToPost(id: number): void {
-    this.router.navigateByUrl('/view-post/' + id);
+    this._router.navigateByUrl('/view-post/' + id);
   }
+
+
+
+
+
+ 
 }
