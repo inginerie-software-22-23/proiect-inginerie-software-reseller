@@ -41,7 +41,8 @@ public class NotificationService {
         notificationDto.setPost(notification.isFlag());
         notificationDto.setTimestamp(notification.getTimestamp());
         notificationDto.setSenderId(notification.getSender().getUserId());
-        notificationDto.setSenderId(notification.getRecipient().getUserId());
+        notificationDto.setRecipientId(notification.getRecipient().getUserId());
+        notificationDto.setPostId(notification.getInteractionPost().getPostId());
         return notificationDto;
     }
 }
