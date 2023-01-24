@@ -23,7 +23,6 @@ export class ForYouComponent implements OnInit {
   ngOnInit(): void {
     this._profileService.getFollowingByUsername(this.username).subscribe(data => {
       this.following= data;
-      console.log(this.following[0].username)
       const requests = this.following.map(user => {
         return this._postService.getAllPostsByUser(user.username);
       });

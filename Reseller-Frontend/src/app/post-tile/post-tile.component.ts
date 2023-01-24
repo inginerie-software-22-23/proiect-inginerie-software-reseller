@@ -2,14 +2,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 import { CommentPayload } from '../models/comment.payload';
 import { LikePayload } from '../models/like.payload';
 import { PostModel } from '../models/post-model';
+import { SavedPayload } from '../models/saved.payload';
 import { AuthService } from '../sevices/auth.service';
 import { CommentsService } from '../sevices/comments.service';
 import { LikesService } from '../sevices/likes.service';
 import { PostsService } from '../sevices/posts.service';
+import { SavedService } from '../sevices/saved.service';
 
 @Component({
   selector: 'app-post-tile',
@@ -25,9 +27,10 @@ export class PostTileComponent implements OnInit {
   likePayload: LikePayload = new LikePayload;
   isLoggedIn: boolean | undefined;
   loggedInSubscription: Subscription;
+  savePayload: SavedPayload = new SavedPayload;
 
   constructor(private _router: Router,private _http: HttpClient, private _likeService: LikesService,
-    private _authService: AuthService,
+    private _authService: AuthService, private _saveService: SavedService,
     private _postService: PostsService, private toastr: ToastrService){
 
       this.loggedInSubscription = this._authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
@@ -44,15 +47,11 @@ export class PostTileComponent implements OnInit {
 
 
   like(post:PostModel) {
-    // if (!this.isLoggedIn) {
-    //   this.toastr.error('You must be logged in to like a post!');
-    //   return;
-    // }
     this.likePayload.postId = post.id;
     this._likeService.postLike(this.likePayload).subscribe(
       (response) => {
         this.toastr.success('Liked!');
-        this.updateLikeDetails(post);
+        //this.updateLikeDetails(post);
 
       },
       (error: HttpErrorResponse) => {
@@ -64,16 +63,22 @@ export class PostTileComponent implements OnInit {
     window.location.reload()
   }
 
-  private updateLikeDetails(post:PostModel) {
-    this._postService.getPost(post.id).subscribe(
-      data => {
-        post = data;
+
+  save(post:PostModel) {
+    this.savePayload.postId = post.id;
+    this._saveService.postSave(this.savePayload).subscribe(
+      (response) => {
+        this.toastr.success('Liked!');
+        //this.updateLikeDetails(post);
+
       },
       (error: HttpErrorResponse) => {
         this.toastr.error(error.message);
         console.error(error);
       }
+      
     );
+    window.location.reload()
   }
 }
 

@@ -26,6 +26,9 @@ export class ProfileComponent implements OnInit {
   followRequest: FollowPayload = new FollowPayload;
   followers: number=0;
   following: number=0;
+  followList: User[]=[];
+  followingList:User[]=[];
+
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
     private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService) {
@@ -47,12 +50,15 @@ export class ProfileComponent implements OnInit {
       
     });
     this._profileService.getFollowersByUsername(this.name).subscribe(data => {
+      this.followList = data;
       this.followers= data.length;
     });
 
     this._profileService.getFollowingByUsername(this.name).subscribe(data => {
       this.following= data.length;
+      this.followingList = data;
     });
+
 
     
     console.log(this.user.id)
