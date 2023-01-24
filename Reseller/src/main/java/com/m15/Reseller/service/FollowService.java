@@ -4,21 +4,17 @@ import com.m15.Reseller.dto.FollowDto;
 import com.m15.Reseller.dto.exception.FollowNotFound;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Follow;
-import com.m15.Reseller.model.Profile;
-import com.m15.Reseller.model.User;
-import com.m15.Reseller.repository.FollowRepository;
-import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.model.Notification;
 import com.m15.Reseller.model.NotificationType;
-import com.m15.Reseller.model.User;
+import com.m15.Reseller.model.Profile;
 import com.m15.Reseller.repository.FollowRepository;
 import com.m15.Reseller.repository.NotificationRepository;
+import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import java.awt.color.ProfileDataException;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
