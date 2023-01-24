@@ -22,15 +22,15 @@ public class Notification {
     private Long notificationId;
     private String text;
     private boolean flag;
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sender_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User sender;
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "recipient_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User recipient;
-    @ManyToOne
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post interactionPost;
