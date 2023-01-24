@@ -12,4 +12,7 @@ import java.util.List;
 @Transactional
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByUser(User user);
+
+    List<Post> findByDescriptionContainingIgnoreCase(String description);
+    List<Post> findByTitleContainingIgnoreCase(String title);
 }
