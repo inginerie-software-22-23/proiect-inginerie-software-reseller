@@ -22,7 +22,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
-    private String imageUrl;
+    private String imageUrl = "";
     @NotBlank(message = "Community name is required")
     private String title;
     private String description;

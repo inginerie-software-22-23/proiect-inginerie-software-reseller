@@ -1,23 +1,28 @@
 package com.m15.Reseller.service;
 
+import com.m15.Reseller.config.JwtUtils;
 import com.m15.Reseller.dto.ProfileDto;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Follow;
 import com.m15.Reseller.model.Profile;
-import com.m15.Reseller.model.User;
 import com.m15.Reseller.repository.FollowRepository;
 import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -28,7 +33,10 @@ public class ProfileService {
     private final ProfileRepository profileRepository;
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
+    private final UserService userService;
     private final FirebaseStorageService storageService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
 
     public List<ProfileDto> getAllProfiles() {
         return profileRepository.findAll()
@@ -75,7 +83,7 @@ public class ProfileService {
 
     public ProfileDto mapToDto(Profile profile) {
         ProfileDto profileDto = new ProfileDto();
-        profileDto.setId(profile.getProfileId());
+        profileDto.setProfileId(profile.getProfileId());
         profileDto.setUsername(profile.getUsername());
         profileDto.setUserId(profile.getUser().getUserId());
         profileDto.setDescription(profile.getDescription());
@@ -105,5 +113,41 @@ public class ProfileService {
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
         return storageService.getFile(profile.getImageUrl());
+    }
+
+    public ProfileDto getProfileById(Long id) {
+        return mapToDto(profileRepository.findById(id)
+                .orElseThrow(() -> new SpringResellerException("Profile not found!")));
+    }
+
+    public String editProfile(String username, ProfileDto profileDto, HttpServletRequest request) {
+        Profile profile = profileRepository.findByUsername(username)
+                .orElseThrow(() -> new SpringResellerException("Profile not found!"));
+
+        String newToken = "Success";
+        String newUsername = profileDto.getUsername();
+        String oldUsername = profile.getUser().getUsername();
+        if (Objects.equals(updateField(oldUsername, newUsername), newUsername)) {
+            userService.editUsername(profile.getUser(), newUsername);
+            profile.setUsername(newUsername);
+            HttpSession session = request.getSession();
+            session.removeAttribute("jwt");
+            newToken = jwtUtils.generateToken(profile.getUser());
+            session.setAttribute("jwt", newToken);
+
+        }
+        profile.setImageUrl(updateField(profile.getImageUrl(), profileDto.getImageUrl()));
+        profile.setDescription(updateField(profile.getDescription(), profileDto.getDescription()));
+        profile.setFullName(updateField(profile.getFullName(), profileDto.getFullName()));
+        profileRepository.save(profile);
+        return newToken;
+    }
+
+    private String updateField(String oldValue, String newValue) {
+        if (newValue != null && !newValue.equals("") && !Objects.equals(oldValue, newValue)) {
+            return newValue;
+        }
+
+        return oldValue;
     }
 }

@@ -2,6 +2,7 @@ package com.m15.Reseller.controller;
 
 import com.m15.Reseller.dto.ProfileDto;
 import com.m15.Reseller.service.ProfileService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ public class ProfileController {
         return status(HttpStatus.OK).body(profileService.getProfileByUsername(username));
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ProfileDto> getProfileById(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(profileService.getProfileById(id));
+    }
+
     @GetMapping("/{username}/followers")
     public ResponseEntity<List<ProfileDto>> getFollowers(@PathVariable String username) {
         return status(HttpStatus.OK).body(profileService.getFollowers(username));
@@ -46,5 +52,10 @@ public class ProfileController {
     @GetMapping("/{username}/profile-picture")
     public ResponseEntity<byte[]> getProfilePicture(@PathVariable("username") String username) throws IOException {
         return status(HttpStatus.OK).body(profileService.getProfilePicture(username));
+    }
+
+    @PutMapping("/{username}/edit")
+    public ResponseEntity<String> editProfile(@PathVariable("username") String username, @RequestBody ProfileDto profileDto, HttpServletRequest request) {
+        return status(HttpStatus.OK).body(profileService.editProfile(username, profileDto, request));
     }
 }

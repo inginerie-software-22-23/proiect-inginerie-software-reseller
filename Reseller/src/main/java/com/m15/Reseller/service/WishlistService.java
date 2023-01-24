@@ -44,6 +44,8 @@ public class WishlistService {
         return "Success";
     }
 
+
+
     public List<WishlistDto> getSavesByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
@@ -64,5 +66,19 @@ public class WishlistService {
         WishlistDto dto = new WishlistDto();
         dto.setPostId(wishlist.getPost().getPostId());
         return dto;
+    }
+
+    public String deleteWishlist(WishlistDto wishlistDto) {
+        Post post = postRepository.findById(wishlistDto.getPostId())
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + wishlistDto.getPostId() + " not found!"));
+
+        Optional<Wishlist> wishlistByPostAndUser = wishlistRepository.findTopByPostAndUserOrderByWishlistIdDesc(post, authService.getCurrentUser());
+
+        if (wishlistByPostAndUser.isEmpty()) {
+            throw new SpringResellerException("You didn't save this post yet!");
+        }
+
+        wishlistRepository.deleteById(wishlistByPostAndUser.get().getWishlistId());
+        return "Success";
     }
 }
