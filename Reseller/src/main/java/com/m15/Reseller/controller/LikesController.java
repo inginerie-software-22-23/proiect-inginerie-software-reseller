@@ -31,7 +31,7 @@ public class LikesController {
     }
 
     @DeleteMapping()
-    public ResponseEntity<String>  unlike(@RequestBody LikeDto likeDto) {
+    public ResponseEntity<String> unlike(@RequestBody LikeDto likeDto) {
         return new ResponseEntity<>(likesService.unlike(likeDto), HttpStatus.OK);
     }
 }

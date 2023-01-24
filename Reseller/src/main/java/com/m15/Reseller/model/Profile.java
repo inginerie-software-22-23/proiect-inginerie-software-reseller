@@ -19,9 +19,9 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long profileId;
     private String username;
-    private String fullName;
-    private String description;
-    private String imageUrl;
+    private String fullName = "";
+    private String description = "";
+    private String imageUrl = "";
     private boolean isActive = false;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
