@@ -22,13 +22,14 @@ export class PostsService {
     return this.http.post('http://localhost:8070/api/post', postPayload);
   }
 
-  getPost(id: number): Observable<PostModel> {
+  getPostById(id: number): Observable<PostModel> {
     return this.http.get<PostModel>('http://localhost:8070/api/post/' + id);
   }
 
   getAllPostsByUser(name: string): Observable<PostModel[]> {
     return this.http.get<PostModel[]>('http://localhost:8070/api/post/user/' + name);
   }
+
 
 
 }

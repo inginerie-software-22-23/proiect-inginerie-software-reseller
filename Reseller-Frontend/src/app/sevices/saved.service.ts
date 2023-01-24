@@ -17,6 +17,6 @@ export class SavedService {
   }
 
   getAllSavesByUser(username: string) {
-    return this._http.get<LikePayload[]>('http://localhost:8070/api/wishlist/by-user' + username);
+    return this._http.get<SavedPayload[]>('http://localhost:8070/api/wishlist/by-user/' + username);
   }
 }
