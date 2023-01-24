@@ -91,9 +91,9 @@ public class LikesService {
                 .toList();
     }
 
-    public String unlike(LikeDto likeDto) {
-        Post post = postRepository.findById(likeDto.getPostId())
-                .orElseThrow(() -> new PostNotFoundException("Post with id " + likeDto.getPostId() + " not found!"));
+    public String unlike(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + id + " not found!"));
 
         Optional<Likes> likeByPostAndUser = likesRepository.findTopByPostAndUserOrderByLikeIdDesc(post, authService.getCurrentUser());
 
@@ -103,7 +103,7 @@ public class LikesService {
 
         likesRepository.deleteById(likeByPostAndUser.get().getLikeId());
         post.setLikesCount(post.getLikesCount() - 1);
-        return "Success";
+        return "Deleted";
     }
 
     private LikeDto mapToDto(Likes likes) {
