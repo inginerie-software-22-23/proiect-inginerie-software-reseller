@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `comment_id` bigint NOT NULL AUTO_INCREMENT,
   `created_date` datetime(6) DEFAULT NULL,
+  `likes_count` int DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
   `post_id` bigint DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE `comment` (
   KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
   CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FKs1slvnkuemjsq2kj4h3vhx7i1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +43,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,'2023-01-24 16:23:11.338635',1,'dada',1,2);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,14 +84,17 @@ DROP TABLE IF EXISTS `likes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `likes` (
   `like_id` bigint NOT NULL AUTO_INCREMENT,
-  `post_id` bigint NOT NULL,
+  `comment_id` bigint DEFAULT NULL,
+  `post_id` bigint DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
   PRIMARY KEY (`like_id`),
+  KEY `FK8arpx7i3g3e5dammtdsira2m6` (`comment_id`),
   KEY `FKowd6f4s7x9f3w50pvlo6x3b41` (`post_id`),
   KEY `FKi2wo4dyk4rok7v4kak8sgkwx0` (`user_id`),
+  CONSTRAINT `FK8arpx7i3g3e5dammtdsira2m6` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`comment_id`) ON DELETE CASCADE,
   CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FKowd6f4s7x9f3w50pvlo6x3b41` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +103,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,NULL,1,2),(2,1,NULL,2);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,9 +127,9 @@ CREATE TABLE `notification` (
   KEY `FKn1l10g2mvj4r1qs93k952fshe` (`post_id`),
   KEY `FKqnduwq6ix2pxx1add03905i1i` (`recipient_id`),
   KEY `FKnbt1hengkgjqru2q44q8rlc2c` (`sender_id`),
-  CONSTRAINT `FKn1l10g2mvj4r1qs93k952fshe` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
-  CONSTRAINT `FKnbt1hengkgjqru2q44q8rlc2c` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `FKqnduwq6ix2pxx1add03905i1i` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `FKn1l10g2mvj4r1qs93k952fshe` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
+  CONSTRAINT `FKnbt1hengkgjqru2q44q8rlc2c` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `FKqnduwq6ix2pxx1add03905i1i` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,7 +163,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`post_id`),
   KEY `FK72mt33dhhs48hf9gcqrq4fxte` (`user_id`),
   CONSTRAINT `FK72mt33dhhs48hf9gcqrq4fxte` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +172,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,1,'2023-01-24 16:23:01.612973','Marime','still testing',1,1,0,'Junk',2);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +246,7 @@ CREATE TABLE `token` (
   PRIMARY KEY (`id`),
   KEY `FKe32ek7ixanakfqsdaokm4q9y2` (`user_id`),
   CONSTRAINT `FKe32ek7ixanakfqsdaokm4q9y2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +255,6 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES (1,NULL,'87b8db82-e7cb-4004-9907-3a4a7e48c62c',1),(2,NULL,'f86a7899-039e-4d2d-ba46-2bec00d76df2',2),(3,NULL,'4eec7af3-6b48-4eea-b851-9ad432f2f113',3),(4,NULL,'7ba93a3d-6817-4ea5-8dd7-5abd063e39ff',4),(5,NULL,'012f34e0-fcc4-4a8c-810a-9394a5f84ea6',5),(6,NULL,'4d4d9d6a-2ee9-45a9-9018-48b05e9ee725',6),(7,NULL,'99c05417-aede-464f-934d-30451b49cffe',7),(8,NULL,'df9eda18-a40a-47fb-b298-adf90842104f',8),(9,NULL,'2d976efb-4e57-4c87-a061-460ca9d1235f',9),(10,NULL,'0c8658c8-4dfb-4220-92bf-6fefb0e62aa1',10),(11,NULL,'99aeb1e1-9970-4349-a678-536ecffe873f',11),(12,NULL,'3c6a52c3-bcda-4683-b3f0-540abd8767da',12),(13,NULL,'5e2b6f28-03ae-4e74-87ff-1068c5495735',13),(14,NULL,'3cad490d-0627-4e94-8358-174cd070d06b',14),(15,NULL,'8b413636-1348-4d63-ba98-09924930009c',15),(16,NULL,'275d10e5-06ce-42e1-99ca-299c7f36555c',16),(17,NULL,'a8ddbf8c-0f3d-4c94-8abd-d8786cca8cfe',17),(18,NULL,'a1d439db-2baf-4921-91b3-93cba739033f',18),(19,NULL,'f4483bd2-9c74-4078-b00a-322005d6468f',19),(20,NULL,'a2cff88c-4ac8-4841-9f75-f8cafa20e793',20),(21,NULL,'bc930f19-8ca6-42b6-936e-e841bd23efbc',21);
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +283,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'2023-01-24 11:06:37.678446','alexandra.ene@gmail.com',_binary '','$2a$10$tjY.GpacmpqR0AZxcL/lzeaWl/KZ6KDHBagNIvNupnqiYkNBwrd7S','USER','alexandra.ene'),(2,'2023-01-24 11:06:37.810448','ortansa.barbu@gmail.com',_binary '','$2a$10$PwoodipTv9ndCJGA6257GOzNqmS.9rpuvlO9arfmS.clcTZH9L29O','USER','ortansa.barbu'),(3,'2023-01-24 11:06:37.889447','floare.ionescu@gmail.com',_binary '','$2a$10$icrIL6uPq8a5juUEK44C5O7sYlEtK2w8F8njphXp0CcVNCBEakx8i','USER','floare.ionescu'),(4,'2023-01-24 11:06:37.965450','anastasia.ionita@gmail.com',_binary '','$2a$10$r3Oi6ZCfP33UDt2pnFxrjODGhN0Atj7V5DtMCFzZfDlF5T2YCPKE6','USER','anastasia.ionita'),(5,'2023-01-24 11:06:38.045448','emil.dumitrescu@gmail.com',_binary '','$2a$10$iToo6MBq5xQxctn3e//u0OxsbG3AE1YepeBf0mbPaUZbtKFOeFHqa','USER','emil.dumitrescu'),(6,'2023-01-24 11:06:38.127448','nicusor.stanescu@gmail.com',_binary '','$2a$10$H0KMM.SloEuA/n55E/OaSeCzD55DGXVp7IpRKwsfXUSlrvV3CWfBm','USER','nicusor.stanescu'),(7,'2023-01-24 11:06:38.205449','semenica.tomescu@gmail.com',_binary '','$2a$10$TjwGR0nNZ/WyUMTV14yy4O2H1OVk6H0gdw4H.BUepTlXieaMNqcdW','USER','semenica.tomescu'),(8,'2023-01-24 11:06:38.288449','todor.puscasu@gmail.com',_binary '','$2a$10$dkIhb1kmFaEriGoxxzi8OuSSTMPNdwzvn9RZARxAy93569/sldJPi','USER','todor.puscasu'),(9,'2023-01-24 11:06:38.366008','florenta.tabacu@gmail.com',_binary '','$2a$10$hO6TjNVR1YWsckSv.cgvNu.UeLzVLuN4RKVuMqwxkmBzyzYxzWdXK','USER','florenta.tabacu'),(10,'2023-01-24 11:06:38.443009','leontina.oprea@gmail.com',_binary '','$2a$10$p6Qmsfvbfqu/q/lOwebzG.2xZwVfCvpA5GnRRc4ZiQG/58ByRPSWW','USER','leontina.oprea'),(11,'2023-01-24 11:06:38.522010','adela.dinu@gmail.com',_binary '','$2a$10$7jqHZI/c8F5JoO.i3Lzz3uAZgPFi55Gm6kHxu6.VxIX5EPWGMWR.G','USER','adela.dinu'),(12,'2023-01-24 11:06:38.598011','geanina.dochioiu@gmail.com',_binary '','$2a$10$UNnkBd2/Kzk.ZkZA2Q06R.UvssuQS2DTUFmDMdl1cEoY1Aqcgyp/a','USER','geanina.dochioiu'),(13,'2023-01-24 11:06:38.677010','estera.barbu@gmail.com',_binary '','$2a$10$ZhFU3pLm17FsyOBKRvSHHeaLZeVv7hc21mxPNFAKqrvke/PZfXutu','USER','estera.barbu'),(14,'2023-01-24 11:06:38.758011','simion.oprea@gmail.com',_binary '','$2a$10$PSYusk.A3jUEjFsDOk/OfeV3FBaIcxtXfh2QvooJK6XDrU6LthcYq','USER','simion.oprea'),(15,'2023-01-24 11:06:38.836009','irina.nistor@gmail.com',_binary '','$2a$10$4hMgGtlWOiebA4Gg75ALcehnP7fZPmJBlByYiattGaeTDxzZI4yzi','USER','irina.nistor'),(16,'2023-01-24 11:06:38.918009','raul.nistor@gmail.com',_binary '','$2a$10$xGTjHEh0qpIVHM.9diVpVu2UF0RqYq.0FY9dTawbB5S99Cl9z5AW.','USER','raul.nistor'),(17,'2023-01-24 11:06:39.001011','flaviu.eftimie@gmail.com',_binary '','$2a$10$7XlO6qL28.YVHT6uCgA/le/NVmzcspesqwdYeKPBAzCMXXwDasTAK','USER','flaviu.eftimie'),(18,'2023-01-24 11:06:39.086012','teofil.ababei@gmail.com',_binary '','$2a$10$zRMjsBr.DIXV099Y84yHkOiPLew/uqUN6gAGd0Zlf9vvkl7.eSkaC','USER','teofil.ababei'),(19,'2023-01-24 11:06:39.170009','marcel.toma@gmail.com',_binary '','$2a$10$ZrDih7Ln93lVmdASwg2q8umfyp32P.SRQXmOmXFnZYAwiKRGGnZvy','USER','marcel.toma'),(20,'2023-01-24 11:06:39.249009','marcu.stancu@gmail.com',_binary '','$2a$10$8kNtE3wZlJEwmvGfIdRx2OscOUGH98oJ1GJA9401KaXyctuGTZcxq','USER','marcu.stancu'),(21,'2023-01-24 11:08:21.019177','admin@mil.com',_binary '','$2a$10$juBBX.SqiV9Lj/PATSophebeHM3YxjV8xaV07OgysVkikaVuIVJG6','USER','admin');
+INSERT INTO `user` VALUES (1,'2023-01-24 11:06:37.678446','alexandra.ene@gmail.com',_binary '','$2a$10$tjY.GpacmpqR0AZxcL/lzeaWl/KZ6KDHBagNIvNupnqiYkNBwrd7S','USER','alexandra.ene'),(2,'2023-01-24 11:06:37.810448','ortansa.barbu@gmail.com',_binary '','$2a$10$PwoodipTv9ndCJGA6257GOzNqmS.9rpuvlO9arfmS.clcTZH9L29O','USER','ortansa.barbu'),(3,'2023-01-24 11:06:37.889447','floare.ionescu@gmail.com',_binary '','$2a$10$icrIL6uPq8a5juUEK44C5O7sYlEtK2w8F8njphXp0CcVNCBEakx8i','USER','floare.ionescu'),(4,'2023-01-24 11:06:37.965450','anastasia.ionita@gmail.com',_binary '','$2a$10$r3Oi6ZCfP33UDt2pnFxrjODGhN0Atj7V5DtMCFzZfDlF5T2YCPKE6','USER','anastasia.ionita'),(5,'2023-01-24 11:06:38.045448','emil.dumitrescu@gmail.com',_binary '','$2a$10$iToo6MBq5xQxctn3e//u0OxsbG3AE1YepeBf0mbPaUZbtKFOeFHqa','USER','emil.dumitrescu'),(6,'2023-01-24 11:06:38.127448','nicusor.stanescu@gmail.com',_binary '','$2a$10$H0KMM.SloEuA/n55E/OaSeCzD55DGXVp7IpRKwsfXUSlrvV3CWfBm','USER','nicusor.stanescu'),(7,'2023-01-24 11:06:38.205449','semenica.tomescu@gmail.com',_binary '','$2a$10$TjwGR0nNZ/WyUMTV14yy4O2H1OVk6H0gdw4H.BUepTlXieaMNqcdW','USER','semenica.tomescu'),(8,'2023-01-24 11:06:38.288449','todor.puscasu@gmail.com',_binary '','$2a$10$dkIhb1kmFaEriGoxxzi8OuSSTMPNdwzvn9RZARxAy93569/sldJPi','USER','todor.puscasu'),(9,'2023-01-24 11:06:38.366008','florenta.tabacu@gmail.com',_binary '','$2a$10$hO6TjNVR1YWsckSv.cgvNu.UeLzVLuN4RKVuMqwxkmBzyzYxzWdXK','USER','florenta.tabacu'),(10,'2023-01-24 11:06:38.443009','leontina.oprea@gmail.com',_binary '','$2a$10$p6Qmsfvbfqu/q/lOwebzG.2xZwVfCvpA5GnRRc4ZiQG/58ByRPSWW','USER','leontina.oprea'),(11,'2023-01-24 11:06:38.522010','adela.dinu@gmail.com',_binary '','$2a$10$7jqHZI/c8F5JoO.i3Lzz3uAZgPFi55Gm6kHxu6.VxIX5EPWGMWR.G','USER','adela.dinu'),(12,'2023-01-24 11:06:38.598011','geanina.dochioiu@gmail.com',_binary '','$2a$10$UNnkBd2/Kzk.ZkZA2Q06R.UvssuQS2DTUFmDMdl1cEoY1Aqcgyp/a','USER','geanina.dochioiu'),(13,'2023-01-24 11:06:38.677010','estera.barbu@gmail.com',_binary '','$2a$10$ZhFU3pLm17FsyOBKRvSHHeaLZeVv7hc21mxPNFAKqrvke/PZfXutu','USER','estera.barbu'),(14,'2023-01-24 11:06:38.758011','simion.oprea@gmail.com',_binary '','$2a$10$PSYusk.A3jUEjFsDOk/OfeV3FBaIcxtXfh2QvooJK6XDrU6LthcYq','USER','simion.oprea'),(15,'2023-01-24 11:06:38.836009','irina.nistor@gmail.com',_binary '','$2a$10$4hMgGtlWOiebA4Gg75ALcehnP7fZPmJBlByYiattGaeTDxzZI4yzi','USER','irina.nistor'),(16,'2023-01-24 11:06:38.918009','raul.nistor@gmail.com',_binary '','$2a$10$xGTjHEh0qpIVHM.9diVpVu2UF0RqYq.0FY9dTawbB5S99Cl9z5AW.','USER','raul.nistor'),(17,'2023-01-24 11:06:39.001011','flaviu.eftimie@gmail.com',_binary '','$2a$10$7XlO6qL28.YVHT6uCgA/le/NVmzcspesqwdYeKPBAzCMXXwDasTAK','USER','flaviu.eftimie'),(18,'2023-01-24 11:06:39.086012','teofil.ababei@gmail.com',_binary '','$2a$10$zRMjsBr.DIXV099Y84yHkOiPLew/uqUN6gAGd0Zlf9vvkl7.eSkaC','USER','teofil.ababei'),(19,'2023-01-24 11:06:39.170009','marcel.toma@gmail.com',_binary '','$2a$10$ZrDih7Ln93lVmdASwg2q8umfyp32P.SRQXmOmXFnZYAwiKRGGnZvy','USER','marcel.toma'),(20,'2023-01-24 11:06:39.249009','marcu.stancu@gmail.com',_binary '','$2a$10$8kNtE3wZlJEwmvGfIdRx2OscOUGH98oJ1GJA9401KaXyctuGTZcxq','USER','marcu.stancu'),(21,'2023-01-24 11:08:21.019177','admin@mil.com',_binary '','$2a$10$juBBX.SqiV9Lj/PATSophebeHM3YxjV8xaV07OgysVkikaVuIVJG6','ADMIN','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-24 13:09:29
+-- Dump completed on 2023-01-24 18:26:47

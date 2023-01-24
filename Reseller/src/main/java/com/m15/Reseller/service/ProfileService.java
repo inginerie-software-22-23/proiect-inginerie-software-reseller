@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -92,6 +93,12 @@ public class ProfileService {
         profile.setImageUrl(profilePictureUrl);
         profileRepository.save(profile);
         return "Success";
+    }
+
+    public List<ProfileDto> searchProfile(String username) {
+        return profileRepository.findByUsernameStartingWith(username).stream()
+                .map(this::mapToDto)
+                .collect(toList());
     }
 
     public byte[] getProfilePicture(String username) throws IOException {

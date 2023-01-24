@@ -40,6 +40,14 @@ public class NotificationService {
         notificationDto.setText(notification.getText());
         notificationDto.setPost(notification.isFlag());
         notificationDto.setTimestamp(notification.getTimestamp());
+        notificationDto.setSenderId(notification.getSender().getUserId());
+        notificationDto.setRecipientId(notification.getRecipient().getUserId());
+        if (notification.getInteractionPost() != null) {
+            notificationDto.setPostId(notification.getInteractionPost().getPostId());
+        }
+        else {
+            notificationDto.setPostId((long) -1);
+        }
         return notificationDto;
     }
 }

@@ -5,8 +5,13 @@
       <th>Full name</th>
       <th>Image</th>
       <th>Description</th>
-      <th> Followers</th>
-      <th>Following</th>
+      <th><button (click)="goToFollowersList()">Followers</button>
+        <button (click)="goToFollowingList()">Following</button>
+        <!-- <app-follow-tile [currentList]="currentList" [followersList]="followersList" [followingList]="followingList"></app-follow-tile> -->
+        
+     
+      
+
       
     </tr>
     <tr >

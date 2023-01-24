@@ -1,7 +1,6 @@
 package com.m15.Reseller.controller;
 
 import com.m15.Reseller.dto.LikeDto;
-import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.service.LikesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +21,17 @@ public class LikesController {
     public ResponseEntity<String> like(@RequestBody LikeDto likeDto) {
         return status(HttpStatus.OK).body(likesService.likePost(likeDto));
     }
+    @PostMapping("/comment")
+    public ResponseEntity<String> likeComment(@RequestBody LikeDto likeDto) {
+        return status(HttpStatus.OK).body(likesService.likeComment(likeDto));
+    }
     @GetMapping("by-user/{username}")
     public ResponseEntity<List<LikeDto>> getLikesByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(likesService.getLikesByUsername(username));
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<String>  unlike(@RequestBody LikeDto likeDto) {
+        return new ResponseEntity<>(likesService.unlike(likeDto), HttpStatus.OK);
     }
 }

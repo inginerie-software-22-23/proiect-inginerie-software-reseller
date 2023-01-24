@@ -32,4 +32,5 @@ public class Comment {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+    private Integer likesCount = 0;
 }
