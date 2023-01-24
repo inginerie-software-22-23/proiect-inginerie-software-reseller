@@ -16,4 +16,5 @@ public class NotificationDto {
     private LocalDateTime timestamp;
     private Long senderId;
     private Long recipientId;
+    private Long postId;
 }
