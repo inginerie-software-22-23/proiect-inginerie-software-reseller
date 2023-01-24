@@ -54,7 +54,7 @@ export class ViewPostComponent implements OnInit {
   }
 
   private getPostById() {
-    this.postService.getPost(this.postId).subscribe(
+    this.postService.getPostById(this.postId).subscribe(
     { next : data => {
       this.post = data;
     },
