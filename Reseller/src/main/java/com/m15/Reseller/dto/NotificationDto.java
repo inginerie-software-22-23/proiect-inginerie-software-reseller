@@ -14,4 +14,6 @@ public class NotificationDto {
     private String text;
     private boolean isPost;
     private LocalDateTime timestamp;
+    private Long senderId;
+    private Long recipientId;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommentPayload } from '../models/comment.payload';
@@ -7,6 +7,7 @@ import { PostModel } from '../models/post-model';
 import { User } from '../models/user';
 import { AuthService } from '../sevices/auth.service';
 import { CommentsService } from '../sevices/comments.service';
+import { FollowService } from '../sevices/follow.service';
 import { PostsService } from '../sevices/posts.service';
 import { ProfileService } from '../sevices/profile.service';
 
@@ -21,16 +22,24 @@ export class MyProfileComponent implements OnInit {
 
   private subscribe : Subscription = new Subscription;
   username= this.authServ.getUserName();
-  users: User[] =[ ] ;
+  user: User | undefined;
   posts: PostModel[]=[];
   comments: CommentPayload[]=[];
   postLength: number=0;
   commentLength: number=0;
+  followers: number=0;
+  following: number=0;
+  @Output() followersChange = new EventEmitter<User[]>();
+  @Output() followingChange = new EventEmitter<User[]>();
+  followersList: User[] = [];
+  followingList: User[] = [];
+  @Output() currentListChange = new EventEmitter<string>();
+  currentList!: string;
  
 
 
   constructor(private router: Router,private _profileService: ProfileService,  private authServ: AuthService, private _activatedRoute: ActivatedRoute, private _postService: PostsService,
-    private _commentService: CommentsService) { }
+    private _commentService: CommentsService, private _followService: FollowService) { }
 
 
   ngOnInit(): void {
@@ -46,14 +55,43 @@ export class MyProfileComponent implements OnInit {
 
 
     this._profileService.getUserByUsername(this.username).subscribe(user => {
-      this.users = user;
-      console.log(this.users);
+      this.user = user;
+      console.log(this.user);
+
+
     });
+
+    this._profileService.getFollowersByUsername(this.username).subscribe(data => {
+      this.followers= data.length;
+      this.followersList = data;
+      this.followersChange.emit(this.followersList);
+    });
+
+    this._profileService.getFollowingByUsername(this.username).subscribe(data => {
+      this.following= data.length;
+      this.followingList = data;
+      this.followersChange.emit(this.followingList);
+    });
+
    }
    logout(){
     this.authServ.logout();
     this.router.navigateByUrl('/login');
    }
 
+   goToFollowersList() {
+    this.router.navigate(['/followers-list']);
+  }
+  goToFollowingList() {
+ 
+    this.router.navigate(['/following-list']);
+  }
+  }
 
-}
+
+  
+
+
+
+
+

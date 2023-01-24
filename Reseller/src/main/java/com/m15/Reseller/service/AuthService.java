@@ -79,7 +79,6 @@ public class AuthService {
         profile.setUsername(user.getUsername());
         profile.setUser(user);
         profile.setFullName(registerRequest.getFullName());
-
         profileRepository.save(profile);
 
         String token = generateVerificationToken(user);

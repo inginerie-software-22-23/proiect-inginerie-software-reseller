@@ -6,13 +6,13 @@ import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Follow;
 import com.m15.Reseller.model.Notification;
 import com.m15.Reseller.model.NotificationType;
-import com.m15.Reseller.model.User;
+import com.m15.Reseller.model.Profile;
 import com.m15.Reseller.repository.FollowRepository;
 import com.m15.Reseller.repository.NotificationRepository;
+import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,19 +24,20 @@ import java.util.Objects;
 public class FollowService {
 
     private final FollowRepository followRepository;
+    private final ProfileRepository profileRepository;
     private final UserRepository userRepository;
     private final NotificationRepository notificationRepository;
     private final AuthService authService;
 
-    public String followUser(FollowDto followDto) {
+    public String followProfile(FollowDto followDto) {
         if (Objects.equals(authService.getCurrentUser().getUserId(), followDto.getFollowed())) {
             throw new SpringResellerException("You can't follow yourself!");
         }
 
-        User follower = userRepository.findById(authService.getCurrentUser().getUserId())
-                .orElseThrow(() -> new UsernameNotFoundException("User ID not found!"));
-        User followed = userRepository.findById(followDto.getFollowed())
-                .orElseThrow(() -> new UsernameNotFoundException("User ID not found!"));
+        Profile follower = profileRepository.findByUser(authService.getCurrentUser())
+                .orElseThrow(() -> new SpringResellerException("Profile ID not found!"));
+        Profile followed = profileRepository.findById(followDto.getFollowed())
+                .orElseThrow(() -> new  SpringResellerException("Profile ID not found!"));
 
         if (this.isFollowing(follower, followed)) {
             throw new SpringResellerException("Already following this account!");
@@ -49,9 +50,9 @@ public class FollowService {
 
         Notification notification = new Notification();
         notification.setText(follower.getUsername() + " started following you");
-        notification.setPost(false);
-        notification.setSender(follower);
-        notification.setRecipient(followed);
+        notification.setFlag(false);
+        notification.setSender(follower.getUser());
+        notification.setRecipient(followed.getUser());
         notification.setType(NotificationType.FOLLOW);
         notification.setTimestamp(LocalDateTime.now());
         notificationRepository.save(notification);
@@ -59,15 +60,15 @@ public class FollowService {
         return "Success";
     }
 
-    public String unfollowUser(FollowDto followDto) {
+    public String unfollowProfile(FollowDto followDto) {
         if (Objects.equals(authService.getCurrentUser().getUserId(), followDto.getFollowed())) {
             throw new SpringResellerException("You can't unfollow yourself!");
         }
 
-        User follower = userRepository.findById(authService.getCurrentUser().getUserId())
-                .orElseThrow(() -> new UsernameNotFoundException("User ID not found!"));
-        User followed = userRepository.findById(followDto.getFollowed())
-                .orElseThrow(() -> new UsernameNotFoundException("User ID not found!"));
+        Profile follower = profileRepository.findByUser(authService.getCurrentUser())
+                .orElseThrow(() -> new SpringResellerException("Profile ID not found!"));
+        Profile followed = profileRepository.findById(followDto.getFollowed())
+                .orElseThrow(() -> new  SpringResellerException("Profile ID not found!"));
 
         Follow follow = followRepository.findByFollowerAndFollowed(follower, followed)
                 .orElseThrow(() -> new FollowNotFound("Follow not found!"));
@@ -76,7 +77,7 @@ public class FollowService {
         return "Success";
     }
 
-    private boolean isFollowing(User follower, User followed) {
+    private boolean isFollowing(Profile follower, Profile followed) {
         Follow follow = followRepository.findByFollowerAndFollowed(follower, followed)
                 .orElse(null);
         return follow != null;

@@ -1,37 +1,18 @@
-// .create-post-container{
-//     display: flex;
-//     flex-direction: column;
-// }
-// .form-control{
-//     display: grid;
-//     grid-template-columns: repeat(5, 1fr);
-//     grid-gap: 14em;
-// }
-// .container{
-//     margin: 50%;
-//     margin-top: 12%
-   
-// }
-// .btns{
-//     margin-top: 5em;
-//     display: flex;
-// }
-
-
-
 /* Colors */  
 /* ---------------------------------------- */ 
 $border:     #c6c6c6;
 $border-focus: #9FB1C1;
-$brand-color:  #1b3d4d;
+$brand-color:  lightcoral;
 $booking-green: #bdcc00;
-$asphalt:     #506982;
+$asphalt:     black;
 
 
 body{
   text-align: center;
   font-family: 'Lato', 'sans-serif';
   font-weight: 400;
+  margin-left: 12,5%;
+  margin-right: 12,5%;
 
 }
 a{
@@ -126,6 +107,7 @@ h2.heading{
 }
 
 button{
+  
   cursor: pointer;
   background-color: $brand-color;
   border: none;
@@ -146,7 +128,10 @@ button{
 
 
 
-
+.buttons{
+  display: flex;
+  column-gap: 20em;
+}
 
 
 $pad: 10px;

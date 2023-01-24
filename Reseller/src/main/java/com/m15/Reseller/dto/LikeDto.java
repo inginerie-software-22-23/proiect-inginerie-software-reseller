@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LikeDto {
     private Long postId;
+    private Long commentId;
 }

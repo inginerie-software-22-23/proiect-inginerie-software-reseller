@@ -21,6 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { LikeButtonComponent } from './like-button/like-button.component'
 import { ToastrModule } from 'ngx-toastr';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { FollowTileComponent } from './following-followers-list/follow-tile/follow-tile.component';
+import { FollowersListComponent } from './following-followers-list/follow-tile/followers-list/followers-list.component';
+import { FollowingListComponent } from './following-followers-list/follow-tile/following-list/following-list.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 
@@ -38,6 +44,12 @@ import { ToastrModule } from 'ngx-toastr';
     PostFormComponent,
     MyProfileComponent,
     LikeButtonComponent,
+    ProfileFormComponent,
+    FollowTileComponent,
+    FollowersListComponent,
+    FollowingListComponent,
+    WishlistComponent,
+    NotificationsComponent,
     
   ],
   imports: [
