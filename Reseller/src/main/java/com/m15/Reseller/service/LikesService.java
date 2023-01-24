@@ -102,6 +102,7 @@ public class LikesService {
         }
 
         likesRepository.deleteById(likeByPostAndUser.get().getLikeId());
+        post.setLikesCount(post.getLikesCount() - 1);
         return "Success";
     }
 

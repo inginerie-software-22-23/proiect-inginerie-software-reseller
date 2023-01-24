@@ -19,16 +19,13 @@ public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeId;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "commentId", referencedColumnName = "commentId", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Comment comment;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 }

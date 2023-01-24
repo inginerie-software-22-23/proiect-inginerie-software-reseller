@@ -79,6 +79,7 @@ public class WishlistService {
         }
 
         wishlistRepository.deleteById(wishlistByPostAndUser.get().getWishlistId());
+        post.setSavedCount(post.getSavedCount() - 1);
         return "Success";
     }
 }
