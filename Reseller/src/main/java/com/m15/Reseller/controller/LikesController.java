@@ -1,5 +1,6 @@
 package com.m15.Reseller.controller;
 
+import com.m15.Reseller.dto.FollowDto;
 import com.m15.Reseller.dto.LikeDto;
 import com.m15.Reseller.dto.PostResponse;
 import com.m15.Reseller.service.LikesService;
@@ -25,5 +26,10 @@ public class LikesController {
     @GetMapping("by-user/{username}")
     public ResponseEntity<List<LikeDto>> getLikesByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(likesService.getLikesByUsername(username));
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<String>  unlike(@RequestBody LikeDto likeDto) {
+        return new ResponseEntity<>(likesService.unlike(likeDto), HttpStatus.OK);
     }
 }

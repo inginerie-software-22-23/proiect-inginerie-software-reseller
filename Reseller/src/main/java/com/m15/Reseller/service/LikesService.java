@@ -62,6 +62,20 @@ public class LikesService {
                 .toList();
     }
 
+    public String unlike(LikeDto likeDto) {
+        Post post = postRepository.findById(likeDto.getPostId())
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + likeDto.getPostId() + " not found!"));
+
+        Optional<Likes> likeByPostAndUser = likesRepository.findTopByPostAndUserOrderByLikeIdDesc(post, authService.getCurrentUser());
+
+        if (likeByPostAndUser.isEmpty()) {
+            throw new SpringResellerException("You didn't like this post yet!");
+        }
+
+        likesRepository.deleteById(likeByPostAndUser.get().getLikeId());
+        return "Success";
+    }
+
     private LikeDto mapToDto(Likes likes) {
         LikeDto dto = new LikeDto();
         dto.setPostId(likes.getPost().getPostId());
