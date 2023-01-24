@@ -23,13 +23,12 @@ public class Comment {
     private Long commentId;
     @NotEmpty
     private String text;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
     private Instant createdDate;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+    private Integer likesCount = 0;
 }

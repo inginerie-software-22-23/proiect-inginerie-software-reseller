@@ -45,16 +45,17 @@ public class CommentService {
         emailSender.send(post.getUser().getEmail(),
                 emailSender.buildCommentNotificationEmail(post.getUser(), dto.getText()), "New comment on your post");
 
-        Notification notification = new Notification();
-        notification.setText(authService.getCurrentUser().getUsername() + " just commented on your post");
-        notification.setFlag(true);
-        notification.setSender(authService.getCurrentUser());
-        notification.setRecipient(post.getUser());
-        notification.setInteractionPost(post);
-        notification.setType(NotificationType.COMMENT);
-        notification.setTimestamp(LocalDateTime.now());
-
-        notificationRepository.save(notification);
+        if (authService.getCurrentUser() != post.getUser()) {
+            Notification notification = new Notification();
+            notification.setText(authService.getCurrentUser().getUsername() + " just commented on your post");
+            notification.setFlag(true);
+            notification.setSender(authService.getCurrentUser());
+            notification.setRecipient(post.getUser());
+            notification.setInteractionPost(post);
+            notification.setType(NotificationType.COMMENT);
+            notification.setTimestamp(LocalDateTime.now());
+            notificationRepository.save(notification);
+        }
 
         return "Success";
     }
@@ -93,9 +94,6 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    private void sendCommNotification() {
-        // to do
-    }
 
     private CommentDto mapToDto(Comment comment) {
         CommentDto dto = new CommentDto();

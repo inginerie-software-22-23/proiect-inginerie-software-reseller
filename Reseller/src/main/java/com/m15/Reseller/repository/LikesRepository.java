@@ -1,6 +1,6 @@
 package com.m15.Reseller.repository;
 
-import com.m15.Reseller.dto.LikeDto;
+import com.m15.Reseller.model.Comment;
 import com.m15.Reseller.model.Likes;
 import com.m15.Reseller.model.Post;
 import com.m15.Reseller.model.User;
@@ -14,6 +14,7 @@ import java.util.Optional;
 @Transactional
 public interface LikesRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findTopByPostAndUserOrderByLikeIdDesc(Post post, User user);
+    Optional<Likes> findTopByCommentAndUserOrderByLikeIdDesc(Comment comment, User user);
 
     List<Likes> findByUser(User user);
     List<Likes> findAllByPost(Post post);

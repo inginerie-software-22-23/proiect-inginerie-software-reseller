@@ -15,7 +15,7 @@ export class LikesService {
   }
 
   getAllLikesByUser(username: string) {
-    return this._http.get<LikePayload[]>('http://localhost:8070/api/likes/' + username);
+    return this._http.get<LikePayload[]>('http://localhost:8070/api/likes/by-user/' + username);
   }
 
 }

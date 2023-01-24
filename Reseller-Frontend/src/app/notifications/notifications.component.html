@@ -1,0 +1,14 @@
+<div class="row post" *ngFor="let notif of notificationList">
+    <span class="post-info">
+      You have {{notifications}} notifications!
+    </span>
+    <hr />
+    <div class="notifications">
+      <a *ngIf="notif.post == true ; else userLink" [routerLink]="['/view-post/', notif.postId]">{{notif.text}}</a>
+      <ng-template #userLink>
+        <a [routerLink]="['/user', notif.senderId]">{{notif.text}}</a>
+      </ng-template>
+    </div>
+  </div>
+  
+

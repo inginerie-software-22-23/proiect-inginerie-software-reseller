@@ -2,6 +2,8 @@ package com.m15.Reseller.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
@@ -26,7 +28,7 @@ public class Notification {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "recipient_id", nullable = false)
     private User recipient;
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "post_id", nullable = true)
     private Post interactionPost;
     @Enumerated(EnumType.STRING)

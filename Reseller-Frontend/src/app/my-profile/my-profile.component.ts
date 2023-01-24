@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommentPayload } from '../models/comment.payload';
@@ -29,6 +29,12 @@ export class MyProfileComponent implements OnInit {
   commentLength: number=0;
   followers: number=0;
   following: number=0;
+  @Output() followersChange = new EventEmitter<User[]>();
+  @Output() followingChange = new EventEmitter<User[]>();
+  followersList: User[] = [];
+  followingList: User[] = [];
+  @Output() currentListChange = new EventEmitter<string>();
+  currentList!: string;
  
 
 
@@ -57,10 +63,14 @@ export class MyProfileComponent implements OnInit {
 
     this._profileService.getFollowersByUsername(this.username).subscribe(data => {
       this.followers= data.length;
+      this.followersList = data;
+      this.followersChange.emit(this.followersList);
     });
 
     this._profileService.getFollowingByUsername(this.username).subscribe(data => {
       this.following= data.length;
+      this.followingList = data;
+      this.followersChange.emit(this.followingList);
     });
 
    }
@@ -69,5 +79,19 @@ export class MyProfileComponent implements OnInit {
     this.router.navigateByUrl('/login');
    }
 
+   goToFollowersList() {
+    this.router.navigate(['/followers-list']);
+  }
+  goToFollowingList() {
+ 
+    this.router.navigate(['/following-list']);
+  }
+  }
 
-}
+
+  
+
+
+
+
+

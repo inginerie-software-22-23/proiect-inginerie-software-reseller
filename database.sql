@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `comment_id` bigint NOT NULL AUTO_INCREMENT,
   `created_date` datetime(6) DEFAULT NULL,
+  `likes_count` int DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
   `post_id` bigint DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE `comment` (
   KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
   CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FKs1slvnkuemjsq2kj4h3vhx7i1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +43,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,'2023-01-24 16:23:11.338635',1,'dada',1,2);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,14 +84,17 @@ DROP TABLE IF EXISTS `likes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `likes` (
   `like_id` bigint NOT NULL AUTO_INCREMENT,
-  `post_id` bigint NOT NULL,
+  `comment_id` bigint DEFAULT NULL,
+  `post_id` bigint DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
   PRIMARY KEY (`like_id`),
+  KEY `FK8arpx7i3g3e5dammtdsira2m6` (`comment_id`),
   KEY `FKowd6f4s7x9f3w50pvlo6x3b41` (`post_id`),
   KEY `FKi2wo4dyk4rok7v4kak8sgkwx0` (`user_id`),
+  CONSTRAINT `FK8arpx7i3g3e5dammtdsira2m6` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`comment_id`) ON DELETE CASCADE,
   CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   CONSTRAINT `FKowd6f4s7x9f3w50pvlo6x3b41` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +103,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,NULL,1,2),(2,1,NULL,2);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,9 +127,9 @@ CREATE TABLE `notification` (
   KEY `FKn1l10g2mvj4r1qs93k952fshe` (`post_id`),
   KEY `FKqnduwq6ix2pxx1add03905i1i` (`recipient_id`),
   KEY `FKnbt1hengkgjqru2q44q8rlc2c` (`sender_id`),
-  CONSTRAINT `FKn1l10g2mvj4r1qs93k952fshe` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
-  CONSTRAINT `FKnbt1hengkgjqru2q44q8rlc2c` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `FKqnduwq6ix2pxx1add03905i1i` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `FKn1l10g2mvj4r1qs93k952fshe` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
+  CONSTRAINT `FKnbt1hengkgjqru2q44q8rlc2c` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `FKqnduwq6ix2pxx1add03905i1i` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,7 +163,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`post_id`),
   KEY `FK72mt33dhhs48hf9gcqrq4fxte` (`user_id`),
   CONSTRAINT `FK72mt33dhhs48hf9gcqrq4fxte` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +172,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,1,'2023-01-24 16:23:01.612973','Marime','still testing',1,1,0,'Junk',2);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +219,7 @@ CREATE TABLE `refresh_token` (
   `created_date` datetime(6) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +228,6 @@ CREATE TABLE `refresh_token` (
 
 LOCK TABLES `refresh_token` WRITE;
 /*!40000 ALTER TABLE `refresh_token` DISABLE KEYS */;
-INSERT INTO `refresh_token` VALUES (1,'2023-01-24 11:26:40.884902','8787b886-b583-469e-b831-6671dc9e3236');
 /*!40000 ALTER TABLE `refresh_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +246,7 @@ CREATE TABLE `token` (
   PRIMARY KEY (`id`),
   KEY `FKe32ek7ixanakfqsdaokm4q9y2` (`user_id`),
   CONSTRAINT `FKe32ek7ixanakfqsdaokm4q9y2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +255,6 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES (1,NULL,'87b8db82-e7cb-4004-9907-3a4a7e48c62c',1),(2,NULL,'f86a7899-039e-4d2d-ba46-2bec00d76df2',2),(3,NULL,'4eec7af3-6b48-4eea-b851-9ad432f2f113',3),(4,NULL,'7ba93a3d-6817-4ea5-8dd7-5abd063e39ff',4),(5,NULL,'012f34e0-fcc4-4a8c-810a-9394a5f84ea6',5),(6,NULL,'4d4d9d6a-2ee9-45a9-9018-48b05e9ee725',6),(7,NULL,'99c05417-aede-464f-934d-30451b49cffe',7),(8,NULL,'df9eda18-a40a-47fb-b298-adf90842104f',8),(9,NULL,'2d976efb-4e57-4c87-a061-460ca9d1235f',9),(10,NULL,'0c8658c8-4dfb-4220-92bf-6fefb0e62aa1',10),(11,NULL,'99aeb1e1-9970-4349-a678-536ecffe873f',11),(12,NULL,'3c6a52c3-bcda-4683-b3f0-540abd8767da',12),(13,NULL,'5e2b6f28-03ae-4e74-87ff-1068c5495735',13),(14,NULL,'3cad490d-0627-4e94-8358-174cd070d06b',14),(15,NULL,'8b413636-1348-4d63-ba98-09924930009c',15),(16,NULL,'275d10e5-06ce-42e1-99ca-299c7f36555c',16),(17,NULL,'a8ddbf8c-0f3d-4c94-8abd-d8786cca8cfe',17),(18,NULL,'a1d439db-2baf-4921-91b3-93cba739033f',18),(19,NULL,'f4483bd2-9c74-4078-b00a-322005d6468f',19),(20,NULL,'a2cff88c-4ac8-4841-9f75-f8cafa20e793',20),(21,NULL,'bc930f19-8ca6-42b6-936e-e841bd23efbc',21);
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-24 13:32:03
+-- Dump completed on 2023-01-24 18:26:47

@@ -27,9 +27,8 @@ public class Post {
     private String title;
     private String description;
     private Integer price;
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
     private Instant createdDate;
     private Integer likesCount = 0;
