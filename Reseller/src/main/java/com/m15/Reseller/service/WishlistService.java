@@ -68,9 +68,9 @@ public class WishlistService {
         return dto;
     }
 
-    public String deleteWishlist(WishlistDto wishlistDto) {
-        Post post = postRepository.findById(wishlistDto.getPostId())
-                .orElseThrow(() -> new PostNotFoundException("Post with id " + wishlistDto.getPostId() + " not found!"));
+    public String deleteWishlist(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + id + " not found!"));
 
         Optional<Wishlist> wishlistByPostAndUser = wishlistRepository.findTopByPostAndUserOrderByWishlistIdDesc(post, authService.getCurrentUser());
 
@@ -79,6 +79,7 @@ public class WishlistService {
         }
 
         wishlistRepository.deleteById(wishlistByPostAndUser.get().getWishlistId());
-        return "Success";
+        post.setSavedCount(post.getSavedCount() - 1);
+        return "Deleted";
     }
 }

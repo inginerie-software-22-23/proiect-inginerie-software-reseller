@@ -58,4 +58,9 @@ public class ProfileController {
     public ResponseEntity<String> editProfile(@PathVariable("username") String username, @RequestBody ProfileDto profileDto, HttpServletRequest request) {
         return status(HttpStatus.OK).body(profileService.editProfile(username, profileDto, request));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteProfile(@PathVariable Long id) {
+        return status(HttpStatus.MOVED_PERMANENTLY).body(profileService.deleteProfile(id));
+    }
 }

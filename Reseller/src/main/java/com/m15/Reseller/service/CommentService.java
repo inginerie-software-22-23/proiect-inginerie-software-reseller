@@ -106,4 +106,15 @@ public class CommentService {
         dto.setText(comment.getText());
         return dto;
     }
+
+    public String deleteComment(Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new CommentNotFoundException(id.toString()));
+
+        if (authService.getCurrentUser().equals(comment.getUser())) {
+            commentRepository.deleteById(id);
+            return "Deleted";
+        }
+        return "Error";
+    }
 }

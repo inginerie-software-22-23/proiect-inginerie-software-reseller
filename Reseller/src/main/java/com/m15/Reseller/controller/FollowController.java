@@ -21,8 +21,8 @@ public class FollowController {
         return new ResponseEntity<>(followService.followProfile(followDto), HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> unfollow(@RequestBody FollowDto followDto) {
-        return new ResponseEntity<>(followService.unfollowProfile(followDto), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> unfollow(@PathVariable Long id) {
+        return new ResponseEntity<>(followService.unfollowProfile(id), HttpStatus.MOVED_PERMANENTLY);
     }
 }

@@ -24,9 +24,9 @@ public class WishlistController {
         return status(HttpStatus.OK).body(wishlistService.savePost(wishlistDto));
     }
 
-    @DeleteMapping()
-    public ResponseEntity<String> deleteWishlist(@RequestBody WishlistDto wishlistDto) {
-        return new ResponseEntity<>(wishlistService.deleteWishlist(wishlistDto), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteWishlist(@PathVariable Long id) {
+        return new ResponseEntity<>(wishlistService.deleteWishlist(id), HttpStatus.MOVED_PERMANENTLY);
     }
 
     @GetMapping("by-user/{username}")

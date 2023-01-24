@@ -5,6 +5,7 @@ import com.m15.Reseller.dto.ProfileDto;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Follow;
 import com.m15.Reseller.model.Profile;
+import com.m15.Reseller.model.User;
 import com.m15.Reseller.repository.FollowRepository;
 import com.m15.Reseller.repository.ProfileRepository;
 import com.m15.Reseller.repository.UserRepository;
@@ -34,8 +35,8 @@ public class ProfileService {
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
     private final UserService userService;
+    private final AuthService authService;
     private final FirebaseStorageService storageService;
-    private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
     public List<ProfileDto> getAllProfiles() {
@@ -149,5 +150,16 @@ public class ProfileService {
         }
 
         return oldValue;
+    }
+
+    public String deleteProfile(Long id) {
+        Profile profile = profileRepository.findById(id)
+                .orElseThrow(() -> new SpringResellerException("Profile not found!"));
+
+        if (authService.getCurrentUser().equals(profile.getUser())) {
+            userRepository.deleteById(authService.getCurrentUser().getUserId());
+            return "Deleted";
+        }
+        return "Error";
     }
 }

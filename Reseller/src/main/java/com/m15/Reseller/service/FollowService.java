@@ -60,21 +60,21 @@ public class FollowService {
         return "Success";
     }
 
-    public String unfollowProfile(FollowDto followDto) {
-        if (Objects.equals(authService.getCurrentUser().getUserId(), followDto.getFollowed())) {
+    public String unfollowProfile(Long id) {
+        if (Objects.equals(authService.getCurrentUser().getUserId(), id)) {
             throw new SpringResellerException("You can't unfollow yourself!");
         }
 
         Profile follower = profileRepository.findByUser(authService.getCurrentUser())
                 .orElseThrow(() -> new SpringResellerException("Profile ID not found!"));
-        Profile followed = profileRepository.findById(followDto.getFollowed())
+        Profile followed = profileRepository.findById(id)
                 .orElseThrow(() -> new  SpringResellerException("Profile ID not found!"));
 
         Follow follow = followRepository.findByFollowerAndFollowed(follower, followed)
                 .orElseThrow(() -> new FollowNotFound("Follow not found!"));
 
         followRepository.deleteById(follow.getId());
-        return "Success";
+        return "Deleted";
     }
 
     private boolean isFollowing(Profile follower, Profile followed) {
