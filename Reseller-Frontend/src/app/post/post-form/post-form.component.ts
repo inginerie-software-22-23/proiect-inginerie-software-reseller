@@ -31,7 +31,7 @@ export class PostFormComponent implements OnInit {
     this.createPostForm = new FormGroup({
       title: new FormControl('', Validators.required),
       imageUrl: new FormControl('', Validators.required),
-      price: new FormControl(0, Validators.required),
+      price: new FormControl(0, [Validators.required, this.noNegativeValidator]),
       description: new FormControl('', Validators.required),
     });
   }
@@ -43,13 +43,22 @@ export class PostFormComponent implements OnInit {
     this.postPayload.description = this.createPostForm.get('description')?.value;
 
     this.postService.createPost(this.postPayload).subscribe((data) => {
+      this.router.navigateByUrl('/my-profile');
      
-    }, error => { })
-    this.router.navigateByUrl('/my-profile');
+    }, error => {  })
+   
   }
 
   discardPost() {
     this.router.navigateByUrl('/my-profile');
   }
+
+  noNegativeValidator(control: FormControl) {
+    if (control.value !== null && control.value < 0) {
+      return { price: true };
+    }
+    return null;
+  }
+
 
 }

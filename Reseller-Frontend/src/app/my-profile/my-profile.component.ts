@@ -56,8 +56,7 @@ export class MyProfileComponent implements OnInit {
 
     this._profileService.getUserByUsername(this.username).subscribe(user => {
       this.user = user;
-      console.log(this.user);
-
+ 
 
     });
 
@@ -86,6 +85,17 @@ export class MyProfileComponent implements OnInit {
  
     this.router.navigate(['/following-list']);
   }
+
+  editValues() {
+    let selectedUser = new User;
+    this._profileService.getUserByUsername(this.username).subscribe( data =>{
+      selectedUser = data;
+    })
+    this.router.navigate([`edit/${selectedUser.username}`])
+  }
+
+
+
   }
 
 

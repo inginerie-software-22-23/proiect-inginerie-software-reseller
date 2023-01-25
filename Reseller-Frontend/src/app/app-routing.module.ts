@@ -11,6 +11,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PostFormComponent } from './post/post-form/post-form.component';
 import { ViewPostComponent } from './post/view-post/view-post.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
@@ -29,7 +30,8 @@ const routes: Routes = [ {path: 'sign-up', component: SignupComponent},
 {path:'following-list', component: FollowingListComponent},
 {path: 'followers-list', component: FollowersListComponent},
 {path: 'notifications', component: NotificationsComponent},
-{path: 'wishlist', component: WishlistComponent}
+{path: 'wishlist', component: WishlistComponent},
+{path: 'edit/:name', component: ProfileFormComponent}
 ];
 
 @NgModule({
