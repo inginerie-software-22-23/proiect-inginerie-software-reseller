@@ -15,7 +15,7 @@ export class FollowService {
     return this._http.post<any>('http://localhost:8070/api/follow', followPayload ,{ responseType: 'json' });
   }
 
-  // deleteFollow(followPayload: FollowPayload) {
-  //   return this._http.delete('http://localhost:8070/api/follow', followPayload);
-  // }
+  deleteFollow(userId: number) {
+    return this._http.delete('http://localhost:8070/api/follow/'+userId);
+}
 }

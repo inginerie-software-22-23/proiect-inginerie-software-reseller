@@ -1,7 +1,11 @@
 package com.m15.Reseller.controller;
 
+import com.m15.Reseller.dto.AuthenticationResponse;
+import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.ProfileDto;
+import com.m15.Reseller.service.AuthService;
 import com.m15.Reseller.service.ProfileService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,8 @@ import static org.springframework.http.ResponseEntity.status;
 @AllArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
+    private final AuthService authService;
+
     @GetMapping
     public ResponseEntity<List<ProfileDto>> getAllProfiles() {
         return status(HttpStatus.OK).body(profileService.getAllProfiles());
@@ -26,6 +32,11 @@ public class ProfileController {
     @GetMapping("/{username}")
     public ResponseEntity<ProfileDto> getProfileByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(profileService.getProfileByUsername(username));
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ProfileDto> getProfileById(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(profileService.getProfileById(id));
     }
 
     @GetMapping("/{username}/followers")
@@ -46,5 +57,15 @@ public class ProfileController {
     @GetMapping("/{username}/profile-picture")
     public ResponseEntity<byte[]> getProfilePicture(@PathVariable("username") String username) throws IOException {
         return status(HttpStatus.OK).body(profileService.getProfilePicture(username));
+    }
+
+    @PutMapping("/{username}/edit")
+    public AuthenticationResponse editProfile(@PathVariable("username") String username, @RequestBody ProfileDto profileDto) {
+        return profileService.editProfile(username, profileDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteProfile(@PathVariable Long id) {
+        return status(HttpStatus.MOVED_PERMANENTLY).body(profileService.deleteProfile(id));
     }
 }

@@ -1,12 +1,21 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoginResponse } from '../models/login-response';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+   
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProfileService {
+  
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
@@ -21,4 +30,7 @@ export class ProfileService {
   getFollowingByUsername(username:String){
     return this.httpClient.get<User[]>('http://localhost:8070/api/profile/' + username + '/following') ;
   }
+
+  updateProfile(username: String, user: User) {
+    return this.httpClient.put<LoginResponse>('http://localhost:8070/api/profile/' + username + '/edit', user)}
 }

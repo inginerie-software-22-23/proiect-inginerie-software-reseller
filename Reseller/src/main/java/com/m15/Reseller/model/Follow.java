@@ -22,13 +22,11 @@ public class Follow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "follower_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Profile follower;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "followed_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Profile followed;
 }

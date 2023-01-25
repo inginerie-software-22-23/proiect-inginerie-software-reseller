@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfileDto {
-    private Long id;
+    private Long profileId;
     private String username;
     private Long userId;
-    private String fullName;
-    private String description;
-    private String imageUrl;
-    private boolean isActive;
+    private String fullName = "";
+    private String description = "";
+    private String imageUrl = "";
+    private boolean isActive = false;
 }

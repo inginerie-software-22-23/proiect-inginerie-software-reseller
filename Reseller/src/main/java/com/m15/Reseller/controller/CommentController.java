@@ -42,4 +42,9 @@ public class CommentController {
     public ResponseEntity<List<CommentDto>> getCommentsByPost(@PathVariable Long id) {
         return status(HttpStatus.OK).body(commentService.getCommentsByPost(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteComment(@PathVariable Long id) {
+        return status(HttpStatus.MOVED_PERMANENTLY).body(commentService.deleteComment(id));
+    }
 }
