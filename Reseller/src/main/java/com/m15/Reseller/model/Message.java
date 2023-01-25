@@ -18,11 +18,14 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "senderId", referencedColumnName = "senderId")
+    @JoinColumn(name = "senderId", referencedColumnName = "userId")
     private User sender;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipientId", referencedColumnName = "recipientId")
+    @JoinColumn(name = "recipientId", referencedColumnName = "userId")
     private User recipient;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "chat_id")
+    private Chat chat;
     private String text;
-    private Instant createdDate;
+    private Instant createdDate = Instant.now();
 }

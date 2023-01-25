@@ -101,7 +101,7 @@ public class LikesService {
             throw new SpringResellerException("You didn't like this post yet!");
         }
 
-        likesRepository.deleteById(likeByPostAndUser.get().getLikeId());
+        likesRepository.delete(likeByPostAndUser.get());
         post.setLikesCount(post.getLikesCount() - 1);
         return "Deleted";
     }
