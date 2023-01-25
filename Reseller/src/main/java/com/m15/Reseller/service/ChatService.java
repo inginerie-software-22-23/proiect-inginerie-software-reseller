@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,12 +22,19 @@ import java.util.Optional;
 public class ChatService {
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
+    private final MessageService messageService;
+    private final AuthService authService;
 
     public String save(ChatDto chatDto) {
         User firstUser = userRepository.findById(chatDto.getFirstUserId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         User secondUser = userRepository.findById(chatDto.getSecondUserId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        Set<ChatDto> check = getChatByFirstUsernameAndSecondUsername(firstUser.getUsername(), secondUser.getUsername());
+        if (!check.isEmpty()) {
+            return "Chat between these users already exists";
+        }
 
         chatRepository.save(
                 Chat.builder()
@@ -37,17 +46,22 @@ public class ChatService {
     }
 
 
-    public Chat getById(Long id) {
+    public ChatDto getById(Long id) {
         Optional<Chat> chatOptional = chatRepository.findById(id);
         if (chatOptional.isPresent()) {
-            return chatOptional.get();
+            return mapToDto(chatOptional.get());
         } else {
             throw new ChatNotFoundException("Chat ID not found");
         }
     }
 
-    public HashSet<Chat> getChatByFirstUserName(String username) {
-        HashSet<Chat> chat = chatRepository.getChatByFirstUsername(username);
+    public Set<ChatDto> getChatByFirstUserName(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+
+        Set<ChatDto> chat = chatRepository.getChatByFirstUser(user).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());
 
         if (chat.isEmpty()) {
             throw new ChatNotFoundException("Chat with user provided not found");
@@ -56,8 +70,12 @@ public class ChatService {
         }
     }
 
-    public HashSet<Chat> getChatBySecondUserName(String username) {
-        HashSet<Chat> chat = chatRepository.getChatBySecondUsername(username);
+    public Set<ChatDto> getChatBySecondUserName(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        Set<ChatDto> chat = chatRepository.getChatBySecondUser(user).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());
         if (chat.isEmpty()) {
             throw new ChatNotFoundException("Chat with user provided not found");
         } else {
@@ -65,9 +83,16 @@ public class ChatService {
         }
     }
 
-    public HashSet<Chat> getChatByFirstUserNameOrSecondUserName(String username) {
-        HashSet<Chat> chat = chatRepository.getChatByFirstUsername(username);
-        HashSet<Chat> chat1 = chatRepository.getChatBySecondUsername(username);
+    public Set<ChatDto> getChatByFirstUserNameOrSecondUserName(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+
+        Set<ChatDto> chat = chatRepository.getChatByFirstUser(user).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());;
+        Set<ChatDto> chat1 = chatRepository.getChatBySecondUser(user).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());;
 
         chat1.addAll(chat);
 
@@ -80,9 +105,18 @@ public class ChatService {
         }
     }
 
-    public HashSet<Chat> getChatByFirstUserNameAndSecondUserName(String firstUserName, String secondUserName) {
-        HashSet<Chat> chat = chatRepository.getChatByFirstUsernameAndSecondUsername(firstUserName, secondUserName);
-        HashSet<Chat> chat1 = chatRepository.getChatBySecondUsernameAndFirstUsername(firstUserName, secondUserName);
+    public Set<ChatDto> getChatByFirstUsernameAndSecondUsername(String firstUsername, String secondUsername) {
+        User firstUser = userRepository.findByUsername(firstUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        User secondUser = userRepository.findByUsername(secondUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+
+        Set<ChatDto> chat = chatRepository.getChatByFirstUserAndSecondUser(firstUser, secondUser).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());;
+        Set<ChatDto> chat1 = chatRepository.getChatByFirstUserAndSecondUser(secondUser, firstUser).stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toSet());
         if (chat.isEmpty() && chat1.isEmpty()) {
             throw new ChatNotFoundException("Chat with user provided not found");
         } else if (chat.isEmpty()) {
@@ -90,5 +124,13 @@ public class ChatService {
         } else {
             return chat;
         }
+    }
+
+    private ChatDto mapToDto(Chat chat) {
+        ChatDto dto = new ChatDto();
+        dto.setFirstUserId(chat.getFirstUser().getUserId());
+        dto.setSecondUserId(chat.getSecondUser().getUserId());
+        dto.setMessages(chat.getMessages().stream().map(messageService::mapToDto).collect(Collectors.toList()));
+        return dto;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -24,9 +25,9 @@ public class ChatController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Chat> getChatById(@PathVariable Long id) {
+    public ResponseEntity<ChatDto> getChatById(@PathVariable Long id) {
         try {
-            return new ResponseEntity<Chat>(chatService.getById(id), HttpStatus.OK);
+            return new ResponseEntity<ChatDto>(chatService.getById(id), HttpStatus.OK);
         } catch (ChatNotFoundException e) {
             return new ResponseEntity("Chat Not Found", HttpStatus.NOT_FOUND);
         }
@@ -35,10 +36,10 @@ public class ChatController {
     @GetMapping("/firstUsername/{username}")
     public ResponseEntity<?> getChatByFirstUserName(@PathVariable String username) {
         try {
-            HashSet<Chat> byChat = this.chatService.getChatByFirstUserName(username);
+            Set<ChatDto> byChat = this.chatService.getChatByFirstUserName(username);
             return new ResponseEntity<>(byChat, HttpStatus.OK);
         } catch (ChatNotFoundException e) {
-            return new ResponseEntity("Chat Not Exits", HttpStatus.CONFLICT);
+            return new ResponseEntity("Chat Does Not Exist", HttpStatus.CONFLICT);
         }
     }
 
@@ -48,33 +49,33 @@ public class ChatController {
     public ResponseEntity<?> getChatBySecondUserName(@PathVariable String username) {
 
         try {
-            HashSet<Chat> byChat = this.chatService.getChatBySecondUserName(username);
+            Set<ChatDto> byChat = this.chatService.getChatBySecondUserName(username);
             return new ResponseEntity<>(byChat, HttpStatus.OK);
         } catch (ChatNotFoundException e) {
-            return new ResponseEntity("Chat Not Exits", HttpStatus.CONFLICT);
+            return new ResponseEntity("Chat Does Not Exist", HttpStatus.CONFLICT);
         }
     }
 
-    @GetMapping("/getChatByFirstUserNameOrSecondUserName/{username}")
+    @GetMapping("/getChatByFirstUsernameOrSecondUsername/{username}")
     public ResponseEntity<?> getChatByFirstUserNameOrSecondUserName(@PathVariable String username) {
 
         try {
-            HashSet<Chat> byChat = this.chatService.getChatByFirstUserNameOrSecondUserName(username);
+            Set<ChatDto> byChat = this.chatService.getChatByFirstUserNameOrSecondUserName(username);
             return new ResponseEntity<>(byChat, HttpStatus.OK);
         } catch (ChatNotFoundException e) {
-            return new ResponseEntity("Chat Not Exits", HttpStatus.CONFLICT);
+            return new ResponseEntity("Chat Does Not Exist", HttpStatus.CONFLICT);
         }
     }
 
 
-    @GetMapping("/getChatByFirstUserNameAndSecondUserName")
-    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestParam("firstUserName") String firstUserName, @RequestParam("secondUserName") String secondUserName){
+    @GetMapping("/getChatByFirstUsernameAndSecondUsername")
+    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestParam("firstUsername") String firstUsername, @RequestParam("secondUsername") String secondUsername){
 
         try {
-            HashSet<Chat> chatByBothEmail = this.chatService.getChatByFirstUserNameAndSecondUserName(firstUserName, secondUserName);
-            return new ResponseEntity<>(chatByBothEmail, HttpStatus.OK);
+            Set<ChatDto> chatByBothUsers = this.chatService.getChatByFirstUsernameAndSecondUsername(firstUsername, secondUsername);
+            return new ResponseEntity<>(chatByBothUsers, HttpStatus.OK);
         } catch (ChatNotFoundException e) {
-            return new ResponseEntity("Chat Not Exits", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Chat Does Not Exist", HttpStatus.NOT_FOUND);
         }
     }
 }
