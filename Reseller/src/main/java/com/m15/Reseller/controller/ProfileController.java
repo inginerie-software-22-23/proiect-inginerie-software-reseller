@@ -1,6 +1,9 @@
 package com.m15.Reseller.controller;
 
+import com.m15.Reseller.dto.AuthenticationResponse;
+import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.ProfileDto;
+import com.m15.Reseller.service.AuthService;
 import com.m15.Reseller.service.ProfileService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -19,6 +22,8 @@ import static org.springframework.http.ResponseEntity.status;
 @AllArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
+    private final AuthService authService;
+
     @GetMapping
     public ResponseEntity<List<ProfileDto>> getAllProfiles() {
         return status(HttpStatus.OK).body(profileService.getAllProfiles());
@@ -55,8 +60,8 @@ public class ProfileController {
     }
 
     @PutMapping("/{username}/edit")
-    public ResponseEntity<String> editProfile(@PathVariable("username") String username, @RequestBody ProfileDto profileDto, HttpServletRequest request) {
-        return status(HttpStatus.OK).body(profileService.editProfile(username, profileDto, request));
+    public AuthenticationResponse editProfile(@PathVariable("username") String username, @RequestBody ProfileDto profileDto) {
+        return profileService.editProfile(username, profileDto);
     }
 
     @DeleteMapping("{id}")
