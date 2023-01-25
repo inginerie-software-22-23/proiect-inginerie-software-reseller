@@ -14,7 +14,7 @@
     margin-bottom: 2%;
 }
 .username{
-    color: lightcoral ;
+    color: lightcoral;
 }
 
 .commments{
@@ -25,11 +25,13 @@
 }
 
 .btns{
+    cursor: pointer;
     display: flex;
-    column-gap: 2em ;
+    column-gap: 10px;
 }
 
 .post-title{
+    cursor: pointer;
     background: none;
     border: none;
     padding: 0;

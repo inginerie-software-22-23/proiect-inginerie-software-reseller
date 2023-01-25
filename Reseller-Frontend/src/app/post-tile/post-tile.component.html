@@ -2,9 +2,8 @@
     <div class="col-md-11">
       <span class="post-info">
         <button class="post-title" (click)="goToPost(post.id)">{{post.title}}</button>
-        <span> . Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
+        <span> &nbsp;&nbsp;&nbsp;&nbsp; Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
       </span>
-      <hr />
       <div class="post-title">
         <a class="postname">{{post.imageUrl}}</a>
       </div>
@@ -12,8 +11,8 @@
         <p class="post-text" [innerHtml]="post.description"></p>
       </div>
       <div class="btns" >
-        <mat-icon (click)="goToPost(post.id)">comments</mat-icon><span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>
-        <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon>   <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>  
+        <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon> <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>
+        <mat-icon (click)="goToPost(post.id)">comments</mat-icon> <span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>  
         <mat-icon (click)="save(post)">bookmark</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>   
       </div>
     </div>

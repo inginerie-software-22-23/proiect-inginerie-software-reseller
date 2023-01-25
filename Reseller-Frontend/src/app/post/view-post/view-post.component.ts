@@ -53,6 +53,11 @@ export class ViewPostComponent implements OnInit {
     window.location.reload();
   }
 
+  onTextAreaInput(textarea: HTMLTextAreaElement) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight - 14 + 'px';
+  }
+
   private getPostById() {
     this.postService.getPostById(this.postId).subscribe(
     { next : data => {
