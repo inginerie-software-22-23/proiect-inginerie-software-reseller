@@ -9,12 +9,15 @@
       </div>
       <div>
         <p class="post-text" [innerHtml]="post.description"></p>
+        <span>Price : {{post.price}}</span>
       </div>
+      <hr />
       <div class="btns" >
         <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon> <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>
         <mat-icon (click)="goToPost(post.id)">comments</mat-icon> <span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>  
         <mat-icon (click)="save(post)">bookmark</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>   
       </div>
+     
     </div>
   </div>
 

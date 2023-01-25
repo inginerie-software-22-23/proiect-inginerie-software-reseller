@@ -38,8 +38,7 @@ export class AuthService {
         this.username.emit(data.username);
 
         console.log(data);
-        console.log(data.authenticationToken);
-        console.log(data.username);
+ 
 
         return true;
       }));

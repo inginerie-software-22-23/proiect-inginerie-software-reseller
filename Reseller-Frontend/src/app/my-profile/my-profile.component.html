@@ -7,12 +7,6 @@
       <th>Description</th>
       <th><button (click)="goToFollowersList()">Followers</button>
         <button (click)="goToFollowingList()">Following</button>
-        <!-- <app-follow-tile [currentList]="currentList" [followersList]="followersList" [followingList]="followingList"></app-follow-tile> -->
-        
-     
-      
-
-      
     </tr>
     <tr >
 
@@ -30,7 +24,7 @@
     <span> Posts: {{postLength}}</span>
       <mat-icon routerLink="/create-post">control_point</mat-icon>
       <mat-icon (click)="logout()">input</mat-icon>
-      <mat-icon>settings</mat-icon>
+      <mat-icon (click)="editValues()">settings</mat-icon>
   </div>
   <hr />
   <app-post-tile [posts]="posts"></app-post-tile>

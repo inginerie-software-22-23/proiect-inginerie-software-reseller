@@ -25,10 +25,9 @@
     
 
     <div class="bio">
-        <br />Posts: <b>{{postLength}}</b> 
-        <button (click)="follow()">
-          FOLLOW
-      </button>
+      <br />Posts: <b>{{postLength}}</b> 
+      <button (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
+      <button (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
     </div>
     <hr />
     <app-post-tile [posts]="posts"></app-post-tile>
