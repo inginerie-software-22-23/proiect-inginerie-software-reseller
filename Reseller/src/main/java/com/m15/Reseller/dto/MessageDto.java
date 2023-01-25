@@ -14,5 +14,5 @@ public class MessageDto {
     private Long recipientId;
     private Long chatId;
     private String text;
-    private Instant createdDate;
+    private Instant createdDate = Instant.now();
 }
