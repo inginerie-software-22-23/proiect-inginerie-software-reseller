@@ -20,6 +20,7 @@
 
 .username{
     color: gray;
+    text-decoration: none;
 }
 
 .post-text{
@@ -72,32 +73,46 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 
-  a {
-    font-size: 20px;
-    margin: 5px;
-  }
-
   a:first-child {
     font-weight: bold;
     margin-left: 10px;
     text-decoration: none;
     color: black;
+    font-size: 18px;
   }
   
   a:last-child {
     margin-left: 10px;
     color: black;
+    font-size: 15px;
   }
 }
 
-.username {
-  text-decoration: none;
+
+
+.commentButton {
+  cursor: pointer;
+  background-color: lighten(lightcoral, 20%);
+  border: none;
+  border-radius: 10px;
+  border-color: none;
+  font-size: 17px;
+  position: absolute;
+  left: 325px;
+  top: 136px;
+  color: rgb(82, 75, 75);
+  background-size: 100px 100px;
+  width: 125px; 
+  height: 35px;
+  &:hover{
+    background-color: lighten(lightcoral, 8%);
+  }
 }
 
 // .post-comment {
 //   button {
-//     border-radius: 5px;
-//     border-color: none;
-//     cursor: pointer;
+//     position: absolute;
+//     left: 350px;
+//     top: 139px;
 //   }
 // }

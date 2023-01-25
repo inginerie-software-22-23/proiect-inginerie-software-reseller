@@ -23,7 +23,7 @@
                   <div class="form-group">                  
                     <textarea rows="1" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" class="form-control" [formControlName]="'text'" placeholder="Enter your comment..."></textarea>
                   </div>
-                  <button type="submit" class="login float-right">Comment</button>
+                  <button type="submit" class="commentButton">Comment</button>
                 </form>
               </div>
               <div *ngFor="let comment of comments">

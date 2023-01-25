@@ -12,7 +12,8 @@ import { ProfileService } from '../sevices/profile.service';
   templateUrl: './profile-form.component.html',
   styleUrls: ['./profile-form.component.scss']
 })
-export class ProfileFormComponent implements OnInit{
+
+export class ProfileFormComponent implements OnInit {
   editForm!: FormGroup;
   user: User = new User();
   username: String = '';
@@ -24,18 +25,16 @@ export class ProfileFormComponent implements OnInit{
   }
 
   ngOnInit() {
-
-      this.username = this._authService.getUserName();
-      this._profileService.getUserByUsername(this.username).subscribe(data => {
-        this.user =  data;
-        if(!!this.user){
-          this.editForm.patchValue(this.user);}
-
-      })
-   
+    this.username = this._authService.getUserName();
+    this._profileService.getUserByUsername(this.username).subscribe(data => {
+      this.user =  data;
+      if(!!this.user) {
+        this.editForm.patchValue(this.user);
       }
+    })
+  }
       
-  createForm(){
+  createForm() {
     this.editForm = this._formBuilder.group({
       username: ['', Validators.required],
       fullName: ['', Validators.required],
@@ -44,35 +43,26 @@ export class ProfileFormComponent implements OnInit{
       active: [true],
       });
   }
-  saveUser() {
-    
-  if (this.editForm.valid) {
-    
-    if (this.username === this.editForm.value.username){
-      
-      this.editForm.value.username = "";
-    
+
+  saveUser() { 
+    if (this.editForm.valid) {   
+      if (this.username === this.editForm.value.username) {     
+        this.editForm.value.username = "";  
+      }
+
+      this._profileService.updateProfile(this.username, this.editForm.value).subscribe(data => {
+        console.log(data)
+        this.localStorage.store('authenticationToken', data.authenticationToken);
+        this.localStorage.store('username', data.username);
+        this.localStorage.store('refreshToken', data.refreshToken);
+        this.localStorage.store('expiresAt', data.expiresAt);
+        this._router.navigate(['/my-profile'])
+      });
     }
+  }
 
-
-      
-    this._profileService.updateProfile(this.username, this.editForm.value).subscribe(data => {
-      console.log(data)
-      this.localStorage.store('authenticationToken', data.authenticationToken);
-      this.localStorage.store('username', data.username);
-      this.localStorage.store('refreshToken', data.refreshToken);
-      this.localStorage.store('expiresAt', data.expiresAt);
-      this._router.navigate(['/my-profile'])
-    });
-
-     
- 
-
-
-    }
-     
-    
-    
-    
-
-  }}
+  onTextAreaInput(textarea: HTMLTextAreaElement) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight - 4 + 'px';
+  }
+}
