@@ -1,15 +1,17 @@
-<h3 class="post-info">
-  You have {{notifications}} notifications
-</h3>
-<hr />
-<div class="row post" *ngFor="let notif of notificationList">
-  <div class="notifications">
-    <a *ngIf="notif.post == true ; else userLink" [routerLink]="['/view-post/', notif.postId]">{{notif.text}}</a>
-    <ng-template #userLink>
-      <a [routerLink]="['/user', notif.senderId]">{{notif.text}}</a>
-    </ng-template>
+<div class="container">
+  <div class="notification">
+    <div class="notification-header">
+      <h2>You have {{notifications}} notifications</h2>
+      
+    </div>
+    <div class="notification-body" *ngFor="let notif of notificationList">
+      <a *ngIf="notif.post == true ; else userLink" [routerLink]="['/view-post/', notif.postId]">{{notif.text}}</a>
+      <ng-template #userLink>
+        <a [routerLink]="['/user', notif.senderId]">{{notif.text}}</a>
+      </ng-template>
+      <hr>
+    </div>
   </div>
-  <hr />
 </div>
   
 

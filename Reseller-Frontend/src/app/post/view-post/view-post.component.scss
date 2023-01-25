@@ -4,53 +4,100 @@
   margin-bottom: 0%;
 }
 .post-title {
-    font-size: 28px;
+  font-size: 28px;
+  font-weight: bold;
+  opacity: 1;
+  color: lightcoral;
+}
+  
+.post-title:hover {
+  opacity: 0.6;
+}
+
+.post-url {
+  color: black;
+}
+
+.username{
+    color: gray;
+}
+
+.post-text{
+    margin-top: 10px;
+}
+
+.post{
+    --post-line-color: #ccc;    
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.8);
+    color: #878A8C;
+    position: relative;
+    border-radius: 4px;
+    padding:5px;
+}
+
+// .comment{    
+//   margin-top: 7px;
+//   --post-line-color: #ccc;    
+//   border: 1px solid #ccc;    
+//   // margin-bottom: 10px;
+//   overflow: hidden;
+//   background-color: rgba(255,255,255,0.8);
+//   color: #878A8C;
+//   position: relative;
+//   border-radius: 4px;
+//   // padding:5px;
+// }
+
+.form-group {
+  textarea {
+    border-radius: 10px;
+    border-color: black;
+    padding: 7px;
+    margin-bottom: 7px;
+    margin-top: 7px;
+    font-size: 17px;
+  }
+}
+
+.form-control::placeholder {
+  font-size: 17px;
+}
+
+.comment {
+  margin-top: 7px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  a {
+    font-size: 20px;
+    margin: 5px;
+  }
+
+  a:first-child {
     font-weight: bold;
-    opacity: 1;
-    color: lightcoral;
-  }
-  
-  .post-title:hover {
-    opacity: 0.6;
-  }
-  
-  .subreddit-text {
-    font-weight: bold;
-  }
-  
-  .post-url {
+    margin-left: 10px;
+    text-decoration: none;
     color: black;
   }
   
-  .username{
-      color: gray;
+  a:last-child {
+    margin-left: 10px;
+    color: black;
   }
-  
-  .post-text{
-      margin-top: 10px;
-  }
-  
-  .post{
-      --post-line-color: #ccc;    
-      border: 1px solid #ccc;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      overflow: hidden;
-      background-color: rgba(255,255,255,0.8);
-      color: #878A8C;
-      position: relative;
-      border-radius: 4px;
-      padding:5px;
-  }
-  
-  .comment{    
-      --post-line-color: #ccc;    
-      border: 1px solid #ccc;    
-     // margin-bottom: 10px;
-      overflow: hidden;
-      background-color: rgba(255,255,255,0.8);
-      color: #878A8C;
-      position: relative;
-      border-radius: 4px;
-     // padding:5px;
-  }
+}
+
+.username {
+  text-decoration: none;
+}
+
+// .post-comment {
+//   button {
+//     border-radius: 5px;
+//     border-color: none;
+//     cursor: pointer;
+//   }
+// }
