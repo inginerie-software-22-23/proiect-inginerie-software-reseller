@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { CommentPayload } from 'src/app/models/comment.payload';
 import { PostModel } from 'src/app/models/post-model';
 import { User } from 'src/app/models/user';
@@ -26,7 +26,6 @@ export class ViewPostComponent implements OnInit {
   commentForm: FormGroup;
   commentPayload: CommentPayload;
   comments: CommentPayload[] = [];
-  commentImages: string[] = [];
 
   constructor(private postService: PostsService, private activateRoute: ActivatedRoute,private commentService: CommentsService, private profileService: ProfileService,
      private router: Router, private sanitizer: DomSanitizer, private imageService: ImageService) { //
@@ -38,6 +37,7 @@ export class ViewPostComponent implements OnInit {
     this.commentPayload = {
       text: '',
       username: '',
+      url: '',
       postId: this.postId
     };
   }
@@ -81,17 +81,22 @@ export class ViewPostComponent implements OnInit {
   }
 
   private getCommentsForPost() {
+
     this.commentService.getAllCommentsForPost(this.postId).subscribe(
-      {next :data => {
-      this.comments = data;
-      this.comments.forEach(comment => {
-        this.getProfileUrlForComment(comment)
-      });
+      { next :data => {
+        this.comments = data;
+        this.comments.forEach(comment => {
+          this.imageService.getImageUrl(comment.username).subscribe(
+            data => {
+              comment.url = data;
+            }
+          );
+        });
     }, 
     error:() => {
       //throwError(error);
     }}
-    );
+    )
   }
 
   private getLikesForPost() {
@@ -104,14 +109,6 @@ export class ViewPostComponent implements OnInit {
     }}
     );
   }
-
-  private getProfileUrlForComment(comment: CommentPayload) {
-    this.imageService.getImageUrl(comment.username).subscribe(
-      data => {
-        this.commentImages.push(data);
-      }
-    );
-  } 
 
   private getProfileUrlForPost(post: PostModel) {
     this.imageService.getImageUrl(post.username).subscribe(

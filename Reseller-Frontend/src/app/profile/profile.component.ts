@@ -7,6 +7,7 @@ import { User } from '../models/user';
 import { AuthService } from '../sevices/auth.service';
 import { CommentsService } from '../sevices/comments.service';
 import { FollowService } from '../sevices/follow.service';
+import { ImageService } from '../sevices/image.service';
 import { PostsService } from '../sevices/posts.service';
 import { ProfileService } from '../sevices/profile.service';
 
@@ -32,10 +33,12 @@ export class ProfileComponent implements OnInit {
   activeUser= this._authService.getUserName();
   activeUserFollowing: User[]=[];
   isFollowed: boolean = false;
+  imageUrl: string = '';
 
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
-    private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService, private _authService: AuthService) {
+    private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService, private _authService: AuthService,
+    private imageService:ImageService) {
 
   }
 
@@ -52,6 +55,11 @@ export class ProfileComponent implements OnInit {
 
     this._profileService.getUserByUsername(this.name).subscribe(user => {
       this.user = user;
+      this.imageService.getImageUrl(user.username).subscribe(
+        data => {
+          this.imageUrl = data;
+        }
+      );
       
     });
     this._profileService.getFollowersByUsername(this.name).subscribe(data => {

@@ -8,5 +8,6 @@ export class PostModel {
     commentCount: number = 0;
     likesCount: number = 0;
     savedCount: number = 0;
+    profileUrl: string = '';
 
 }

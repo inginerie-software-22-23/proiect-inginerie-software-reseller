@@ -5,6 +5,7 @@ import { AuthService } from '../sevices/auth.service';
 import { PostsService } from '../sevices/posts.service';
 import { ProfileService } from '../sevices/profile.service';
 import { forkJoin } from 'rxjs';
+import { ImageService } from '../sevices/image.service';
 
 @Component({
   selector: 'app-for-you',
@@ -17,8 +18,11 @@ export class ForYouComponent implements OnInit {
   username= this._authService.getUserName();
   user:User | undefined;
   posts:PostModel[]=[];
+  productImages: string[] = [];
+  profileImages: string[] = [];
 
-  constructor( private _profileService: ProfileService, private _authService: AuthService, private _postService:PostsService) { }
+  constructor( private _profileService: ProfileService, private _authService: AuthService, private _postService:PostsService,
+    private imageService: ImageService) { }
 
   ngOnInit(): void {
     this._profileService.getFollowingByUsername(this.username).subscribe(data => {
@@ -28,7 +32,18 @@ export class ForYouComponent implements OnInit {
       });
       forkJoin(requests).subscribe(data => {
         this.posts = data.flat();
-        console.log(this.posts);
+        this.posts.forEach(post => {
+          this.imageService.getPostImageUrl(post.id).subscribe(
+            data => {
+              post.imageUrl = data;
+            }
+          );
+          this.imageService.getImageUrl(post.username).subscribe(
+            data => {
+              post.profileUrl = data;
+            }
+          );
+        });
       });
     });
   }
