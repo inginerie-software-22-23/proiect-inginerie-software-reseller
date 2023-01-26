@@ -55,7 +55,7 @@ public class ProfileController {
     }
 
     @GetMapping("/{username}/profile-picture")
-    public ResponseEntity<byte[]> getProfilePicture(@PathVariable("username") String username) throws IOException {
+    public ResponseEntity<String> getProfilePicture(@PathVariable("username") String username) throws IOException {
         return status(HttpStatus.OK).body(profileService.getProfilePicture(username));
     }
 
