@@ -22,6 +22,7 @@ export class ViewPostComponent implements OnInit {
   postId: number;
   post!: PostModel;
   sellerImage: string = '';
+  productImage: string = '';
   commentForm: FormGroup;
   commentPayload: CommentPayload;
   comments: CommentPayload[] = [];
@@ -71,6 +72,7 @@ export class ViewPostComponent implements OnInit {
     { next : data => {
       this.post = data;
       this.getProfileUrlForPost(this.post);
+      this.getPostImageUrl(this.post);
     },
      error: () => {
   
@@ -120,9 +122,9 @@ export class ViewPostComponent implements OnInit {
   }
 
   private getPostImageUrl(post: PostModel) {
-    this.imageService.getImageUrl(post.username).subscribe(
+    this.imageService.getPostImageUrl(post.id).subscribe(
       data => {
-        this.sellerImage = data;
+        this.productImage = data;
       }
     );
   } 

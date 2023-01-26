@@ -9,6 +9,7 @@ import { PostModel } from '../models/post-model';
 import { SavedPayload } from '../models/saved.payload';
 import { AuthService } from '../sevices/auth.service';
 import { CommentsService } from '../sevices/comments.service';
+import { ImageService } from '../sevices/image.service';
 import { LikesService } from '../sevices/likes.service';
 import { PostsService } from '../sevices/posts.service';
 import { SavedService } from '../sevices/saved.service';
@@ -28,10 +29,11 @@ export class PostTileComponent implements OnInit {
   isLoggedIn: boolean | undefined;
   loggedInSubscription: Subscription;
   savePayload: SavedPayload = new SavedPayload;
+  productImages: string[] = [];
 
   constructor(private _router: Router,private _http: HttpClient, private _likeService: LikesService,
     private _authService: AuthService, private _saveService: SavedService,
-    private _postService: PostsService, private toastr: ToastrService){
+    private _postService: PostsService, private toastr: ToastrService, private imageService:ImageService){
 
       this.loggedInSubscription = this._authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
   }
@@ -39,6 +41,15 @@ export class PostTileComponent implements OnInit {
   ngOnInit(): void {
     //this.updateLikeDetails();
     //console.log(this.post)
+    console.log(this.posts)
+    this.posts.forEach(post => {
+      this.imageService.getPostImageUrl(post.id).subscribe(
+        data => {
+          this.productImages.push(data);
+        }
+      );
+    });
+    
   }
 
   goToPost(id: number): void {
