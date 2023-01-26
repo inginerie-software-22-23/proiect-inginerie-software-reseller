@@ -4,19 +4,18 @@
         <div class="col-md-9">
           <div class="row post">
             <div class="col-md-11">
+              <img width="30px" height="30px" [src]="sellerImage" alt="">
               <span>
-                <span class="back"><a class="post-url" href="" routerLink="/home">{{post.title}}</a></span>
-                <span> . Seller:              
+                <span> Seller:              
                   <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a>
                 </span>
               </span>
               <hr />
-              <a routerLink="post.url" class="post-title">{{post.title}}</a>
+              <img width="300px" height="150px" [src]="productImage" alt="">
               <div>
-                <p class="post-text" [innerHtml]="post.description"></p>
-              </div>
-              <div>
+                <p routerLink="post.url" class="post-title">{{post.title}}</p>
                 <span>Price: {{post.price}}</span>
+                <p class="post-text" [innerHtml]="post.description"></p>
               </div>
               <div class="post-comment">
                 <form [formGroup]="commentForm" (ngSubmit)="postComment()">
@@ -26,8 +25,9 @@
                   <button type="submit" class="login float-right">Comment</button>
                 </form>
               </div>
-              <div *ngFor="let comment of comments">
+              <div *ngFor="let comment of comments; let i = index">
                 <div class="comment">
+                    <img width="30px" height="30px" [src]="commentImages[i]" alt="">
                     <a routerLink="/user/{{comment.username}}">{{comment.username}}</a>
                     <a>{{comment.text}}</a>
                 </div>

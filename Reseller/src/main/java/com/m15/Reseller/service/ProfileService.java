@@ -113,10 +113,15 @@ public class ProfileService {
                 .collect(toList());
     }
 
-    public byte[] getProfilePicture(String username) throws IOException {
+    public String getProfilePicture(String username) throws IOException {
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
-        return storageService.getFile(profile.getImageUrl());
+
+        return "https://firebasestorage.googleapis.com/v0/b/reseller-1d2c9.appspot.com/o/" +
+                profile.getImageUrl().replace("/", "%2F") +
+                "?alt=media&token=" +
+                profile.getImageUrl();
+
     }
 
     public ProfileDto getProfileById(Long id) {
