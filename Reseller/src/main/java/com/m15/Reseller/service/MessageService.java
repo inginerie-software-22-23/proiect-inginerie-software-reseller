@@ -1,5 +1,6 @@
 package com.m15.Reseller.service;
 
+import com.m15.Reseller.dto.ChatDto;
 import com.m15.Reseller.dto.MessageDto;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Chat;
@@ -14,8 +15,12 @@ import org.checkerframework.checker.units.qual.C;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -32,19 +37,29 @@ public class MessageService {
         User recipient = userRepository.findById(messageDto.getRecipientId())
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        Optional<Chat> chatOptional = chatRepository.findById(messageDto.getChatId());
-        Chat chat = chatOptional.orElseGet(() -> Chat.builder()
-                .firstUser(authService.getCurrentUser())
-                .secondUser(recipient)
-                .build());
+        Set<Chat> chatCheck = chatRepository.getChatByFirstUserAndSecondUser(recipient, authService.getCurrentUser());
+        Chat chat;
+        if (chatCheck.isEmpty()) {
+            chat = new Chat();
+            chat.setFirstUser(authService.getCurrentUser());
+            chat.setSecondUser(recipient);
+        } else {
+            chat = chatCheck.iterator().next();
+        }
 
-        messageRepository.save(
-                Message.builder()
-                        .sender(authService.getCurrentUser())
-                        .recipient(recipient)
-                        .chat(chat)
-                        .text(messageDto.getText())
-                        .build());
+        Message message = Message.builder()
+                .sender(authService.getCurrentUser())
+                .recipient(recipient)
+                .chat(chat)
+                .text(messageDto.getText())
+                .createdDate(Instant.now())
+                .build();
+        messageRepository.save(message);
+
+        List<Message> newList = chat.getMessages();
+        newList.add(message);
+        chat.setMessages(newList);
+        chatRepository.save(chat);
 
         return "Success";
     }
@@ -92,7 +107,7 @@ public class MessageService {
                 .collect(toList());
     }
 
-    private MessageDto mapToDto(Message message) {
+    MessageDto mapToDto(Message message) {
         MessageDto dto = new MessageDto();
         dto.setText(message.getText());
         dto.setRecipientId(message.getRecipient().getUserId());

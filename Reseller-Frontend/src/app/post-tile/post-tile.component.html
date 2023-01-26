@@ -1,11 +1,11 @@
-<div class="row post" *ngFor="let post of posts">
+<div class="row post" *ngFor="let post of posts; let i = index">
     <div class="col-md-11">
       <span class="post-info">
         <button class="post-title" (click)="goToPost(post.id)">{{post.title}}</button>
         <span> &nbsp;&nbsp;&nbsp;&nbsp; Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
       </span>
       <div class="post-title">
-        <a class="postname">{{post.imageUrl}}</a>
+        <img width="300px" height="150px" [src]="productImages[i]" alt="">
       </div>
       <div>
         <p class="post-text" [innerHtml]="post.description"></p>

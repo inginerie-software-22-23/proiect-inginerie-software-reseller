@@ -52,7 +52,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}/product-picture")
-    public ResponseEntity<byte[]> getProductPicture(@PathVariable("id") Long id) throws IOException {
+    public ResponseEntity<String> getProductPicture(@PathVariable("id") Long id) throws IOException {
         return status(HttpStatus.OK).body(postService.getProductPicture(id));
     }
 }

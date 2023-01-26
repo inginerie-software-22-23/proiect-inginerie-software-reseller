@@ -2,6 +2,8 @@ package com.m15.Reseller.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 
@@ -17,10 +19,10 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "senderId", referencedColumnName = "userId")
     private User sender;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "recipientId", referencedColumnName = "userId")
     private User recipient;
     @ManyToOne(fetch = FetchType.EAGER)
