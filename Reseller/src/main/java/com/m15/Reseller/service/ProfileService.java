@@ -102,6 +102,12 @@ public class ProfileService {
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
 
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new SpringResellerException("User not found!"));
+
+        if (!user.equals(authService.getCurrentUser())) {
+            throw new SpringResellerException("Error - Not logged in!");
+        }
         profile.setImageUrl(profilePictureUrl);
         profileRepository.save(profile);
         return "Success";

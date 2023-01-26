@@ -29,7 +29,6 @@ export class PostTileComponent implements OnInit {
   isLoggedIn: boolean | undefined;
   loggedInSubscription: Subscription;
   savePayload: SavedPayload = new SavedPayload;
-  productImages: string[] = [];
 
   constructor(private _router: Router,private _http: HttpClient, private _likeService: LikesService,
     private _authService: AuthService, private _saveService: SavedService,
@@ -39,17 +38,6 @@ export class PostTileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.updateLikeDetails();
-    //console.log(this.post)
-    console.log(this.posts)
-    this.posts.forEach(post => {
-      this.imageService.getPostImageUrl(post.id).subscribe(
-        data => {
-          this.productImages.push(data);
-        }
-      );
-    });
-    
   }
 
   goToPost(id: number): void {
