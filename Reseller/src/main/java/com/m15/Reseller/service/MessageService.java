@@ -112,6 +112,7 @@ public class MessageService {
         dto.setText(message.getText());
         dto.setRecipientId(message.getRecipient().getUserId());
         dto.setSenderId(message.getSender().getUserId());
+        dto.setChatId(message.getChat().getChatId());
         return dto;
     }
 }
