@@ -128,6 +128,7 @@ public class ChatService {
 
     private ChatDto mapToDto(Chat chat) {
         ChatDto dto = new ChatDto();
+        dto.setChatId(chat.getChatId());
         dto.setFirstUserId(chat.getFirstUser().getUserId());
         dto.setSecondUserId(chat.getSecondUser().getUserId());
         dto.setMessages(chat.getMessages().stream().map(messageService::mapToDto).collect(Collectors.toList()));
