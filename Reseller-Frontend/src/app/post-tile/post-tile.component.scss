@@ -4,34 +4,42 @@
     margin-top: 10px;
     margin-bottom: 10px;
     overflow: hidden;
-    background-color: rgba(255,255,255,0.8);
-    color: #878A8C;
+    //background-color: rgba(255,255,255,0.8);
+    color: black;
     position: relative;
     border-radius: 4px;
-    padding:5px;
+    padding: 5px;
     margin: 7%;
     margin-top: 2%;
     margin-bottom: 2%;
 }
+
 .username{
     color: lightcoral;
-}
-
-.commments{
-    background: white;
-    border: none;
-    padding: 0;
-
 }
 
 .btns{
     cursor: pointer;
     display: flex;
-    column-gap: 10px;
+    flex-direction: row;
+    align-items: center;
+
+    :nth-child(2) {
+        margin-left: 7px;
+        margin-right: 17px;
+    }
+
+    :nth-child(4) {
+        margin-left: 7px;
+        margin-right: 14px;
+    }
+
+    :nth-child(6) {
+        margin-left: 7px;
+    }
 }
 
 .post-title{
-    cursor: pointer;
     background: none;
     border: none;
     padding: 0;
@@ -39,16 +47,53 @@
     font-weight: bold;
     opacity: 1;
     color: lightcoral;
-}
 
-.posturl, .postname{    
-    color: lightcoral;
-}
+    img {
+        cursor: pointer;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
-.subreddit-text{
-    font-weight: bold;
+    :nth-child(2) {
+        cursor: pointer;
+    }
+
+    :nth-child(3) {
+
+    }
+
+    :last-child {
+
+    }
 }
 
 .post-text{
     margin-top: 10px;
+}
+
+.post-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    a {
+        font-weight: bold;
+        color: black;
+        font-size: 20px;
+        text-decoration: none;
+    }
+}
+
+.col-md-11 {
+    hr {
+        border-top: 2px solid lighten($color: lightcoral, $amount: 10);
+        background-color: none;
+    } 
 }
