@@ -1,8 +1,24 @@
+<<<<<<< Updated upstream
+=======
+<!-- <form [formGroup]="searchForm" (ngSubmit)="search()">
+  <input type="text" formControlName="searchControl" >
+  <button type="submit">Search</button>
+</form> -->
+
+
+
+<!-- <div class="row post" *ngFor="let post of searchResults"> -->
+
+>>>>>>> Stashed changes
 <div class="row post" *ngFor="let post of posts">
     <div class="col-md-11">
       <span class="post-info">
         <button class="post-title" (click)="goToPost(post.id)">{{post.title}}</button>
+<<<<<<< Updated upstream
         <span> . Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
+=======
+        <span>  Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
+>>>>>>> Stashed changes
       </span>
       <hr />
       <div class="post-title">
@@ -14,11 +30,15 @@
       </div>
       <hr />
       <div class="btns" >
+<<<<<<< Updated upstream
         <mat-icon (click)="goToPost(post.id)">comments</mat-icon><span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>
         <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon>   <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>  
+=======
+        <mat-icon (click)="likeButtonLogic(post)" >thumb_up_alt</mat-icon> <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>
+        <mat-icon (click)="goToPost(post.id)">comments</mat-icon> <span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>  
+>>>>>>> Stashed changes
         <mat-icon (click)="save(post)">bookmark</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>   
       </div>
-     
     </div>
   </div>
 

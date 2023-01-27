@@ -1,0 +1,10 @@
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+    <input type="text" formControlName="searchControl" >
+    <button type="submit">Search</button>
+  </form>
+
+<div *ngFor = "let user of searchResults">
+    <a class="username" routerLink="/user/{{user.username}}">{{user.username}}</a>
+
+
+</div>

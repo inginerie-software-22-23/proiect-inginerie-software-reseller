@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, Subscription } from 'rxjs';
 import { CommentPayload } from '../models/comment.payload';
 import { FollowPayload } from '../models/follow.payload';
 import { PostModel } from '../models/post-model';
@@ -17,13 +18,13 @@ import { ProfileService } from '../sevices/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  name: string='';
+  //name: string='';
   posts: PostModel[]=[];
   comments: CommentPayload[]=[];
   postLength: number=0;
   commentLength: number=0;
   user!: User;
-  public isFollow: boolean = false;
+  public isFollow: boolean | undefined;
   followRequest: FollowPayload = new FollowPayload;
   followers: number=0;
   following: number=0;
@@ -32,18 +33,35 @@ export class ProfileComponent implements OnInit {
   activeUser= this._authService.getUserName();
   activeUserFollowing: User[]=[];
   isFollowed: boolean = false;
+<<<<<<< Updated upstream
 
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
     private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService, private _authService: AuthService) {
 
+=======
+  name = this._activatedRoute.snapshot.params['name'];
+
+  imageUrl: string = '';
+
+
+  constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
+    private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService, private _authService: AuthService,
+    private imageService:ImageService) {
+      
+      
+>>>>>>> Stashed changes
   }
 
   ngOnInit(): void {
-    this.name = this._activatedRoute.snapshot.params['name'];
-    console.log(this.name)
-    this.getUser(this.name, this.user);
-
+    
+    this.getUser();
+    this.verifyIfFollowed()
+    console.log(this.user)
+    this._profileService.getUserByUsername(this.activeUser).subscribe((user:User)=>
+    {
+      this.activeUser = user;
+    })
 
     this._postService.getAllPostsByUser(this.name).subscribe(data => {
       this.posts = data;
@@ -64,35 +82,33 @@ export class ProfileComponent implements OnInit {
       this.followingList = data;
     });
 
-    this._profileService.getFollowingByUsername(this.activeUser).subscribe(data => {
-        this.activeUserFollowing = data;
-        console.log(this.activeUserFollowing)
-        console.log(this.user)
-        const isFound = this.activeUserFollowing.find(f => f.id === this.user.id);
-    
-        if(isFound){
-          this.isFollowed = true;
-        } else {
-          this.isFollowed = false;
-        }
+    this._profileService.getFollowingByUsername(this.activeUser).subscribe((data) => {
+        this.activeUserFollowing = data;  
     
     })
+    console.log(this.activeUserFollowing )
+    console.log(this.activeUser)
   }
 
-  getUser(username: string, user: User) {
-    this._profileService.getUserByUsername(username).subscribe(data => {
-        Object.assign(user, data);
-    });
+  getUser() {
+      this._profileService.getUserByUsername(this.name).subscribe((user: User) => {
+      this.user = user;
+      this.followRequest.followed = user.userId;
+      
+    });      
+      
+    
 }
-
+  verifyIfFollowed(){
+    const isFound = this.activeUserFollowing.find(f => f.profileId === this.followRequest.followed);
+    if(isFound != undefined){
+      this.isFollowed = true;
+    } else {
+      this.isFollowed = false;
+    }
+  }
 
     follow(){
-     
-      let followedName = this._activatedRoute.snapshot.params['name'];
-      let followedUsed = new User;
-      this.getUser(followedName, followedUsed)
-      console.log(followedUsed)
-      this.followRequest.followed =followedUsed.id;
       this._followService.postFollow(this.followRequest).subscribe(data=>{
         this.isFollowed = true;
        
@@ -101,10 +117,7 @@ export class ProfileComponent implements OnInit {
 
   }
   unfollow(){
-    let followedName = this._activatedRoute.snapshot.params['name'];
-    this.getUser(this.name, this.user);
-    console.log(this.user)
-    this.followRequest.followed =this.user.id;
+
     this._followService.deleteFollow(this.followRequest.followed).subscribe(data => {
       this.isFollowed = false;
 

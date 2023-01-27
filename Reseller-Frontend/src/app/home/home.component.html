@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
   <div class="reddit-body">
     <div class="container">
       <div class="row">
@@ -6,6 +7,27 @@
           <app-post-tile [posts]="posts"></app-post-tile>
         </div>
 
+=======
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+  <input type="text" formControlName="searchControl" >
+  <button type="submit">Search</button>
+</form>
+
+<mat-icon routerLink="/search-profile">search</mat-icon>
+  
+<div class="home-body">
+  <div class="container">
+    <div class="row">
+      <hr />
+      <div class="col-md-9">
+        <div *ngIf="searchResults.length > 0; else showPosts">
+          <app-post-tile [posts]="searchResults"></app-post-tile>
+        </div>
+        <ng-template #showPosts>
+          <app-post-tile [posts]="posts"></app-post-tile>
+        </ng-template>
+>>>>>>> Stashed changes
       </div>
     </div>
   </div>
+</div>
