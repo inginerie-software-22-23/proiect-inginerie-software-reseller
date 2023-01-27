@@ -12,10 +12,10 @@ export class FollowService {
   constructor(private _http: HttpClient) { }
 
   postFollow(followPayload: FollowPayload): Observable<any> {
-    return this._http.post<any>('http://localhost:8070/api/follow', followPayload ,{ responseType: 'json' });
+    return this._http.post<any>('http://localhost:8070/api/follow', followPayload , {responseType: 'text' as 'json'});
   }
 
   deleteFollow(userId: number) {
-    return this._http.delete('http://localhost:8070/api/follow/'+userId);
+    return this._http.delete('http://localhost:8070/api/follow/'+userId,  {responseType: 'text' as 'json'});
 }
 }

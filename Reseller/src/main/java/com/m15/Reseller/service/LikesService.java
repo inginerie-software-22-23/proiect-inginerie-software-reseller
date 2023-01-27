@@ -91,6 +91,21 @@ public class LikesService {
                 .toList();
     }
 
+    public String unlikeComment(Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new SpringResellerException("Comment with id " + id + " not found!"));
+
+        Optional<Likes> likeByCommentAndUser = likesRepository.findTopByCommentAndUserOrderByLikeIdDesc(comment, authService.getCurrentUser());
+
+        if (likeByCommentAndUser.isEmpty()) {
+            throw new SpringResellerException("You didn't like this post yet!");
+        }
+
+        likesRepository.delete(likeByCommentAndUser.get());
+        comment.setLikesCount(comment.getLikesCount() - 1);
+        return "Deleted";
+    }
+
     public String unlike(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException("Post with id " + id + " not found!"));

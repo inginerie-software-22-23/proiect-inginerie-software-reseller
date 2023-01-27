@@ -94,7 +94,6 @@ export class ViewPostComponent implements OnInit {
         });
     }, 
     error:() => {
-      //throwError(error);
     }}
     )
   }
@@ -105,7 +104,7 @@ export class ViewPostComponent implements OnInit {
       this.comments = data;
     }, 
     error:() => {
-      //throwError(error);
+      
     }}
     );
   }

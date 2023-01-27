@@ -1,9 +1,9 @@
 export class User {
-    id!: number;
-    username!: string;
+    profileId: number = 0;
+    username: string='';
     fullName: string='';
-    description!: string;
-    imageUrl!: string;
+    description: string = '';
+    imageUrl: string = '';
     active!: boolean;
-    user_id!: number;
+    userId!: number;
 }

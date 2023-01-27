@@ -15,4 +15,5 @@ public class CommentDto {
     private Instant createdDate;
     private String text;
     private String username;
+    private Integer likesCount = 0;
 }

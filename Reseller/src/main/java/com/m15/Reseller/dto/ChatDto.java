@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatDto {
+    private Long chatId;
     private Long firstUserId;
     private Long secondUserId;
     private List<MessageDto> messages = new ArrayList<>();

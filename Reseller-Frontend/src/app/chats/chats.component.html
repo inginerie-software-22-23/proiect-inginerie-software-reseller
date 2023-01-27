@@ -1,0 +1,18 @@
+<div *ngFor="let chat of chats">
+    <a routerLink="/messages/{{chat.id}}">
+        <!-- {{chat.id}}
+        {{chat.messages}}
+        {{chat.firstUserId}}
+        {{chat.secondUserId}}
+        ////////////////////////////////
+        user:
+        {{user.userId}}
+        {{user.username}}
+        => -->
+        {{chat.sender.username}}
+        
+        <!-- {{chat.messages[chat.messages.length - 1].text}} -->
+  
+    </a>
+    <!-- <span> {{chat.messages[chat.messages.length - 1].text}}</span> -->
+</div> 
