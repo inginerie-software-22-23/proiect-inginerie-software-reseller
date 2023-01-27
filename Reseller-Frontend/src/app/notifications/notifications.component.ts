@@ -29,7 +29,17 @@ export class NotificationsComponent implements OnInit{
             notif.url = data;
           }
         );
+
+        if (notif.post == true) {
+          this._imageService.getPostImageUrl(notif.postId).subscribe(
+            data => {
+              notif.postUrl = data;
+            }
+          )
+        }
       });
+
+
     })
   }
 
