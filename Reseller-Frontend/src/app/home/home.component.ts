@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, Subscription, throwError } from 'rxjs';
 import { PostModel } from '../models/post-model';
+import { ImageService } from '../sevices/image.service';
 import { PostsService } from '../sevices/posts.service';
 import { SearchService } from '../sevices/search.service';
 
@@ -12,15 +13,11 @@ import { SearchService } from '../sevices/search.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-<<<<<<< Updated upstream
-  // posts: PostModel[] =[];
-  // post:PostModel | undefined;
-  // postId:number =2;
-  // subscriptionList: Subscription[] = [];
+
   posts: Array<PostModel> = [];
 
   constructor(private _postService: PostsService) {  this._postService.getAllPosts().subscribe(post => {
-=======
+
   searchControl = new FormControl('');
   searchResults: PostModel[] = [];
   searchForm = new FormGroup({
@@ -30,17 +27,38 @@ export class HomeComponent implements OnInit {
   posts: Array<PostModel> = [];
 
   constructor(private _postService: PostsService,private _searchService: SearchService, private _imageService:ImageService) {  this._postService.getAllPosts().subscribe(post => {
->>>>>>> Stashed changes
+
+  posts: Array<PostModel> = [];
+
+  constructor(private _postService: PostsService, private _imageService:ImageService) {  this._postService.getAllPosts().subscribe(post => {
+
     this.posts = post;
-  }); }
+
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(1000)).subscribe(searchTerm => this.search());
 
+    this.posts.forEach(post => {
+      this._imageService.getPostImageUrl(post.id).subscribe(
+        data => {
+          post.imageUrl = data;
+        }
+      );
+
+      this._imageService.getImageUrl(post.username).subscribe(
+        data => {
+          post.profileUrl = data;
+        }
+      )
+    })
+  })
+ }
+
+
+  ngOnInit(): void {
 
   }
-<<<<<<< Updated upstream
-=======
+
   search() {
     console.log(this.searchControl.value)
     if (this.searchControl.value != null){
@@ -48,10 +66,5 @@ export class HomeComponent implements OnInit {
         this.searchResults = results;
         console.log(results)
       });}
-  }
-  
->>>>>>> Stashed changes
-
-
 
 }

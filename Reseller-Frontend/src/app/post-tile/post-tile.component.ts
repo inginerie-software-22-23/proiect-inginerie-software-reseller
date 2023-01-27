@@ -11,6 +11,7 @@ import { SavedPayload } from '../models/saved.payload';
 import { User } from '../models/user';
 import { AuthService } from '../sevices/auth.service';
 import { CommentsService } from '../sevices/comments.service';
+import { ImageService } from '../sevices/image.service';
 import { LikesService } from '../sevices/likes.service';
 import { PostsService } from '../sevices/posts.service';
 import { ProfileService } from '../sevices/profile.service';
@@ -37,26 +38,19 @@ export class PostTileComponent implements OnInit {
   savedList: SavedPayload[]=[];
   activeUser: User = new User;
 
-<<<<<<< Updated upstream
-  constructor(private _router: Router,private _http: HttpClient, private _likeService: LikesService,
-    private _authService: AuthService, private _saveService: SavedService,
-    private _postService: PostsService, private toastr: ToastrService){
-=======
+
 
 
   constructor(private _router: Router,private _likeService: LikesService, private _profileService: ProfileService,
-    private _authService: AuthService, private _saveService: SavedService, 
+    private _authService: AuthService, private _saveService: SavedService,  private _postService: PostsService, private toastr: ToastrService, private imageService:ImageService,
     private toastr: ToastrService){
->>>>>>> Stashed changes
+
+
 
       this.loggedInSubscription = this._authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
   }
 
   ngOnInit(): void {
-<<<<<<< Updated upstream
-    //this.updateLikeDetails();
-    //console.log(this.post)
-=======
 
     this._likeService.getAllLikesByUser(this.user).subscribe((data: LikePayload[]) => {
       this.likesList = data;
@@ -70,7 +64,6 @@ export class PostTileComponent implements OnInit {
     this.activeUser = data;
    })
 
->>>>>>> Stashed changes
   }
 
   goToPost(id: number): void {

@@ -30,8 +30,8 @@ public class LikesController {
         return status(HttpStatus.OK).body(likesService.getLikesByUsername(username));
     }
 
-    @DeleteMapping()
-    public ResponseEntity<String>  unlike(@RequestBody LikeDto likeDto) {
-        return new ResponseEntity<>(likesService.unlike(likeDto), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> unlike(@PathVariable Long id) {
+        return new ResponseEntity<>(likesService.unlike(id), HttpStatus.MOVED_PERMANENTLY);
     }
 }

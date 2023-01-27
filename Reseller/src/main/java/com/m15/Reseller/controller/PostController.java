@@ -36,7 +36,7 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getAllPosts());
     }
 
-    @GetMapping("user/{username}")
+    @GetMapping("/user/{username}")
     public ResponseEntity<List<PostResponse>> getPostsByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(postService.getPostsByUsername(username));
     }
@@ -52,7 +52,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}/product-picture")
-    public ResponseEntity<byte[]> getProductPicture(@PathVariable("id") Long id) throws IOException {
+    public ResponseEntity<String> getProductPicture(@PathVariable("id") Long id) throws IOException {
         return status(HttpStatus.OK).body(postService.getProductPicture(id));
     }
 }

@@ -4,17 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NotificationDto {
-    private Long notificationId;
-    private String text;
-    private boolean isPost;
-    private LocalDateTime timestamp;
+public class MessageDto {
     private Long senderId;
     private Long recipientId;
-    private Long postId;
+    private Long chatId;
+    private String text;
+    private Instant createdDate = Instant.now();
 }
