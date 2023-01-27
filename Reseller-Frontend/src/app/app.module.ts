@@ -27,6 +27,9 @@ import { FollowersListComponent } from './following-followers-list/follow-tile/f
 import { FollowingListComponent } from './following-followers-list/follow-tile/following-list/following-list.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { SearchProfileComponent } from './search-profile/search-profile.component';
+import { ChatsComponent } from './chats/chats.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 
@@ -50,6 +53,9 @@ import { NotificationsComponent } from './notifications/notifications.component'
     FollowingListComponent,
     WishlistComponent,
     NotificationsComponent,
+    SearchProfileComponent,
+    ChatsComponent,
+    MessagesComponent,
     
   ],
   imports: [
