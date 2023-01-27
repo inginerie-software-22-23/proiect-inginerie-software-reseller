@@ -22,9 +22,9 @@
               </div>
             </form>
           </div>
-          <div *ngFor="let comment of comments; let i = index">
+          <div *ngFor="let comment of comments">
             <div class="comment">
-                <img [src]="commentImages[i]" alt="">
+                <img [src]="comment.url" alt="">
                 <a class="commentUsername" routerLink="/user/{{comment.username}}">{{comment.username}}</a>
                 <a class="commentText">{{comment.text}}</a>
             </div>
