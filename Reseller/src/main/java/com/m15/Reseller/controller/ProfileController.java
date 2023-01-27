@@ -3,6 +3,7 @@ package com.m15.Reseller.controller;
 import com.m15.Reseller.dto.AuthenticationResponse;
 import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.ProfileDto;
+import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.service.AuthService;
 import com.m15.Reseller.service.ProfileService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,7 +57,11 @@ public class ProfileController {
 
     @GetMapping("/{username}/profile-picture")
     public ResponseEntity<String> getProfilePicture(@PathVariable("username") String username) throws IOException {
-        return status(HttpStatus.OK).body(profileService.getProfilePicture(username));
+        try {
+            return status(HttpStatus.OK).body(profileService.getProfilePicture(username));
+        } catch (SpringResellerException e) {
+            return status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{username}/edit")

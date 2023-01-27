@@ -47,6 +47,18 @@ export class MyProfileComponent implements OnInit {
 
     this._postService.getAllPostsByUser(this.username).subscribe(data => {
       this.posts = data;
+      this.posts.forEach(post => {
+        this.imageService.getPostImageUrl(post.id).subscribe(
+          data => {
+            post.imageUrl = data;
+          }
+        );
+        this.imageService.getImageUrl(post.username).subscribe(
+          data => {
+            post.profileUrl = data;
+          }
+        );
+      });
       this.postLength = data.length;
     });
     this._commentService.getAllCommentsByUser(this.username).subscribe(data => {
@@ -75,8 +87,8 @@ export class MyProfileComponent implements OnInit {
 
     this.imageService.getImageUrl(this.username).subscribe(data => {
       this.profileImage = data;
-      console.log(data)
     })
+
    }
 
    logout(){
@@ -99,11 +111,7 @@ export class MyProfileComponent implements OnInit {
     })
     this.router.navigate([`edit/${selectedUser.username}`])
   }
-
-
-
-  }
-
+}
 
   
 

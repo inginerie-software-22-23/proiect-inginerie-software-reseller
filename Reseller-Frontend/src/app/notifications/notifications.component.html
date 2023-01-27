@@ -5,8 +5,10 @@
       
     </div>
     <div class="notification-body" *ngFor="let notif of notificationList">
+      <img width="30px" height="30px" [src]="notif.url">
       <a *ngIf="notif.post == true ; else userLink" [routerLink]="['/view-post/', notif.postId]">{{notif.text}}</a>
       <ng-template #userLink>
+        <img width="30px" height="30px" [src]="notif.url">
         <a [routerLink]="['/user', notif.senderId]">{{notif.text}}</a>
       </ng-template>
       <hr>
