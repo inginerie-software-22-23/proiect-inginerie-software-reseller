@@ -42,7 +42,7 @@ export class PostTileComponent implements OnInit {
 
 
   constructor(private _router: Router,private _likeService: LikesService, private _profileService: ProfileService,
-    private _authService: AuthService, private _saveService: SavedService,  private _postService: PostsService, private toastr: ToastrService, private imageService:ImageService,
+    private _authService: AuthService, private _saveService: SavedService,  private _postService: PostsService, private imageService:ImageService,
     private toastr: ToastrService){
 
 

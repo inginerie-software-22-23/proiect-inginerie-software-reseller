@@ -13,26 +13,20 @@ import { SearchService } from '../sevices/search.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  posts: Array<PostModel> = [];
-
-  constructor(private _postService: PostsService) {  this._postService.getAllPosts().subscribe(post => {
-
-  searchControl = new FormControl('');
+  searchControl!: FormControl; 
   searchResults: PostModel[] = [];
-  searchForm = new FormGroup({
-    searchControl: this.searchControl
-  });
+  searchForm!: FormGroup;
 
   posts: Array<PostModel> = [];
 
   constructor(private _postService: PostsService,private _searchService: SearchService, private _imageService:ImageService) {  this._postService.getAllPosts().subscribe(post => {
+    this.posts =post});
+  this.searchControl = new FormControl('');
+  this.searchForm = new FormGroup({
+    searchControl: this.searchControl
+  });}
 
-  posts: Array<PostModel> = [];
 
-  constructor(private _postService: PostsService, private _imageService:ImageService) {  this._postService.getAllPosts().subscribe(post => {
-
-    this.posts = post;
 
 
   ngOnInit(): void {
@@ -51,12 +45,6 @@ export class HomeComponent implements OnInit {
         }
       )
     })
-  })
- }
-
-
-  ngOnInit(): void {
-
   }
 
   search() {
@@ -68,3 +56,9 @@ export class HomeComponent implements OnInit {
       });}
 
 }
+ }
+
+
+
+
+
