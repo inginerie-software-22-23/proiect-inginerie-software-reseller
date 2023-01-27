@@ -1,8 +1,7 @@
 <div class="container">
   <div class="notification">
     <div class="notification-header">
-      <h2>You have {{notifications}} notifications</h2>
-      
+      <h2>You have {{notifications}} notifications</h2>    
     </div>
     <div class="notification-body" *ngFor="let notif of notificationList">
       <img width="30px" height="30px" [src]="notif.url">

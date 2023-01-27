@@ -62,9 +62,9 @@
     </div>
     <form [formGroup]="commentForm" (ngSubmit)="postComment()">
       <div class="add-comment-container">                
-        <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon> <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>
+        <!-- <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon> <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>
         <mat-icon (click)="goToPost(post.id)">comment</mat-icon> <span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>  
-        <mat-icon (click)="save(post)">bookmark</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>    
+        <mat-icon (click)="save(post)">bookmark</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>     -->
         <textarea rows="1" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" class="add-coment" [formControlName]="'text'" placeholder="Enter your comment..."></textarea>
         <button type="submit" class="commentButton">Comment</button>
       </div>

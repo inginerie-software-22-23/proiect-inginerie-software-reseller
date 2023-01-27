@@ -19,44 +19,54 @@ export class HomeComponent implements OnInit {
 
   posts: Array<PostModel> = [];
 
-  constructor(private _postService: PostsService,private _searchService: SearchService, private _imageService:ImageService) {  this._postService.getAllPosts().subscribe(post => {
-    this.posts =post});
-  this.searchControl = new FormControl('');
-  this.searchForm = new FormGroup({
-    searchControl: this.searchControl
-  });}
+  constructor(private _postService: PostsService,private _searchService: SearchService, private _imageService:ImageService) {  
+    this._postService.getAllPosts().subscribe(post => {
+      this.posts = post;
+
+      this.posts.forEach(post => {
+        this.setImages(post);
+      })
+    });
 
 
+    this.searchControl = new FormControl('');
+    this.searchForm = new FormGroup({
+      searchControl: this.searchControl   
+    });
 
-
-  ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(1000)).subscribe(searchTerm => this.search());
+  }
 
-    this.posts.forEach(post => {
-      this._imageService.getPostImageUrl(post.id).subscribe(
-        data => {
-          post.imageUrl = data;
-        }
-      );
-
-      this._imageService.getImageUrl(post.username).subscribe(
-        data => {
-          post.profileUrl = data;
-        }
-      )
-    })
+  ngOnInit(): void {  
   }
 
   search() {
-    console.log(this.searchControl.value)
     if (this.searchControl.value != null){
       this._searchService.searchPosts(this.searchControl.value).subscribe(results => {
         this.searchResults = results;
-        console.log(results)
-      });}
+        this.searchResults.forEach(post => {
+          this.setImages(post);
+        })
+      });
+    }
+
+  }
+
+  setImages(post:PostModel) {
+    this._imageService.getPostImageUrl(post.id).subscribe(
+      data => {
+        post.imageUrl = data;
+      }
+    );
+
+    this._imageService.getImageUrl(post.username).subscribe(
+      data => {
+        post.profileUrl = data;
+      }
+    )
+  }
 
 }
- }
 
 
 

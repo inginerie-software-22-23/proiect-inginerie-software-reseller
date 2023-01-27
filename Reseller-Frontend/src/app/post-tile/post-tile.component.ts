@@ -41,12 +41,10 @@ export class PostTileComponent implements OnInit {
 
 
 
-  constructor(private _router: Router,private _likeService: LikesService, private _profileService: ProfileService,
+  constructor(private _router: Router, private _likeService: LikesService, private _profileService: ProfileService,
     private _authService: AuthService, private _saveService: SavedService,  private _postService: PostsService, private imageService:ImageService,
-    private toastr: ToastrService){
-
-
-
+    private toastr: ToastrService) {
+      
       this.loggedInSubscription = this._authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
   }
 
@@ -54,15 +52,15 @@ export class PostTileComponent implements OnInit {
 
     this._likeService.getAllLikesByUser(this.user).subscribe((data: LikePayload[]) => {
       this.likesList = data;
-     })
+    })
 
-   this._saveService.getAllSavesByUser(this.user).subscribe(data => {
-    this.savedList = data;
-   })
+    this._saveService.getAllSavesByUser(this.user).subscribe(data => {
+      this.savedList = data;
+    })
 
-   this._profileService.getUserByUsername(this.user).subscribe((data: User) => {
-    this.activeUser = data;
-   })
+    this._profileService.getUserByUsername(this.user).subscribe((data: User) => {
+      this.activeUser = data;
+    })
 
   }
 
