@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `chat`
+--
+
+DROP TABLE IF EXISTS `chat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `chat` (
+  `chat_id` bigint NOT NULL AUTO_INCREMENT,
+  `first_user_id` bigint DEFAULT NULL,
+  `second_user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`chat_id`),
+  KEY `FK9265u35xsivl39tpo2dt3msk` (`first_user_id`),
+  KEY `FK7hx3gjyxthygliqucpt85oup4` (`second_user_id`),
+  CONSTRAINT `FK7hx3gjyxthygliqucpt85oup4` FOREIGN KEY (`second_user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FK9265u35xsivl39tpo2dt3msk` FOREIGN KEY (`first_user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chat`
+--
+
+LOCK TABLES `chat` WRITE;
+/*!40000 ALTER TABLE `chat` DISABLE KEYS */;
+/*!40000 ALTER TABLE `chat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -32,9 +60,9 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`comment_id`),
   KEY `FKs1slvnkuemjsq2kj4h3vhx7i1` (`post_id`),
   KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
-  CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `FKs1slvnkuemjsq2kj4h3vhx7i1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKs1slvnkuemjsq2kj4h3vhx7i1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +71,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'2023-01-24 16:23:11.338635',1,'dada',1,2);
+INSERT INTO `comment` VALUES (1,'2023-01-26 14:22:46.709028',0,'dasdasdasd',1,2),(2,'2023-01-26 14:37:50.485007',0,'dasdasd',1,2),(3,'2023-01-27 14:55:02.059936',0,'foarte frumos',1,1),(4,'2023-01-27 15:11:34.109450',0,'nu imi mai fura vanzarile',2,2),(5,'2023-01-27 16:10:25.513733',0,'dasdasd',1,2),(6,'2023-01-27 16:10:26.802657',0,'asdasd',1,2),(7,'2023-01-27 16:10:27.931313',0,'asdad',1,2),(8,'2023-01-27 16:18:03.638446',0,'dasdasd',1,2),(9,'2023-01-27 16:18:05.192324',0,'dadsad',1,2),(10,'2023-01-27 16:18:06.195468',0,'dd',1,2),(11,'2023-01-27 16:18:07.380689',0,'d',1,2),(12,'2023-01-27 16:18:08.398248',0,'d',1,2),(13,'2023-01-27 16:18:10.744323',0,'d',1,2),(14,'2023-01-27 16:18:11.752517',0,'d',1,2),(15,'2023-01-27 16:18:13.135271',0,'d',1,2),(16,'2023-01-27 16:54:23.367757',0,'ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',1,2),(17,'2023-01-27 17:03:34.240746',0,'dddddddddasda akdsa kaj dloasjdklasjd aksdjla sdjaskl djaslkdasl jdaksldjasld\n',1,2),(18,'2023-01-27 17:07:00.956291',0,'ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',1,2),(19,'2023-01-27 17:12:23.563692',0,'ddddddddddddddddddddddddddddddddddddddddddddddd',1,2),(20,'2023-01-27 17:14:59.620497',0,'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',1,2),(21,'2023-01-27 17:28:35.117149',0,'jkasndk asdjasdj knasdjknas jdkaskjdasn  jkdasndkjas  ndaskjnd as',1,2);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,9 +89,9 @@ CREATE TABLE `follow` (
   PRIMARY KEY (`id`),
   KEY `FK3xc9a9rnt6pxp8vinc1oc5a0r` (`followed_id`),
   KEY `FK28jq0hbsgm4tqch6co05usp2i` (`follower_id`),
-  CONSTRAINT `FK28jq0hbsgm4tqch6co05usp2i` FOREIGN KEY (`follower_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE,
-  CONSTRAINT `FK3xc9a9rnt6pxp8vinc1oc5a0r` FOREIGN KEY (`followed_id`) REFERENCES `profile` (`profile_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK28jq0hbsgm4tqch6co05usp2i` FOREIGN KEY (`follower_id`) REFERENCES `profile` (`profile_id`),
+  CONSTRAINT `FK3xc9a9rnt6pxp8vinc1oc5a0r` FOREIGN KEY (`followed_id`) REFERENCES `profile` (`profile_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +100,7 @@ CREATE TABLE `follow` (
 
 LOCK TABLES `follow` WRITE;
 /*!40000 ALTER TABLE `follow` DISABLE KEYS */;
+INSERT INTO `follow` VALUES (1,2,1),(2,1,2);
 /*!40000 ALTER TABLE `follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,10 +120,10 @@ CREATE TABLE `likes` (
   KEY `FK8arpx7i3g3e5dammtdsira2m6` (`comment_id`),
   KEY `FKowd6f4s7x9f3w50pvlo6x3b41` (`post_id`),
   KEY `FKi2wo4dyk4rok7v4kak8sgkwx0` (`user_id`),
-  CONSTRAINT `FK8arpx7i3g3e5dammtdsira2m6` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`comment_id`) ON DELETE CASCADE,
-  CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `FKowd6f4s7x9f3w50pvlo6x3b41` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK8arpx7i3g3e5dammtdsira2m6` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`comment_id`),
+  CONSTRAINT `FKi2wo4dyk4rok7v4kak8sgkwx0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKowd6f4s7x9f3w50pvlo6x3b41` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,8 +132,41 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (1,NULL,1,2),(2,1,NULL,2);
+INSERT INTO `likes` VALUES (1,NULL,1,1),(7,NULL,1,2);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `message` (
+  `message_id` bigint NOT NULL AUTO_INCREMENT,
+  `created_date` datetime(6) DEFAULT NULL,
+  `text` varchar(255) DEFAULT NULL,
+  `chat_id` bigint DEFAULT NULL,
+  `recipient_id` bigint DEFAULT NULL,
+  `sender_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`message_id`),
+  KEY `FKmejd0ykokrbuekwwgd5a5xt8a` (`chat_id`),
+  KEY `FKiup8wew331d92o7u3k8d918o3` (`recipient_id`),
+  KEY `FKcnj2qaf5yc36v2f90jw2ipl9b` (`sender_id`),
+  CONSTRAINT `FKcnj2qaf5yc36v2f90jw2ipl9b` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKiup8wew331d92o7u3k8d918o3` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKmejd0ykokrbuekwwgd5a5xt8a` FOREIGN KEY (`chat_id`) REFERENCES `chat` (`chat_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message`
+--
+
+LOCK TABLES `message` WRITE;
+/*!40000 ALTER TABLE `message` DISABLE KEYS */;
+/*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -127,10 +189,10 @@ CREATE TABLE `notification` (
   KEY `FKn1l10g2mvj4r1qs93k952fshe` (`post_id`),
   KEY `FKqnduwq6ix2pxx1add03905i1i` (`recipient_id`),
   KEY `FKnbt1hengkgjqru2q44q8rlc2c` (`sender_id`),
-  CONSTRAINT `FKn1l10g2mvj4r1qs93k952fshe` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
-  CONSTRAINT `FKnbt1hengkgjqru2q44q8rlc2c` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `FKqnduwq6ix2pxx1add03905i1i` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FKn1l10g2mvj4r1qs93k952fshe` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  CONSTRAINT `FKnbt1hengkgjqru2q44q8rlc2c` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKqnduwq6ix2pxx1add03905i1i` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,6 +201,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` VALUES (1,_binary '\0','alexandra.ene started following you','2023-01-27 16:33:44.883904','FOLLOW',NULL,2,1),(2,_binary '','alexandra.ene just liked your post','2023-01-27 16:35:19.882744','LIKE',1,2,1),(3,_binary '','alexandra.ene just commented on your post','2023-01-27 16:55:02.067936','COMMENT',1,2,1),(4,_binary '\0','ortansa.barbu started following you','2023-01-27 17:09:19.968865','FOLLOW',NULL,1,2),(5,_binary '','ortansa.barbu just commented on your post','2023-01-27 17:11:34.114450','COMMENT',2,1,2),(6,_binary '','ortansa.barbu just liked your post','2023-01-27 20:56:47.058322','LIKE',2,1,2),(7,_binary '','ortansa.barbu just liked your post','2023-01-27 20:58:45.379072','LIKE',2,1,2),(8,_binary '','ortansa.barbu just liked your post','2023-01-27 20:59:14.633758','LIKE',2,1,2);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,8 +225,8 @@ CREATE TABLE `post` (
   `user_id` bigint DEFAULT NULL,
   PRIMARY KEY (`post_id`),
   KEY `FK72mt33dhhs48hf9gcqrq4fxte` (`user_id`),
-  CONSTRAINT `FK72mt33dhhs48hf9gcqrq4fxte` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK72mt33dhhs48hf9gcqrq4fxte` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +235,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,1,'2023-01-24 16:23:01.612973','Marime','still testing',1,1,0,'Junk',2);
+INSERT INTO `post` VALUES (1,20,'2023-01-26 14:12:08.415628','Descriere','product-images/e81008c4-701f-4e80-b2e2-255555a8749f-istockphoto-1076492576-612x612.jpg',2,1,2,'Titlu',2),(2,1,'2023-01-27 15:04:36.453273','Descriere2','product-images/74e2767b-42df-4a13-a25f-2393fb835339-istockphoto-1076492576-612x612.jpg',0,2,1,'Titlu2',1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +266,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (1,'New to Reseller','Alexandra Ene',NULL,_binary '\0','alexandra.ene',1),(2,'New to Reseller','Ortansa Barbu',NULL,_binary '\0','ortansa.barbu',2),(3,'New to Reseller','Floare Ionescu',NULL,_binary '\0','floare.ionescu',3),(4,'New to Reseller','Anastasia Ionita',NULL,_binary '\0','anastasia.ionita',4),(5,'New to Reseller','Emil Dumitrescu',NULL,_binary '\0','emil.dumitrescu',5),(6,'New to Reseller','Nicusor Stanescu',NULL,_binary '\0','nicusor.stanescu',6),(7,'New to Reseller','Semenica Tomescu',NULL,_binary '\0','semenica.tomescu',7),(8,'New to Reseller','Todor Puscasu',NULL,_binary '\0','todor.puscasu',8),(9,'New to Reseller','Florenta Tabacu',NULL,_binary '\0','florenta.tabacu',9),(10,'New to Reseller','Leontina Oprea',NULL,_binary '\0','leontina.oprea',10),(11,'New to Reseller','Adela Dinu',NULL,_binary '\0','adela.dinu',11),(12,'New to Reseller','Geanina Dochioiu',NULL,_binary '\0','geanina.dochioiu',12),(13,'New to Reseller','Estera Barbu',NULL,_binary '\0','estera.barbu',13),(14,'New to Reseller','Simion Oprea',NULL,_binary '\0','simion.oprea',14),(15,'New to Reseller','Irina Nistor',NULL,_binary '\0','irina.nistor',15),(16,'New to Reseller','Raul Nistor',NULL,_binary '\0','raul.nistor',16),(17,'New to Reseller','Flaviu Eftimie',NULL,_binary '\0','flaviu.eftimie',17),(18,'New to Reseller','Teofil Ababei',NULL,_binary '\0','teofil.ababei',18),(19,'New to Reseller','Marcel Toma',NULL,_binary '\0','marcel.toma',19),(20,'New to Reseller','Marcu Stancu',NULL,_binary '\0','marcu.stancu',20),(21,'New to Reseller','admin admin',NULL,_binary '\0','admin',21);
+INSERT INTO `profile` VALUES (1,'New to Reseller','Alexandra Ene','profile-pictures/19e2dc29-d7b4-4178-bd63-45ea3cd94248-windows_10_red_in_4k-wallpaper-1920x1080.jpg',_binary '\0','alexandra.ene',1),(2,'New to Reseller','Ortansa Barbu','profile-pictures/bab0132a-8d15-4256-89fc-0661cfdb886d-user-ge5a12c801_640.png',_binary '\0','ortansa.barbu',2),(3,'New to Reseller','Floare Ionescu',NULL,_binary '\0','floare.ionescu',3),(4,'New to Reseller','Anastasia Ionita',NULL,_binary '\0','anastasia.ionita',4),(5,'New to Reseller','Emil Dumitrescu',NULL,_binary '\0','emil.dumitrescu',5),(6,'New to Reseller','Nicusor Stanescu',NULL,_binary '\0','nicusor.stanescu',6),(7,'New to Reseller','Semenica Tomescu',NULL,_binary '\0','semenica.tomescu',7),(8,'New to Reseller','Todor Puscasu',NULL,_binary '\0','todor.puscasu',8),(9,'New to Reseller','Florenta Tabacu',NULL,_binary '\0','florenta.tabacu',9),(10,'New to Reseller','Leontina Oprea',NULL,_binary '\0','leontina.oprea',10),(11,'New to Reseller','Adela Dinu',NULL,_binary '\0','adela.dinu',11),(12,'New to Reseller','Geanina Dochioiu',NULL,_binary '\0','geanina.dochioiu',12),(13,'New to Reseller','Estera Barbu',NULL,_binary '\0','estera.barbu',13),(14,'New to Reseller','Simion Oprea',NULL,_binary '\0','simion.oprea',14),(15,'New to Reseller','Irina Nistor',NULL,_binary '\0','irina.nistor',15),(16,'New to Reseller','Raul Nistor',NULL,_binary '\0','raul.nistor',16),(17,'New to Reseller','Flaviu Eftimie',NULL,_binary '\0','flaviu.eftimie',17),(18,'New to Reseller','Teofil Ababei',NULL,_binary '\0','teofil.ababei',18),(19,'New to Reseller','Marcel Toma',NULL,_binary '\0','marcel.toma',19),(20,'New to Reseller','Marcu Stancu',NULL,_binary '\0','marcu.stancu',20),(21,'New to Reseller','admin admin',NULL,_binary '\0','admin',21);
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,7 +282,7 @@ CREATE TABLE `refresh_token` (
   `created_date` datetime(6) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,6 +291,7 @@ CREATE TABLE `refresh_token` (
 
 LOCK TABLES `refresh_token` WRITE;
 /*!40000 ALTER TABLE `refresh_token` DISABLE KEYS */;
+INSERT INTO `refresh_token` VALUES (1,'2023-01-26 14:09:27.638082','b7de2321-37dc-4ab4-a226-52739823a8f7'),(3,'2023-01-27 14:33:20.603159','689d16f3-c249-4c99-b35b-5e4f899fbd1e'),(6,'2023-01-27 15:08:57.497381','d1a860ad-8bef-4a3d-897f-78663cf762c8'),(7,'2023-01-27 21:22:16.690749','ee2c7958-25f4-47ef-8b4e-60e776e9ff64');
 /*!40000 ALTER TABLE `refresh_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +309,7 @@ CREATE TABLE `token` (
   `user_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKe32ek7ixanakfqsdaokm4q9y2` (`user_id`),
-  CONSTRAINT `FKe32ek7ixanakfqsdaokm4q9y2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
+  CONSTRAINT `FKe32ek7ixanakfqsdaokm4q9y2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -301,9 +365,9 @@ CREATE TABLE `wishlist` (
   PRIMARY KEY (`wishlist_id`),
   KEY `FKceor61aistecmo62mqb8b8dgd` (`post_id`),
   KEY `FKd4r80jm8s41fgoa0xv9yy5lo8` (`user_id`),
-  CONSTRAINT `FKceor61aistecmo62mqb8b8dgd` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
-  CONSTRAINT `FKd4r80jm8s41fgoa0xv9yy5lo8` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FKceor61aistecmo62mqb8b8dgd` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  CONSTRAINT `FKd4r80jm8s41fgoa0xv9yy5lo8` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -312,6 +376,7 @@ CREATE TABLE `wishlist` (
 
 LOCK TABLES `wishlist` WRITE;
 /*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
+INSERT INTO `wishlist` VALUES (1,1,1),(2,1,2),(3,2,2);
 /*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -324,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-24 18:26:47
+-- Dump completed on 2023-01-27 23:45:56
