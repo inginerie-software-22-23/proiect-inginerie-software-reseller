@@ -19,4 +19,9 @@ export class SavedService {
   getAllSavesByUser(username: string) {
     return this._http.get<SavedPayload[]>('http://localhost:8070/api/wishlist/by-user/' + username);
   }
+
+  deleteSave(saveId: number) {
+    return this._http.delete('http://localhost:8070/api/wishlist/'+saveId);
+}
+
 }

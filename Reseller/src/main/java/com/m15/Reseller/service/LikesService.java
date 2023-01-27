@@ -123,8 +123,8 @@ public class LikesService {
 
     private LikeDto mapToDto(Likes likes) {
         LikeDto dto = new LikeDto();
-        dto.setPostId(likes.getPost().getPostId() != null ? likes.getPost().getPostId() : -1);
-        dto.setCommentId(likes.getComment().getCommentId() != null ? likes.getComment().getCommentId() : -1);
+        dto.setPostId(likes.getPost() != null ? likes.getPost().getPostId() : -1);
+        dto.setCommentId(likes.getComment() != null ? likes.getComment().getCommentId() : -1);
         return dto;
     }
 
