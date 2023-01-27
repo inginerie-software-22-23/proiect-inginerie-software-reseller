@@ -36,6 +36,10 @@
         color: black;
         font-size: 20px;
         text-decoration: none;
+        
+        &:hover {
+            opacity: 0.6;
+        }
     }
 }
 
@@ -65,26 +69,33 @@
     .details-container {
         width: 50%;
         
-        :first-child {
+        p:first-child {
             cursor: pointer;
-            margin-bottom: 70px;
+            
             margin-left: 60px;
             font-size: 50px;
             color: lightcoral;
             font-weight: bold;   
         }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, lightcoral, transparent); 
+            margin-bottom: 70px;
+        }
     
-        :nth-child(2) {
+        p:nth-child(3) {
             color: black;
             font-size: 30px;
-            &::before {
-                content: "Price";
-                font-weight: bold;
-                color: black;
-            }
+            // &::before {
+            //     content: "Price";
+            //     font-weight: bold;
+            //     color: black;
+            // }
         }
 
-        :last-child {
+        p:last-child {
             margin-top: 50px;
             margin-bottom: 20px;
             overflow-wrap: break-word;
