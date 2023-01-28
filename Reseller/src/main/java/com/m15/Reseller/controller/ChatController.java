@@ -73,7 +73,7 @@ public class ChatController {
 
 
     @GetMapping("/getChatByFirstUsernameAndSecondUsername")
-    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestParam("firstUsername") String firstUsername, @RequestParam("secondUsername") String secondUsername){
+    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestBody String firstUsername, @RequestBody String secondUsername){
 
         try {
             Set<ChatDto> chatByBothUsers = this.chatService.getChatByFirstUsernameAndSecondUsername(firstUsername, secondUsername);

@@ -4,7 +4,7 @@
   </form>
 
 <div *ngFor = "let user of searchResults">
-    <a class="username" routerLink="/user/{{user.username}}">{{user.username}}</a>
+  <a class="username" [routerLink]="user.username === activeUser ? ['/my-profile'] : ['/user', user.username]">{{user.username}}</a>
 
 
 </div>

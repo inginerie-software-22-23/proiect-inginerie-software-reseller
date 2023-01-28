@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { User } from '../models/user';
+import { AuthService } from '../sevices/auth.service';
 import { ProfileService } from '../sevices/profile.service';
 import { SearchService } from '../sevices/search.service';
 
@@ -12,6 +13,8 @@ import { SearchService } from '../sevices/search.service';
 })
 export class SearchProfileComponent implements OnInit {
 
+  activeUser  = this.authService.getUserName();
+
   searchControl = new FormControl('');
   searchResults: User[] = [];
   allUsers:User[] = [];
@@ -20,7 +23,7 @@ export class SearchProfileComponent implements OnInit {
   });
 
 
-  constructor(private _profileService:ProfileService, private _searchService:SearchService ){}
+  constructor(private _profileService:ProfileService, private _searchService:SearchService, private authService: AuthService ){}
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(1000)).subscribe(searchTerm => this.search());

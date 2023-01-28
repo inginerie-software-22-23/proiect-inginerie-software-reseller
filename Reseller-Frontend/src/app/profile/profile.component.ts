@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, map, Subscription, switchMap, takeUntil } from 'rxjs';
 import { ChatPayload } from '../models/chat.payload';
+import { Chatrequest } from '../models/chatrequest';
 import { CommentPayload } from '../models/comment.payload';
 import { FollowPayload } from '../models/follow.payload';
 import { PostModel } from '../models/post-model';
@@ -144,26 +145,46 @@ export class ProfileComponent implements OnInit {
 
   }
   chat(){
-    this._chatService.getChatByUsername(this.name).pipe(
-      // takeUntil(this.ngUnsubscribe),
-      switchMap((chats: ChatPayload[]) => {
-        this.chats = chats;
-        return forkJoin(
-          chats.map(chat => {
-            const userId = chat.firstUserId === this.user.userId ? chat.secondUserId : chat.firstUserId;
-            return this._profileService.getUserById(userId);
-          })
-        );
-      })
-    ).subscribe((users: User[]) => {
-      this.chats.forEach((chat, index) => {
-        chat.sender = users[index];
-        this._chatService.setChat(chat); 
-        if(chat.sender.username === this.name){
-          this.router.navigate(['/message/'+ chat.chatId]);
-      }
-      });
-    });
+    let chatReq: Chatrequest = new Chatrequest;
+    chatReq.firstUsername = this.activeUser;
+    chatReq.secondUsername = this.name
+
+    this._chatService.getChatByUsernames(this.activeUser.username, this.name).subscribe(data =>{
+      this.chats = data;
+     
+    })
+    if (this.chat.length>0){
+      this._chatService.setChat(this.chats[0]);
+      this.router.navigate(['/messages' + this.chats[0].chatId])
+    }
+    else{
+      
+    }
+
+
+
+
+    // this._chatService.getChatByUsername(this.name).pipe(
+    //   // takeUntil(this.ngUnsubscribe),
+    //   switchMap((chats: ChatPayload[]) => {
+    //     this.chats = chats;
+    //     return forkJoin(
+    //       chats.map(chat => {
+    //         const userId = chat.firstUserId === this.user.userId ? chat.secondUserId : chat.firstUserId;
+    //         return this._profileService.getUserById(userId);
+    //       })
+    //     );
+    //   })
+    // ).subscribe((users: User[]) => {
+    //   this.chats.forEach((chat, index) => {
+    //     chat.sender = users[index];
+    //     this._chatService.setChat(chat); 
+    //     if(chat.sender.username === this.name){
+    //       this.router.navigate(['/message/'+ chat.chatId]);
+    //   }
+    //   });
+    // });
+
 
 
   }

@@ -15,7 +15,7 @@ import { ProfileService } from '../sevices/profile.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit, OnDestroy{
+export class MessagesComponent implements OnInit{
 
   chatId:number=0;
   chat: ChatPayload = new ChatPayload;
@@ -28,6 +28,7 @@ export class MessagesComponent implements OnInit, OnDestroy{
   message: MessagePayload = new MessagePayload;
   messageForm: FormGroup;
   chatFromService: ChatPayload | undefined ;
+
 
   
   // chatFromChat: ChatPayload = new ChatPayload;
@@ -48,10 +49,21 @@ export class MessagesComponent implements OnInit, OnDestroy{
     };
   }
   ngOnInit(): void {
+   
     this.chatId = this.activateRoute.snapshot.params['id'];
+
+    // this._chatService.getChatById(this.chatId).subscribe(data => {
+    //   this.chat =data;
+    //   this.messages = data.messages;
+
+
+    // })
 
     this.chat = this._chatService.getChat();
     this.messages = this.chat.messages;
+   
+
+
 
     
     this._profileService.getUserByUsername(this.activeUsername).subscribe((data: User) =>{
@@ -60,12 +72,14 @@ export class MessagesComponent implements OnInit, OnDestroy{
     this._profileService.getUserByUsername(this.chat.sender.username).subscribe((data: User) =>{
       this.chatUser = data;
     })
+
   
 
 
   }
   
   postMessage(){
+
     this.sendMessage.chatId = this.chatId;
     this.sendMessage.senderId = this.activeUser.userId;
     this.sendMessage.recipientId = this.chatUser.userId;
@@ -78,9 +92,12 @@ export class MessagesComponent implements OnInit, OnDestroy{
     this.messageForm.reset;
   }
 
-  ngOnDestroy(){
- 
-
-  }
+//  getChatUser(){
+//   const userId = this.chat.firstUserId === this.activeUser.userId ? this.chat.secondUserId : this.chat.firstUserId;
+//   this._profileService.getUserById(userId).subscribe((data: User) =>{
+//       this.chatUser = data;
+//       this.chat.sender = data;
+//     })
+//  }
 
 }
