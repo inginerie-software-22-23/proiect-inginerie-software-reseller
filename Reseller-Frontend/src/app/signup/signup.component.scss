@@ -1,23 +1,97 @@
-.card-header{
-    margin: 100px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+$primary-color: lightcoral;
+$secondary-color: black;
+$tertiary-color: #F5F5F5;
+
+* {
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
 }
 
-.card-body {
-    background-color:  lightcoral;
-    border-color:  lightcoral;
-    color: aliceblue;
-    fill: lightcoral;
-    border: 1px solid;
-    border-radius: 4px;
-    text-align: center;
-    letter-spacing: 1px;
+h1 {
+    margin-left: 75px;
+    font-size: 30px;
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: $tertiary-color;
+    align-items: center;
+}
+
+.empty-form{
+    margin-left: 15px;
+    color: firebrick;
+}
+
+.container {
+    max-width: 500px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: auto;
+}
+
+.form-container {
+    background-color: $secondary-color;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    color: $secondary-color;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+        box-shadow: 0 0 10px $primary-color;
+    }
+}
+
+input[type="submit"] {
+    background-color: $primary-color;
+    color: $tertiary-color;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: darken($primary-color, 10%);
+    }
+}
+
+a {
+    color: $primary-color;
+    font-size: 1.2rem;
     text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    line-height: 24px;
-    text-transform: uppercase;
-    padding: 3px 16px;
-    opacity: 1;
-  }
-  
+    margin-top: 1rem;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

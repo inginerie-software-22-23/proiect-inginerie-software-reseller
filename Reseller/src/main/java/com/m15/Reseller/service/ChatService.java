@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -30,8 +31,10 @@ public class ChatService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         User secondUser = userRepository.findById(chatDto.getSecondUserId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        Set<ChatDto> check = getChatByFirstUsernameAndSecondUsername(firstUser.getUsername(), secondUser.getUsername());
+        ChatDto dto = new ChatDto();
+        dto.setFirstUserId(firstUser.getUserId());
+        dto.setSecondUserId(secondUser.getUserId());
+        Set<ChatDto> check = getChatByFirstUsernameAndSecondUsername(dto);
         if (!check.isEmpty()) {
             return "Chat between these users already exists";
         }
@@ -105,10 +108,10 @@ public class ChatService {
         }
     }
 
-    public Set<ChatDto> getChatByFirstUsernameAndSecondUsername(String firstUsername, String secondUsername) {
-        User firstUser = userRepository.findByUsername(firstUsername)
+    public Set<ChatDto> getChatByFirstUsernameAndSecondUsername(ChatDto chatDto) {
+        User firstUser = userRepository.findById(chatDto.getFirstUserId())
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
-        User secondUser = userRepository.findByUsername(secondUsername)
+        User secondUser = userRepository.findById(chatDto.getSecondUserId())
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
 
         Set<ChatDto> chat = chatRepository.getChatByFirstUserAndSecondUser(firstUser, secondUser).stream()
