@@ -2,10 +2,6 @@
 .container {
     max-width: 800px;
     margin: 0 auto;
-
-    hr {
-        background-color: 1px solid black;
-    }
 }
 
 /* Notification Box */
@@ -22,10 +18,8 @@
     color: black;
     text-align: center;
     padding: 1px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 
     h2 {
         font-size: 25px;
@@ -35,16 +29,7 @@
 
 /* Notification Body */
 .notification-body {
-    line-height: 2;
-    text-align: left;
-    padding: 10px;
-
-    a {
-        color: black;
-        text-decoration: none;
-        margin-left: 120px;
-        font-size: 22px;
-    }
+    margin-bottom: 10px;
 
     hr {
         border: 0;
@@ -53,38 +38,39 @@
     }
 }
 
-// /* Notification Footer */
-// .notification-footer {
-//     background-color: #333;
-//     color: #fff;
-//     font-size: 14px;
-//     text-align: center;
-//     padding: 10px;
-//     border-bottom-left-radius: 10px;
-//     border-bottom-right-radius: 10px;
-// }
+.notificationText {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 10px;
+    margin-top: 7px;
+    
 
-/* Buttons */
-.notification button{
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-}
+    .firstPhoto {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+    }
 
-/* Icon */
-.notification i{
-    color: #555;
-    font-size: 24px;
-    padding: 10px;
-}
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 22px;
+    }
 
-/* Responsive Design */
-@media only screen and (max-width: 600px) {
-    .notification {
-        width: 100%;
+    .postText {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .secondPhoto {
+        display: flex;
+        width: 60px;
+        height: 60px;
+        margin-left: 70px;
     }
 }
