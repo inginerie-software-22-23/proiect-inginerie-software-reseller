@@ -73,7 +73,7 @@ public class FollowService {
         Follow follow = followRepository.findByFollowerAndFollowed(follower, followed)
                 .orElseThrow(() -> new FollowNotFound("Follow not found!"));
 
-        followRepository.deleteById(follow.getId());
+        followRepository.delete(follow);
         return "Deleted";
     }
 

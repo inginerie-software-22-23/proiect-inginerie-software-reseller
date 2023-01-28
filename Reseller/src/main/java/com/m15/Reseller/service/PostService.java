@@ -118,17 +118,21 @@ public class PostService {
         return "Success";
     }
 
+    public String getProductPicture(Long id) throws IOException {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new SpringResellerException("Post not found!"));
+
+        return "https://firebasestorage.googleapis.com/v0/b/reseller-1d2c9.appspot.com/o/" +
+                post.getImageUrl().replace("/", "%2F") +
+                "?alt=media&token=" +
+                post.getImageUrl();
+
+    }
+
     public Set<PostResponse> searchPost(String description) {
         return Stream.concat(postRepository.findByDescriptionContainingIgnoreCase(description).stream(),
                         postRepository.findByTitleContainingIgnoreCase(description).stream())
                 .map(this::mapToDto)
                 .collect(Collectors.toSet());
-    }
-
-    public byte[] getProductPicture(Long id) throws IOException {
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new PostNotFoundException("Post not found!"));
-
-        return storageService.getFile(post.getImageUrl());
     }
 }

@@ -22,7 +22,6 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { FollowTileComponent } from './following-followers-list/follow-tile/follow-tile.component';
 import { FollowersListComponent } from './following-followers-list/follow-tile/followers-list/followers-list.component';
 import { FollowingListComponent } from './following-followers-list/follow-tile/following-list/following-list.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
@@ -31,7 +30,6 @@ import { SearchProfileComponent } from './search-profile/search-profile.componen
 import { ChatsComponent } from './chats/chats.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
 
 
 
@@ -49,7 +47,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     PostFormComponent,
     MyProfileComponent,
     ProfileFormComponent,
-    FollowTileComponent,
+
     FollowersListComponent,
     FollowingListComponent,
     WishlistComponent,
@@ -58,6 +56,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ChatsComponent,
     MessagesComponent,
     ForgotPasswordComponent,
+
     
   ],
   imports: [

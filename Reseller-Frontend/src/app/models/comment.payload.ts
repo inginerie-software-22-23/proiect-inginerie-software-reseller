@@ -1,6 +1,9 @@
-export class CommentPayload {
-    postId!: number;
+import { User } from "./user";
 
+export class CommentPayload {
+    commentId: number =0;
+    postId!: number;
     text: string = '';
-    username?:string;
+    username:string = '';
+    url:string ='';
 }

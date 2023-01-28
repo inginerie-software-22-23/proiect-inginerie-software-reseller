@@ -1,22 +1,24 @@
-<div class="row post" *ngFor="let post of posts">
-    <div class="col-md-11">
-      <span class="post-info">
-        <button class="post-title" (click)="goToPost(post.id)">{{post.title}}</button>
-        <span> . Seller:  <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
-      </span>
-      <hr />
-      <div class="post-title">
-        <a class="postname">{{post.imageUrl}}</a>
-      </div>
-      <div>
-        <p class="post-text" [innerHtml]="post.description"></p>
-      </div>
-      <div class="btns" >
-        <mat-icon (click)="goToPost(post.id)">comments</mat-icon><span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>
-        <mat-icon (click)="like(post)" >thumb_up_alt</mat-icon>   <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>  
-        <mat-icon (click)="save(post)">bookmark</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>   
-      </div>
+<div class="container" *ngFor="let post of posts">
+  <div class="user-info">
+    <img [src]="post.profileUrl" alt="">
+    <a class="username" [routerLink]="post.username === activeUser.username ? ['/my-profile'] : ['/user', post.username]">{{post.username}}</a>
+  </div> 
+  <hr />
+  <div class="post-info">
+    <div class="image-container">
+      <img width="300px" height="150px" (click)="goToPost(post.id)" [src]="post.imageUrl" alt="">
+    </div>
+    <div class="details-container">
+      <p (click)="goToPost(post.id)">{{post.title}}</p>
+      <hr>
+      <p> <b>Price</b>: {{post.price}} ₺</p>
+      <p [innerHtml]="post.description"></p>
     </div>
   </div>
-
-  <!-- <app-like-button [post]="post"></app-like-button> -->
+  <hr />
+  <div class="btns" >
+    <mat-icon (click)="likeButtonLogic(post)" >thumb_up_alt</mat-icon> <span class="aligned-with-icon">{{post.likesCount != null ? post.likesCount : 0}}</span>
+    <mat-icon (click)="goToPost(post.id)">comments</mat-icon> <span class="aligned-with-icon">{{post.commentCount != null ? post.commentCount : 0}}</span>  
+    <mat-icon (click)="saveButtonLogic(post)">favorite</mat-icon>  <span class="aligned-with-icon">{{post.savedCount != null ? post.savedCount : 0}}</span>
+  </div>
+</div>

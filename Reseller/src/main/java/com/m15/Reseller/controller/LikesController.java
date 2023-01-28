@@ -34,4 +34,9 @@ public class LikesController {
     public ResponseEntity<String> unlike(@PathVariable Long id) {
         return new ResponseEntity<>(likesService.unlike(id), HttpStatus.MOVED_PERMANENTLY);
     }
+
+    @DeleteMapping("/comment/{id}")
+    public ResponseEntity<String> unlikeComment(@PathVariable Long id) {
+        return new ResponseEntity<>(likesService.unlikeComment(id), HttpStatus.MOVED_PERMANENTLY);
+    }
 }

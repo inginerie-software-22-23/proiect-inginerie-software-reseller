@@ -78,7 +78,7 @@ public class WishlistService {
             throw new SpringResellerException("You didn't save this post yet!");
         }
 
-        wishlistRepository.deleteById(wishlistByPostAndUser.get().getWishlistId());
+        wishlistRepository.delete(wishlistByPostAndUser.get());
         post.setSavedCount(post.getSavedCount() - 1);
         return "Deleted";
     }

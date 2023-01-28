@@ -37,10 +37,6 @@ export class AuthService {
         this.loggedIn.emit(true);
         this.username.emit(data.username);
 
-        console.log(data);
-        console.log(data.authenticationToken);
-        console.log(data.username);
-
         return true;
       }));
   }
@@ -69,7 +65,7 @@ export class AuthService {
 
   logout() {
     this.httpClient.post('http://localhost:8070/api/auth/logout', this.refreshTokenPayload,
-     )
+      { responseType: 'text' })
       .subscribe(data => {
         console.log(data);
       }, error => {

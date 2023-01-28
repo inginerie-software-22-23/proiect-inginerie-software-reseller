@@ -91,6 +91,21 @@ public class LikesService {
                 .toList();
     }
 
+    public String unlikeComment(Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new SpringResellerException("Comment with id " + id + " not found!"));
+
+        Optional<Likes> likeByCommentAndUser = likesRepository.findTopByCommentAndUserOrderByLikeIdDesc(comment, authService.getCurrentUser());
+
+        if (likeByCommentAndUser.isEmpty()) {
+            throw new SpringResellerException("You didn't like this post yet!");
+        }
+
+        likesRepository.delete(likeByCommentAndUser.get());
+        comment.setLikesCount(comment.getLikesCount() - 1);
+        return "Deleted";
+    }
+
     public String unlike(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException("Post with id " + id + " not found!"));
@@ -101,15 +116,15 @@ public class LikesService {
             throw new SpringResellerException("You didn't like this post yet!");
         }
 
-        likesRepository.deleteById(likeByPostAndUser.get().getLikeId());
+        likesRepository.delete(likeByPostAndUser.get());
         post.setLikesCount(post.getLikesCount() - 1);
         return "Deleted";
     }
 
     private LikeDto mapToDto(Likes likes) {
         LikeDto dto = new LikeDto();
-        dto.setPostId(likes.getPost().getPostId());
-        dto.setCommentId(likes.getComment().getCommentId());
+        dto.setPostId(likes.getPost() != null ? likes.getPost().getPostId() : -1);
+        dto.setCommentId(likes.getComment() != null ? likes.getComment().getCommentId() : -1);
         return dto;
     }
 

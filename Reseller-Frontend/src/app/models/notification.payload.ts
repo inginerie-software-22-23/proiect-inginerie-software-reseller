@@ -5,5 +5,6 @@ export class NotificationPayload {
     recipientId: number = -1
     post: boolean = false;
     postId: number = -1;
-
+    url:string = '';
+    postUrl:string= '';
 }

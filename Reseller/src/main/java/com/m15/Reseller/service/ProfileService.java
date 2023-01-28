@@ -1,6 +1,8 @@
 package com.m15.Reseller.service;
 
 import com.m15.Reseller.config.JwtUtils;
+import com.m15.Reseller.dto.AuthenticationResponse;
+import com.m15.Reseller.dto.LoginRequest;
 import com.m15.Reseller.dto.ProfileDto;
 import com.m15.Reseller.dto.exception.SpringResellerException;
 import com.m15.Reseller.model.Follow;
@@ -38,6 +40,7 @@ public class ProfileService {
     private final AuthService authService;
     private final FirebaseStorageService storageService;
     private final JwtUtils jwtUtils;
+    private final RefreshTokenService refreshTokenService;
 
     public List<ProfileDto> getAllProfiles() {
         return profileRepository.findAll()
@@ -99,21 +102,38 @@ public class ProfileService {
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
 
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new SpringResellerException("User not found!"));
+
+        if (!user.equals(authService.getCurrentUser())) {
+            throw new SpringResellerException("Error - Not logged in!");
+        }
         profile.setImageUrl(profilePictureUrl);
         profileRepository.save(profile);
         return "Success";
     }
 
     public List<ProfileDto> searchProfile(String username) {
-        return profileRepository.findByUsernameStartingWith(username).stream()
+        Profile admin = profileRepository.findByUsername("admin")
+                .orElseThrow(() -> new SpringResellerException("Internal error"));
+
+        List<Profile> profiles = new java.util.ArrayList<>(profileRepository.findByUsernameStartingWith(username).stream().toList());
+        profiles.remove(admin);
+
+        return  profiles.stream()
                 .map(this::mapToDto)
                 .collect(toList());
     }
 
-    public byte[] getProfilePicture(String username) throws IOException {
+    public String getProfilePicture(String username) throws IOException {
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("User not found!"));
-        return storageService.getFile(profile.getImageUrl());
+
+        return "https://firebasestorage.googleapis.com/v0/b/reseller-1d2c9.appspot.com/o/" +
+                profile.getImageUrl().replace("/", "%2F") +
+                "?alt=media&token=" +
+                profile.getImageUrl();
+
     }
 
     public ProfileDto getProfileById(Long id) {
@@ -121,31 +141,36 @@ public class ProfileService {
                 .orElseThrow(() -> new SpringResellerException("Profile not found!")));
     }
 
-    public String editProfile(String username, ProfileDto profileDto, HttpServletRequest request) {
+    public AuthenticationResponse editProfile(String username, ProfileDto profileDto) {
         Profile profile = profileRepository.findByUsername(username)
                 .orElseThrow(() -> new SpringResellerException("Profile not found!"));
 
-        String newToken = "Success";
         String newUsername = profileDto.getUsername();
         String oldUsername = profile.getUser().getUsername();
+
+        String newToken = jwtUtils.generateToken(profile.getUser());
+
         if (Objects.equals(updateField(oldUsername, newUsername), newUsername)) {
             userService.editUsername(profile.getUser(), newUsername);
             profile.setUsername(newUsername);
-            HttpSession session = request.getSession();
-            session.removeAttribute("jwt");
             newToken = jwtUtils.generateToken(profile.getUser());
-            session.setAttribute("jwt", newToken);
-
         }
+
         profile.setImageUrl(updateField(profile.getImageUrl(), profileDto.getImageUrl()));
         profile.setDescription(updateField(profile.getDescription(), profileDto.getDescription()));
         profile.setFullName(updateField(profile.getFullName(), profileDto.getFullName()));
         profileRepository.save(profile);
-        return newToken;
+
+        return AuthenticationResponse.builder()
+                .authenticationToken(newToken)
+                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                .expiresAt(jwtUtils.extractExpiration(newToken))
+                .username(profile.getUsername())
+                .build();
     }
 
     private String updateField(String oldValue, String newValue) {
-        if (newValue != null && !newValue.equals("") && !Objects.equals(oldValue, newValue)) {
+        if (newValue != null && !newValue.equals("") && !(Objects.equals(oldValue, newValue))) {
             return newValue;
         }
 
@@ -157,7 +182,7 @@ public class ProfileService {
                 .orElseThrow(() -> new SpringResellerException("Profile not found!"));
 
         if (authService.getCurrentUser().equals(profile.getUser())) {
-            userRepository.deleteById(authService.getCurrentUser().getUserId());
+            userRepository.delete(authService.getCurrentUser());
             return "Deleted";
         }
         return "Error";

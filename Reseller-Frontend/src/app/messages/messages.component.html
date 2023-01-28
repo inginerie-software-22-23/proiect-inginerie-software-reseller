@@ -1,0 +1,17 @@
+<div *ngFor="let message of messages">
+    <div >
+     
+      <span *ngIf="message.senderId === activeUser.userId; else otherUser">me: </span>
+      <ng-template #otherUser>{{chat.sender.username}}: </ng-template>
+      {{message.text}}
+    </div>
+  </div>
+
+  <form [formGroup]="messageForm" (ngSubmit)="postMessage()">
+    <div >                   
+      <textarea rows="1" cols="30"  [formControlName]="'text'"></textarea>
+      <button type="submit" class="sendButton">Send</button>
+    </div>
+  </form>
+  
+  
