@@ -109,7 +109,7 @@ export class MyProfileComponent implements OnInit {
     this._profileService.getUserByUsername(this.username).subscribe( data =>{
       selectedUser = data;
     })
-    this.router.navigate([`edit/${selectedUser.username}`])
+    this.router.navigate(['/edit/'+ this.username])
   }
 }
 

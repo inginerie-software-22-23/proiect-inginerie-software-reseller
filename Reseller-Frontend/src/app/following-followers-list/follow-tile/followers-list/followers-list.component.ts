@@ -12,7 +12,7 @@ import { ProfileService } from 'src/app/sevices/profile.service';
 export class FollowersListComponent {
   followersList: User[]=[];
   followingList: User[]=[];
-  @Input()currentList!: string;
+ 
 
   username= this.authServ.getUserName();
 

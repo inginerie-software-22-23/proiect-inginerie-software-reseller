@@ -18,7 +18,7 @@
           <td>{{followers}}</td>
           <td>{{following}}</td>
           <td>{{isFollowed}}</td>
-          <td>{{activeUserFollowing[0].profileId}}, {{user.profileId}}</td>
+          <!-- <td>{{activeUserFollowing[0].profileId}}, {{user.profileId}}</td> -->
       
        
         </tr>
@@ -31,7 +31,10 @@
       <button (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
       <button (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
     </div>
+
+    <button (click) = "chat()">Chat</button>
     <hr />
+    
     <app-post-tile [posts]="posts"></app-post-tile>
     </div>
 

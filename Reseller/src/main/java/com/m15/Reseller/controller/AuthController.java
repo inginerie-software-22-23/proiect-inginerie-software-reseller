@@ -48,4 +48,9 @@ public class AuthController {
         return ResponseEntity.status(OK).body("Refresh Token has been deleted!");
     }
 
+    @PostMapping("/forgotPassword")
+    public ResponseEntity<String> forgotPassword(@RequestBody String email) {
+        return ResponseEntity.status(OK).body(authService.forgotPassword(email));
+    }
+
 }

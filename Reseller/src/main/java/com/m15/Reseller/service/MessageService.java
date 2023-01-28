@@ -16,10 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -36,16 +34,27 @@ public class MessageService {
     public String save(MessageDto messageDto) {
         User recipient = userRepository.findById(messageDto.getRecipientId())
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        Chat chat = Chat.builder()
+                .firstUser(authService.getCurrentUser())
+                .secondUser(recipient)
+                .messages(new ArrayList<>())
+                .build();
 
-        Set<Chat> chatCheck = chatRepository.getChatByFirstUserAndSecondUser(recipient, authService.getCurrentUser());
-        Chat chat;
-        if (chatCheck.isEmpty()) {
-            chat = new Chat();
-            chat.setFirstUser(authService.getCurrentUser());
-            chat.setSecondUser(recipient);
+        if (messageDto.getChatId() != null) {
+            Optional<Chat> chatCheck = chatRepository.findById(messageDto.getChatId());
+            Chat finalChat = chat;
+            chat = chatCheck.orElseGet(() -> finalChat);
         } else {
-            chat = chatCheck.iterator().next();
+            Set<Chat> chatSet1 = chatRepository.getChatByFirstUserAndSecondUser(authService.getCurrentUser(), recipient);
+            Set<Chat> chatSet2 = chatRepository.getChatByFirstUserAndSecondUser(recipient, authService.getCurrentUser());
+
+            if (!chatSet1.isEmpty()) {
+                chat = chatSet1.iterator().next();
+            } else if (!chatSet2.isEmpty()) {
+                chat = chatSet2.iterator().next();
+            }
         }
+
 
         Message message = Message.builder()
                 .sender(authService.getCurrentUser())

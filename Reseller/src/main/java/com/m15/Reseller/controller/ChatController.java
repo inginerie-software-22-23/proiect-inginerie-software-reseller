@@ -1,10 +1,13 @@
 package com.m15.Reseller.controller;
 
 import com.m15.Reseller.dto.ChatDto;
+import com.m15.Reseller.dto.CommentDto;
+import com.m15.Reseller.dto.MessageDto;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.exception.ChatNotFoundException;
 import com.m15.Reseller.model.Chat;
 import com.m15.Reseller.service.ChatService;
+import com.m15.Reseller.service.MessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ChatController {
     private final ChatService chatService;
+    private final MessageService messageService;
 
     @PostMapping
     public ResponseEntity<String> createChat(@RequestBody ChatDto chatDto) {
