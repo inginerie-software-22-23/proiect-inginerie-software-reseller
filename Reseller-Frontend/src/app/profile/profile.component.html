@@ -1,51 +1,11 @@
-<!-- <div class="container">
-    <div class="bio">
-      <tr>
-        <th>Username</th>
-        <th>Full name</th>
-        <th>Image</th>
-        <th>Description</th>
-        <th>Followers</th>
-        <th>Following</th>
-        
-      </tr>
-      <tr >
-  
-          <td>{{name }}</td>
-          <td>{{user.fullName }}</td>
-          <img width="30px" height="30px" [src]="imageUrl">
-          <td>{{user.description}}</td>
-          <td>{{followers}}</td>
-          <td>{{following}}</td>
- 
-      
-       
-        <!-- </tr>
-    </div> -->
-
-    
-
-    <!-- <div class="bio">
-      <br />Posts: <b>{{postLength}}</b> 
-      <button (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
-      <button (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
-    </div>
-
-    <button (click) = "chat()">Chat</button>
-    <hr />
-    
-    <app-post-tile [posts]="posts"></app-post-tile>
-    </div> -->
-
-
 <div class="container">
   <div class="profile-container">
     <div class="profile-header">
       <img class="profile-image" [src]="imageUrl">
       <h2 class="username">{{name}}</h2>
       <div class="profile-actions">
-        <button class="follow-btn" (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
-        <button class="follow-btn" (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
+        <button class="follow-btn" (click)="follow()" *ngIf="!isFollowed">Follow</button>
+        <button class="unfollow-btn" (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
         <button class="message-btn" (click) = "chat()">Message</button>
       </div>
     </div>

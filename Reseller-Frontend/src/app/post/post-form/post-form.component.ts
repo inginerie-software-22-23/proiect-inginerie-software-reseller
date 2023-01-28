@@ -14,10 +14,10 @@ export class PostFormComponent implements OnInit {
 
   createPostForm!: FormGroup;
   postPayload!: CreatePostPayload;
-  // subreddits: Array<SubredditModel>;
+ 
 
   constructor(private router: Router, private postService: PostsService,
-    ) { //private subredditService: SubredditService
+    ) { 
     this.postPayload = {
       title: '',
       imageUrl: '',
@@ -43,9 +43,10 @@ export class PostFormComponent implements OnInit {
     this.postPayload.description = this.createPostForm.get('description')?.value;
 
     this.postService.createPost(this.postPayload).subscribe((data) => {
-      this.router.navigateByUrl('/my-profile');
+      
      
     }, error => {  })
+    this.router.navigateByUrl('/my-profile');
    
   }
 

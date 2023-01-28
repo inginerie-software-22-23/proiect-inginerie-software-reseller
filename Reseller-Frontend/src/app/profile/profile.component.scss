@@ -47,7 +47,7 @@
     justify-content: center;
 }
 
-.following-btn, .followers-btn, .posts-btn {
+.following-btn, .followers-btn {
     font-size: 1.2rem;
     padding: 10px 20px;
     margin-left: 10px;
@@ -56,13 +56,21 @@
     cursor: pointer;
 }
 
+.posts-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
 .profile-actions {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
 }
 
-.follow-btn, .message-btn {
+.follow-btn, .unfollow-btn, .message-btn {
     font-size: 1.2rem;
     padding: 10px 20px;
     margin-left: 10px;
@@ -77,14 +85,20 @@
 }
 
 .follow-btn {
-    background-color: #1da1f2;
+    background-color: lightcoral;
     color: white;
     margin-left: 60px;
 }
 
+.unfollow-btn {
+    background-color: lightgray;
+    color: black;
+    margin-left: 60px;
+}
+
 .message-btn {
-    background-color: lighten(red, 20%);
-    color: white;
+    background-color: lightgray;
+    color: black;
 }
 
 .add-posts {
