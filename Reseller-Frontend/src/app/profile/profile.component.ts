@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin, map, Subscription, switchMap, takeUntil } from 'rxjs';
+import { ChatPayload } from '../models/chat.payload';
 import { CommentPayload } from '../models/comment.payload';
 import { FollowPayload } from '../models/follow.payload';
 import { PostModel } from '../models/post-model';
 import { User } from '../models/user';
 import { AuthService } from '../sevices/auth.service';
+import { ChatService } from '../sevices/chat.service';
 import { CommentsService } from '../sevices/comments.service';
 import { FollowService } from '../sevices/follow.service';
 import { ImageService } from '../sevices/image.service';
@@ -33,15 +35,16 @@ export class ProfileComponent implements OnInit {
   followingList:User[]=[];
   activeUser= this._authService.getUserName();
   activeUserFollowing: User[]=[];
-  isFollowed: boolean = false;
+  isFollowed!: boolean;
   name = this._activatedRoute.snapshot.params['name'];
+  chats: ChatPayload[]=[]
 
   imageUrl: string = '';
 
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
     private _commentService: CommentsService, private _profileService: ProfileService, private _followService: FollowService, private _authService: AuthService,
-    private imageService:ImageService) {
+    private imageService:ImageService, private _chatService:ChatService, private router:Router) {
       
       
 
@@ -50,8 +53,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     
     this.getUser();
-    this.verifyIfFollowed()
-    console.log(this.user)
+    //this.verifyIfFollowed()
+    //console.log(this.user)
     this._profileService.getUserByUsername(this.activeUser).subscribe((user:User)=>
     {
       this.activeUser = user;
@@ -95,6 +98,8 @@ export class ProfileComponent implements OnInit {
 
     this._profileService.getFollowingByUsername(this.activeUser).subscribe((data) => {
         this.activeUserFollowing = data;  
+        this.isFollowed = this.activeUserFollowing.some(following => following.profileId === this.user.profileId); 
+
     
     })
     console.log(this.activeUserFollowing )
@@ -110,29 +115,55 @@ export class ProfileComponent implements OnInit {
       
     
 }
-  verifyIfFollowed(){
-    const isFound = this.activeUserFollowing.find(f => f.profileId === this.followRequest.followed);
-    if(isFound != undefined){
-      this.isFollowed = true;
-    } else {
-      this.isFollowed = false;
-    }
-  }
+  // verifyIfFollowed(){
+  //   let isFound = this.activeUserFollowing.findIndex(f => f.profileId === this.followRequest.followed);
+  //   if(isFound > -1){
+  //     this.isFollowed = true;
+  //   } else {
+  //     this.isFollowed = false;
+  //   }
+  // }
 
     follow(){
       this._followService.postFollow(this.followRequest).subscribe(data=>{
-        this.isFollowed = true;
+       console.log(data)
        
       })
+      this.isFollowed = true;
       
 
   }
   unfollow(){
 
     this._followService.deleteFollow(this.followRequest.followed).subscribe(data => {
-      this.isFollowed = false;
+      console.log(data)
 
     })
+    this.isFollowed = false;
+
+  }
+  chat(){
+    this._chatService.getChatByUsername(this.name).pipe(
+      // takeUntil(this.ngUnsubscribe),
+      switchMap((chats: ChatPayload[]) => {
+        this.chats = chats;
+        return forkJoin(
+          chats.map(chat => {
+            const userId = chat.firstUserId === this.user.userId ? chat.secondUserId : chat.firstUserId;
+            return this._profileService.getUserById(userId);
+          })
+        );
+      })
+    ).subscribe((users: User[]) => {
+      this.chats.forEach((chat, index) => {
+        chat.sender = users[index];
+        this._chatService.setChat(chat); 
+        if(chat.sender.username === this.name){
+          this.router.navigate(['/message/'+ chat.chatId]);
+      }
+      });
+    });
+
 
   }
 

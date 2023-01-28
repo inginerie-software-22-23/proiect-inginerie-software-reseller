@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
 import { forkJoin, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { ChatPayload } from '../models/chat.payload';
 import { User } from '../models/user';
@@ -21,16 +22,19 @@ export class ChatsComponent implements OnInit, OnDestroy {
   private subscribeList: Subscription[] = [];
 
 
-  constructor(private _chatService: ChatService, private _authSevice: AuthService, private _profileService: ProfileService){
+
+
+  constructor(private _chatService: ChatService, private _authSevice: AuthService, private _profileService: ProfileService, private localStorage: LocalStorageService){
 
 
 
-    
+
 
   }
 
   ngOnInit(): void {
     this.getUser();
+
 
     // this.subscribeList.push(this._profileService.getUserByUsername(this.name).subscribe( (data: User) =>{
     //   this.user = data;
@@ -40,21 +44,21 @@ export class ChatsComponent implements OnInit, OnDestroy {
     //   this.chats = data;
     // }))
 
-    
 
-    
 
-    
+
+
+
   }
 
- 
+
 
   getUser(){
     this._profileService.getUserByUsername(this.name).subscribe((data:User) => {
       this.user = data;
     });
     this._chatService.getChatByUsername(this.name).pipe(
-      takeUntil(this.ngUnsubscribe),
+      // takeUntil(this.ngUnsubscribe),
       switchMap((chats: ChatPayload[]) => {
         this.chats = chats;
         return forkJoin(
@@ -67,10 +71,15 @@ export class ChatsComponent implements OnInit, OnDestroy {
     ).subscribe((users: User[]) => {
       this.chats.forEach((chat, index) => {
         chat.sender = users[index];
+        this._chatService.setChat(chat);
       });
     });
-   
+
   }
+  // onChatSelected(chat: ChatPayload) {
+  //   this._chatService.setChat(chat);
+
+  // }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next(true);

@@ -1,7 +1,7 @@
 <div class="container" *ngFor="let post of posts">
   <div class="user-info">
     <img [src]="post.profileUrl" alt="">
-    <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a>
+    <a class="username" [routerLink]="post.username === activeUser.username ? ['/my-profile'] : ['/user', post.username]">{{post.username}}</a>
   </div> 
   <hr />
   <div class="post-info">
