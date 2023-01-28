@@ -1,17 +1,98 @@
-.bio{
-    margin: 15%;
-    margin-top: 0;
-    margin-bottom: 0;
+.profile-container {
     display: flex;
-    gap: 20em;
-    margin-top: 2em;
+    flex-direction: column;
+    align-items: center;
 }
-.description{
-    margin: 15%;
-    margin-top: 0;
-    margin-bottom: 0;
-    column-gap: 3em;
+  
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
-.th{
-    column-gap: 10em;
+
+.profile-image {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.username {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.description {
+    display: flex;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    overflow-wrap: break-word;
+    max-width: 500px;
+    text-align: left;
+}
+
+.profile-info {
+    text-align: center;
+}
+
+.full-name {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+}
+
+.following-btn, .followers-btn, .posts-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.edit-profile-btn, .logout-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.edit-profile-btn {
+    background-color: #1da1f2;
+    color: white;
+    margin-left: 60px;
+}
+
+.logout-btn {
+    background-color: lighten(red, 20%);
+    color: white;
+}
+
+.add-posts {
+    font-size: 50px;
+    padding: 10px 20px;
+    margin-left: 40px;
+    border: 2px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: lighten($color: lightcoral, $amount: 15);
 }
