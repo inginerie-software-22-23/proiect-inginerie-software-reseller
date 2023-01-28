@@ -49,7 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/forgotPassword")
-    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+    public ResponseEntity<String> forgotPassword(@RequestBody String email) {
         return ResponseEntity.status(OK).body(authService.forgotPassword(email));
     }
 

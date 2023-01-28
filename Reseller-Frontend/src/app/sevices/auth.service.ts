@@ -41,6 +41,10 @@ export class AuthService {
       }));
   }
 
+  forgotPassword(email:string) {
+    return this.httpClient.post<string>("http://localhost:8070/api/auth/forgotPassword", email, {responseType: 'text' as 'json'})
+  }
+
 
   getJwtToken() {
     return this.localStorage.retrieve('authenticationToken');

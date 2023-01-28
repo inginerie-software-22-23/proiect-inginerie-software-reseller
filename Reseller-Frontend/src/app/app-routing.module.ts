@@ -5,6 +5,7 @@ import { ChatsComponent } from './chats/chats.component';
 import { FollowersListComponent } from './following-followers-list/follow-tile/followers-list/followers-list.component';
 import { FollowingListComponent } from './following-followers-list/follow-tile/following-list/following-list.component';
 import { ForYouComponent } from './for-you/for-you.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -36,7 +37,9 @@ const routes: Routes = [ {path: 'sign-up', component: SignupComponent},
 {path: 'edit/:name', component: ProfileFormComponent},
 {path: 'search-profile', component: SearchProfileComponent},
 {path: 'chats', component: ChatsComponent},
-{path: 'messages/:id', component:MessagesComponent}
+{path: 'messages/:id', component:MessagesComponent},
+{path: 'forgot-password', component:ForgotPasswordComponent}
+
 ];
 
 @NgModule({
