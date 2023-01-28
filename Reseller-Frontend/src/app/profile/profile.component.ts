@@ -60,8 +60,20 @@ export class ProfileComponent implements OnInit {
     this._postService.getAllPostsByUser(this.name).subscribe(data => {
       this.posts = data;
       this.postLength = data.length;
-    });
-
+      this.posts.forEach(post => {
+        this.imageService.getPostImageUrl(post.id).subscribe(
+          data => {
+            post.imageUrl = data;
+          }
+        );
+        this.imageService.getImageUrl(post.username).subscribe(
+          data => {
+            post.profileUrl = data;
+          }
+        );
+      });
+      });
+      
     this._profileService.getUserByUsername(this.name).subscribe(user => {
       this.user = user;
       this.imageService.getImageUrl(user.username).subscribe(

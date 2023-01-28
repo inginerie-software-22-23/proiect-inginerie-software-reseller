@@ -114,7 +114,13 @@ public class ProfileService {
     }
 
     public List<ProfileDto> searchProfile(String username) {
-        return profileRepository.findByUsernameStartingWith(username).stream()
+        Profile admin = profileRepository.findByUsername("admin")
+                .orElseThrow(() -> new SpringResellerException("Internal error"));
+
+        List<Profile> profiles = new java.util.ArrayList<>(profileRepository.findByUsernameStartingWith(username).stream().toList());
+        profiles.remove(admin);
+
+        return  profiles.stream()
                 .map(this::mapToDto)
                 .collect(toList());
     }
