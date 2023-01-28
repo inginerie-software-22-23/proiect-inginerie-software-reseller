@@ -148,4 +148,19 @@ public class AuthService {
         return userRepository.findByUsername(user.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
     }
+
+    public String forgotPassword(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new SpringResellerException("Invalid email!"));
+
+        String newPassword = UUID.randomUUID().toString();
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        emailSender.send(
+                email,
+                emailSender.buildForgotPassword(user.getUsername(), newPassword), "Forgot password");
+
+        userRepository.save(user);
+        return "Sent new password to email";
+    }
 }
