@@ -43,11 +43,15 @@ export class ChatService {
     return this._http.post<any>("http://localhost:8070/api/message", message);
   }
 
+  getChatByUsernames(firstUsername: string, secondUsername: string) {
+    //const body = { firstUsername: firstUsername, secondUsername: secondUsername };
+    return this._http.get<ChatPayload[]>('http://localhost:8070/api/chat/getChatByFirstUsernameAndSecondUsername', { params: { firstUsername: firstUsername, secondUsername: secondUsername } });
+  }
   // getChatByUsernames(chat: Chatrequest){
   //   return this._http.get<ChatPayload[]>("http://localhost:8070/api/chat/getChatByFirstUsernameAndSecondUsername")
   // }
-  getChatByUsernames(firstUsername: string, secondUsername: string){
-    return this._http.get<ChatPayload[]>(`http://localhost:8070/api/getChatByFirstUsernameAndSecondUsername?firstUsername=${firstUsername}&secondUsername=${secondUsername}`)
-  }
+  // getChatByUsernames(firstUsername: string, secondUsername: string){
+  //   return this._http.get<ChatPayload[]>(`http://localhost:8070/api/getChatByFirstUsernameAndSecondUsername?firstUsername=${firstUsername}&secondUsername=${secondUsername}`)
+  // }
 
 }

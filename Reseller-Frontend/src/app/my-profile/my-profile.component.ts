@@ -97,11 +97,11 @@ export class MyProfileComponent implements OnInit {
    }
 
    goToFollowersList() {
-    this.router.navigate(['/followers-list']);
+    this.router.navigate(['/followers-list/' + this.username]);
   }
   goToFollowingList() {
  
-    this.router.navigate(['/following-list']);
+    this.router.navigate(['/following-list/' + this.username]);
   }
 
   editValues() {
