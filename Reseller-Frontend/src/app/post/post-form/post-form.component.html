@@ -19,7 +19,7 @@
             </span>
             <input type="number" class="form-control" [formControlName]="'price'" id="price" required>
             <span *ngIf="!createPostForm.get('price')?.valid && createPostForm.get('price')?.touched">
-              Please provide a positive number
+              Please provide valid number!
             </span>
             <span>
               <div class="buttons">

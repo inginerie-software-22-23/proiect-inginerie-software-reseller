@@ -35,7 +35,7 @@
     <hr />
     
     <app-post-tile [posts]="posts"></app-post-tile>
-    </div> -->
+
 
 
 <div class="container">
@@ -48,12 +48,15 @@
         <button class="follow-btn" (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
         <button class="message-btn" (click) = "chat()">Message</button>
       </div>
+
     </div>
     <div class="profile-info">
       <div class="profile-stats">
         <p class="posts-btn"><b>{{postLength}}</b> Posts</p>
-        <p  class="followers-btn"><b>{{followers}}</b> Followers</p>
-        <p  class="following-btn"><b>{{following}}</b> Following</p>          
+
+        <p (click)="goToFollowersList()" class="followers-btn"><b>{{followers}}</b> Followers</p>
+        <p (click)="goToFollowingList()" class="following-btn"><b>{{following}}</b> Following</p>              
+
       </div>
       <h3 class="full-name">{{user.fullName}}</h3>
       <h4 class="description">{{user.description}}</h4>

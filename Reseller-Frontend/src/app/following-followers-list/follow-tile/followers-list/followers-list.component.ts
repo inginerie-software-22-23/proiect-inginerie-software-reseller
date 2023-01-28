@@ -14,7 +14,7 @@ export class FollowersListComponent {
   followingList: User[]=[];
  
 
-  username= this.authServ.getUserName();
+  username = this.route.snapshot.params['name'];
 
   constructor(private route: ActivatedRoute, private authServ:AuthService, private  _profileService:ProfileService) {}
 

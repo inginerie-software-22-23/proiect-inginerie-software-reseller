@@ -22,7 +22,7 @@ import { ProfileService } from '../sevices/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  //name: string='';
+
   posts: PostModel[]=[];
   comments: CommentPayload[]=[];
   postLength: number=0;
@@ -151,15 +151,23 @@ export class ProfileComponent implements OnInit {
 
     this._chatService.getChatByUsernames(this.activeUser.username, this.name).subscribe(data =>{
       this.chats = data;
+      if (this.chat.length>0){
+        this._chatService.setChat(this.chats[0]);
+        this.router.navigate(['/messages/' + this.chats[0].chatId])
+      }
+      else{
+        
+      }
      
     })
-    if (this.chat.length>0){
-      this._chatService.setChat(this.chats[0]);
-      this.router.navigate(['/messages' + this.chats[0].chatId])
-    }
-    else{
-      
-    }
+
+
+
+    // this._chatService.getChatByUsernames(chatReq).subscribe(data =>{
+    //   this.chats = data;
+     
+    // })
+
 
 
 
@@ -191,7 +199,13 @@ export class ProfileComponent implements OnInit {
 
 
 
-
+  goToFollowersList() {
+    this.router.navigate(['/followers-list/'+ this.name]);
+  }
+  goToFollowingList() {
+ 
+    this.router.navigate(['/following-list/' + this.name]);
+  }
 
 
 }
