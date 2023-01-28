@@ -73,10 +73,10 @@ public class ChatController {
 
 
     @GetMapping("/getChatByFirstUsernameAndSecondUsername")
-    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestBody String firstUsername, @RequestBody String secondUsername){
+    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestBody ChatDto chatDto){
 
         try {
-            Set<ChatDto> chatByBothUsers = this.chatService.getChatByFirstUsernameAndSecondUsername(firstUsername, secondUsername);
+            Set<ChatDto> chatByBothUsers = this.chatService.getChatByFirstUsernameAndSecondUsername(chatDto);
             return new ResponseEntity<>(chatByBothUsers, HttpStatus.OK);
         } catch (ChatNotFoundException e) {
             return new ResponseEntity("Chat Does Not Exist", HttpStatus.NOT_FOUND);
