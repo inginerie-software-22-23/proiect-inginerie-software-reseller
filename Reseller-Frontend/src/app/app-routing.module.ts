@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Authguard } from './authguard';
 import { ChatsComponent } from './chats/chats.component';
-import { FollowTileComponent } from './following-followers-list/follow-tile/follow-tile.component';
 import { FollowersListComponent } from './following-followers-list/follow-tile/followers-list/followers-list.component';
 import { FollowingListComponent } from './following-followers-list/follow-tile/following-list/following-list.component';
 import { ForYouComponent } from './for-you/for-you.component';

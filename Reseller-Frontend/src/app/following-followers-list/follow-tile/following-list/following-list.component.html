@@ -1,5 +1,6 @@
 
     <div class="users" *ngFor="let following of followingList">
-      {{ following.username }}
+      <a routerLink="/user/{{following.username}}">{{ following.username }}</a>
+      <a>{{following.imageUrl}}</a>
     </div>
 

@@ -61,6 +61,7 @@ export class PostTileComponent implements OnInit {
     this._profileService.getUserByUsername(this.user).subscribe((data: User) => {
       this.activeUser = data;
     })
+    console.log(this.likesList)
 
   }
 
@@ -151,8 +152,8 @@ export class PostTileComponent implements OnInit {
   saveButtonLogic(post: PostModel){
     let save= new SavedPayload;
     save.postId = post.id;
-    console.log(this.savedList.includes(save))
-    if(this.savedList.includes(save)){
+    let savedPostIndex = this.savedList.findIndex(item => item.postId === save.postId);
+    if(savedPostIndex>-1){
       this.unsave(post)
     }
     else{

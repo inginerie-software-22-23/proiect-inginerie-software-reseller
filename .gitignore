@@ -5,3 +5,5 @@ Reseller/src/main/java/com/m15/Reseller/service/LikesService.java
 *.java
 Reseller/src/main/java/com/m15/Reseller/service/LikesService.java
 *.java
+Reseller/src/main/resources/application.properties
+Reseller-Frontend/src/app/post/view-post/view-post.component.html
