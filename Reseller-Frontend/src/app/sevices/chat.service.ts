@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChatPayload } from '../models/chat.payload';
+import { Chatrequest } from '../models/chatrequest';
 import { MessagePayload } from '../models/message.payload';
 
 @Injectable({
@@ -40,6 +41,13 @@ export class ChatService {
 
   postMessage(message: MessagePayload){
     return this._http.post<any>("http://localhost:8070/api/message", message);
+  }
+
+  // getChatByUsernames(chat: Chatrequest){
+  //   return this._http.get<ChatPayload[]>("http://localhost:8070/api/chat/getChatByFirstUsernameAndSecondUsername")
+  // }
+  getChatByUsernames(firstUsername: string, secondUsername: string){
+    return this._http.get<ChatPayload[]>(`http://localhost:8070/api/getChatByFirstUsernameAndSecondUsername?firstUsername=${firstUsername}&secondUsername=${secondUsername}`)
   }
 
 }
