@@ -1,10 +1,13 @@
 package com.m15.Reseller.controller;
 
 import com.m15.Reseller.dto.ChatDto;
+import com.m15.Reseller.dto.CommentDto;
+import com.m15.Reseller.dto.MessageDto;
 import com.m15.Reseller.dto.PostRequest;
 import com.m15.Reseller.dto.exception.ChatNotFoundException;
 import com.m15.Reseller.model.Chat;
 import com.m15.Reseller.service.ChatService;
+import com.m15.Reseller.service.MessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ChatController {
     private final ChatService chatService;
+    private final MessageService messageService;
 
     @PostMapping
     public ResponseEntity<String> createChat(@RequestBody ChatDto chatDto) {
@@ -69,10 +73,10 @@ public class ChatController {
 
 
     @GetMapping("/getChatByFirstUsernameAndSecondUsername")
-    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestParam("firstUsername") String firstUsername, @RequestParam("secondUsername") String secondUsername){
+    public ResponseEntity<?> getChatByFirstUserNameAndSecondUserName(@RequestBody ChatDto chatDto){
 
         try {
-            Set<ChatDto> chatByBothUsers = this.chatService.getChatByFirstUsernameAndSecondUsername(firstUsername, secondUsername);
+            Set<ChatDto> chatByBothUsers = this.chatService.getChatByFirstUsernameAndSecondUsername(chatDto);
             return new ResponseEntity<>(chatByBothUsers, HttpStatus.OK);
         } catch (ChatNotFoundException e) {
             return new ResponseEntity("Chat Does Not Exist", HttpStatus.NOT_FOUND);

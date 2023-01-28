@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="description">
     <tr>
       <th>Username</th>
@@ -29,4 +29,29 @@
   <hr />
   <app-post-tile [posts]="posts"></app-post-tile>
   </div>
- 
+  -->
+
+<div class="container">
+  <div class="profile-container">
+    <div class="profile-header">
+      <img class="profile-image" [src]="profileImage" alt="Profile Image">
+      <h2 class="username">{{username}}</h2>
+      <div class="profile-actions">
+        <button (click)="editValues()" class="edit-profile-btn">Edit profile</button>
+        <button (click)="logout()" class="logout-btn">Logout</button>
+      </div>
+    </div>
+    <div class="profile-info">
+      <div class="profile-stats">
+        <p class="posts-btn"><b>{{postLength}}</b> Posts</p>
+        <p (click)="goToFollowersList()" class="followers-btn"><b>{{followers}}</b> Followers</p>
+        <p (click)="goToFollowingList()" class="following-btn"><b>{{following}}</b> Following</p>          
+        <p routerLink="/create-post" class="add-posts">+</p>  
+      </div>
+        <h3 class="full-name">{{user?.fullName}}</h3>
+        <h4 class="description">{{user?.description}}</h4>
+    </div>
+  </div>
+  <hr>
+  <app-post-tile [posts]="posts"></app-post-tile>
+</div>

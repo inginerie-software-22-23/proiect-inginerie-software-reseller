@@ -29,6 +29,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { SearchProfileComponent } from './search-profile/search-profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -45,7 +46,6 @@ import { MessagesComponent } from './messages/messages.component';
     ViewPostComponent,
     PostFormComponent,
     MyProfileComponent,
-
     ProfileFormComponent,
 
     FollowersListComponent,
@@ -55,6 +55,8 @@ import { MessagesComponent } from './messages/messages.component';
     SearchProfileComponent,
     ChatsComponent,
     MessagesComponent,
+    ForgotPasswordComponent,
+
     
   ],
   imports: [
