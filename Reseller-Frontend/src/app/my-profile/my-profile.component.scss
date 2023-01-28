@@ -26,6 +26,9 @@
     display: flex;
     font-size: 1.2rem;
     margin-top: 10px;
+    overflow-wrap: break-word;
+    max-width: 500px;
+    text-align: left;
 }
 
 .profile-info {
@@ -67,6 +70,10 @@
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 30px;
+
+    &:hover {
+        opacity: 0.6;
+    }
 }
 
 .edit-profile-btn {

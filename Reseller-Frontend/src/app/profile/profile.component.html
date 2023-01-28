@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="bio">
       <tr>
         <th>Username</th>
@@ -21,12 +21,12 @@
           <!-- <td>{{activeUserFollowing[0].profileId}}, {{user.profileId}}</td> -->
       
        
-        </tr>
-    </div>
+        <!-- </tr>
+    </div> -->
 
     
 
-    <div class="bio">
+    <!-- <div class="bio">
       <br />Posts: <b>{{postLength}}</b> 
       <button (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
       <button (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
@@ -36,5 +36,30 @@
     <hr />
     
     <app-post-tile [posts]="posts"></app-post-tile>
-    </div>
+    </div> -->
 
+
+<div class="container">
+  <div class="profile-container">
+    <div class="profile-header">
+      <img class="profile-image" [src]="imageUrl">
+      <h2 class="username">{{name}}</h2>
+      <div class="profile-actions">
+        <button class="follow-btn" (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
+        <button class="follow-btn" (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
+        <button class="message-btn" (click) = "chat()">Message</button>
+      </div>
+    </div>
+    <div class="profile-info">
+      <div class="profile-stats">
+        <p class="posts-btn"><b>{{postLength}}</b> Posts</p>
+        <p  class="followers-btn"><b>{{followers}}</b> Followers</p>
+        <p  class="following-btn"><b>{{following}}</b> Following</p>          
+      </div>
+      <h3 class="full-name">{{user.fullName}}</h3>
+      <h4 class="description">{{user.description}}</h4>
+    </div>
+  </div>
+  <hr>
+  <app-post-tile [posts]="posts"></app-post-tile>
+</div>

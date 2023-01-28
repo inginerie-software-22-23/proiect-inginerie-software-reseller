@@ -103,6 +103,34 @@
       background-color: lighten(lightcoral, 8%);
     }
   }
+
+  .btns {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    font-size: 20px;
+
+    :first-child {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    :nth-child(2) {
+        margin-left: 7px;
+        margin-right: 17px;
+    }
+
+    :nth-child(3) {
+      cursor: pointer;
+    }
+
+    :nth-child(4) {
+        margin-left: 7px;
+        //margin-right: 14px;
+    }
+  }
 }
 
 .post-header {

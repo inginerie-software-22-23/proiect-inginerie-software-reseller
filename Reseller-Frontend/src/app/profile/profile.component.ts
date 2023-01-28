@@ -130,7 +130,7 @@ export class ProfileComponent implements OnInit {
        
       })
       this.isFollowed = true;
-      
+      this.followers++;
 
   }
   unfollow(){
@@ -140,6 +140,7 @@ export class ProfileComponent implements OnInit {
 
     })
     this.isFollowed = false;
+    this.followers--;
 
   }
   chat(){
