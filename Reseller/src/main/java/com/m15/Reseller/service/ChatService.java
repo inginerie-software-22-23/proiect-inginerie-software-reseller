@@ -34,7 +34,13 @@ public class ChatService {
         ChatDto dto = new ChatDto();
         dto.setFirstUserId(firstUser.getUserId());
         dto.setSecondUserId(secondUser.getUserId());
-        Set<ChatDto> check = getChatByFirstUsernameAndSecondUsername(dto);
+        Set<ChatDto> check;
+        try {
+            check = getChatByFirstUsernameAndSecondUsername(dto);
+        } catch (ChatNotFoundException e) {
+            check = new HashSet<>();
+        }
+
         if (!check.isEmpty()) {
             return "Chat between these users already exists";
         }
