@@ -55,7 +55,7 @@
       <div class="comment" *ngFor="let comment of comments">
         <div class="user-container">
           <img [src]="comment.url" alt="">
-          <a class="commentUsername" routerLink="/user/{{comment.username}}">{{comment.username}}</a>
+          <a class="username" [routerLink]="comment.username === activeUser.username ? ['/my-profile'] : ['/user', comment.username]">{{comment.username}}</a>
           <a class="commentText">{{comment.text}}</a>
         </div>       
       </div>     
