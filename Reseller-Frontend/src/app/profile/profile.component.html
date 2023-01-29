@@ -20,12 +20,12 @@
  
       
        
-        <!-- </tr>
+         </tr>
     </div> -->
 
     
-
-    <!-- <div class="bio">
+<!-- 
+  <div class="bio">
       <br />Posts: <b>{{postLength}}</b> 
       <button (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
       <button (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
@@ -34,7 +34,7 @@
     <button (click) = "chat()">Chat</button>
     <hr />
     
-    <app-post-tile [posts]="posts"></app-post-tile>
+    <app-post-tile [posts]="posts"></app-post-tile> -->
 
 
 
@@ -46,7 +46,7 @@
       <div class="profile-actions">
         <button class="follow-btn" (click)="follow()" *ngIf="!isFollowed">FOLLOW</button>
         <button class="follow-btn" (click)="unfollow()" *ngIf="isFollowed">UNFOLLOW</button>
-        <button class="message-btn" (click) = "chat()">Message</button>
+        <button class="message-btn" (click) = "checkIfUsersHaveChat()">Message</button>
       </div>
 
     </div>

@@ -15,4 +15,6 @@ export class ImageService {
   getPostImageUrl(postId: number) {
     return this._http.get<string>('http://localhost:8070/api/post/' + postId + '/product-picture', {responseType: 'text' as 'json'});
   }
+
+
 }

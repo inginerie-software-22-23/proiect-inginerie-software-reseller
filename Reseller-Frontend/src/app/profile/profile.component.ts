@@ -5,6 +5,7 @@ import { ChatPayload } from '../models/chat.payload';
 import { Chatrequest } from '../models/chatrequest';
 import { CommentPayload } from '../models/comment.payload';
 import { FollowPayload } from '../models/follow.payload';
+import { MessagePayload } from '../models/message.payload';
 import { PostModel } from '../models/post-model';
 import { User } from '../models/user';
 import { AuthService } from '../sevices/auth.service';
@@ -144,22 +145,68 @@ export class ProfileComponent implements OnInit {
     this.followers--;
 
   }
-  chat(){
-    let chatReq: Chatrequest = new Chatrequest;
-    chatReq.firstUsername = this.activeUser;
-    chatReq.secondUsername = this.name
+  
+  checkIfUsersHaveChat(): Promise<ChatPayload> {
+    let user1 = this.name;
+    let user2 = this._authService.getUserName();
+    return new Promise((resolve, reject) => {
+      forkJoin([
+        this._chatService.getChatByUsername(user1),
+        this._chatService.getChatByUsername(user2)
+      ]).subscribe(
+        result => {
+          if(result[0].length == 0 || result[1].length == 0) {
+            reject("One of the users does not have any chats.");
+            this.createChat();
+          }
+          else{
+            let sharedChats = result[0].filter(chat1 => result[1].find(chat2 => chat1.chatId === chat2.chatId));
+            if (sharedChats.length > 0) {
+              resolve(sharedChats[0]);
+              this.router.navigate(['/messages/'+ sharedChats[0].chatId]);
+              console.log('au chat'+ sharedChats[0].chatId)
+            } else {
+              reject("No chat exists between the two users");
+              this.createChat();
+            }
+          }
+        },
+        error => {
+          reject(error);
+          this.createChat();
+        }
+      );
+    });
+  }
 
-    this._chatService.getChatByUsernames(this.activeUser.username, this.name).subscribe(data =>{
-      this.chats = data;
-      if (this.chat.length>0){
-        this._chatService.setChat(this.chats[0]);
-        this.router.navigate(['/messages/' + this.chats[0].chatId])
-      }
-      else{
-        
-      }
-     
+  
+  createChat(){
+    let chat: ChatPayload = {
+      firstUserId: this.activeUser.userId,
+      secondUserId: this.user.userId,
+      chatId: 0,
+      messages: [],
+      sender: this.user
+    }
+
+    this._chatService.postChat(chat).subscribe(data => {
+      //console.log(data.chatId);
+      this.router.navigate(['/messages/'+ data.chatId]);
+
     })
+  }
+
+
+  goToFollowersList() {
+    this.router.navigate(['/followers-list/'+ this.name]);
+  }
+  goToFollowingList() {
+ 
+    this.router.navigate(['/following-list/' + this.name]);
+  }
+
+
+}
 
 
 
@@ -192,20 +239,3 @@ export class ProfileComponent implements OnInit {
     //   }
     //   });
     // });
-
-
-
-  }
-
-
-
-  goToFollowersList() {
-    this.router.navigate(['/followers-list/'+ this.name]);
-  }
-  goToFollowingList() {
- 
-    this.router.navigate(['/following-list/' + this.name]);
-  }
-
-
-}
