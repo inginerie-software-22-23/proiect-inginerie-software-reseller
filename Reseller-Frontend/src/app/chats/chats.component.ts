@@ -71,7 +71,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
     ).subscribe((users: User[]) => {
       this.chats.forEach((chat, index) => {
         chat.sender = users[index];
-        this._chatService.setChat(chat);
+        //this._chatService.setChat(chat);
       });
     });
 

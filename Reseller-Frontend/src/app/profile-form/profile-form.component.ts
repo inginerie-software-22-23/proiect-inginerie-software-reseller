@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,11 +18,16 @@ export class ProfileFormComponent implements OnInit {
   editForm!: FormGroup;
   user: User = new User();
   username: String = '';
-  newToken!: any
+  newToken!: any;
+  fileForm!: FormGroup;
+  
 
   constructor(private _formBuilder: FormBuilder, private _profileService: ProfileService, private _router : Router, private _authService: AuthService,
-    private localStorage: LocalStorageService) {
+    private localStorage: LocalStorageService, private http:HttpClient) {
     this.createForm()
+    this.fileForm = this._formBuilder.group({
+        file:  [null, Validators.required]
+    })
   }
 
   ngOnInit() {
@@ -45,7 +51,7 @@ export class ProfileFormComponent implements OnInit {
   }
 
   saveUser() { 
-    if (this.editForm.valid) {   
+    if (this.editForm.valid && this.fileForm.valid) {   
       if (this.username === this.editForm.value.username) {     
         this.editForm.value.username = "";  
       }
@@ -58,11 +64,49 @@ export class ProfileFormComponent implements OnInit {
         this.localStorage.store('expiresAt', data.expiresAt);
         this._router.navigate(['/my-profile'])
       });
+
+     // this.uploadFile();
+      
+    // this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', this.fileForm.value).subscribe(data=>{
+    //   console.log(data);
+    // });
+
+      // postProfileImageUrl(image: File){
+      //   return this._http.post<File>('http://localhost:8070/api/profile/' + username + '/profile-picture', image)
+      // }
     }
   }
 
   onTextAreaInput(textarea: HTMLTextAreaElement) {
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight - 4 + 'px';
+  }
+  onFileChange(event: Event) {
+    if (event.target instanceof HTMLInputElement && event.target.files && event.target.files.length > 0) {
+      const file: File = event.target.files[0];
+      this.fileForm.get('file')?.setValue(file);
+
+       // create a new FileReader
+       const reader = new FileReader();
+
+       // read the file as a data URL
+       reader.readAsDataURL(file);
+ 
+       // when the file is loaded, set the form control value with the data URL
+       reader.onload = () => {
+         this.editForm.get('imageUrl')?.setValue(reader.result);
+       };
+    }
+  }
+
+  uploadFile() {
+    const formData = new FormData();
+    formData.append('file', this.fileForm.get('file')?.value);
+    
+    const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
+    this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', formData, { headers: headers })
+      .subscribe((response) => {
+        console.log(response)
+      });
   }
 }
