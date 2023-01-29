@@ -10,7 +10,7 @@ $tertiary-color: #F5F5F5;
     justify-content: center;
 }
 
-.empty-form{
+.empty-form, .login-failed {
     margin-left: 15px;
     color: firebrick;
 }

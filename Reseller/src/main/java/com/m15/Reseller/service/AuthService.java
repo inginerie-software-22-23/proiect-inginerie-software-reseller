@@ -151,7 +151,7 @@ public class AuthService {
     }
 
     public String forgotPassword(String email) {
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByEmail(email.strip())
                 .orElseThrow(() -> new SpringResellerException("Invalid email!"));
 
         String newPassword = UUID.randomUUID().toString();
@@ -162,6 +162,6 @@ public class AuthService {
                 emailSender.buildForgotPassword(user.getUsername(), newPassword), "Forgot password");
 
         userRepository.save(user);
-        return "Sent new password to email";
+        return "Sent new password to email - " + newPassword;
     }
 }
