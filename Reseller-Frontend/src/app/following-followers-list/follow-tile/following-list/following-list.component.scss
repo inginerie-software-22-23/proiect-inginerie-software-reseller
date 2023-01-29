@@ -1,5 +1,13 @@
-.users{
-    margin: 25%;
-    margin-top: 10%;
-
-}
+.users {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    a {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    img {
+      border-radius: 50%;
+    }
+  }

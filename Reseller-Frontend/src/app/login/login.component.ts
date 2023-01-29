@@ -12,7 +12,7 @@ import { AuthService } from '../sevices/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loginRequestPayload!: LoginRequestPayload;
-isError: any;
+ isError: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.loginRequestPayload = {
@@ -39,7 +39,15 @@ isError: any;
       this.router.navigate(['/home']);
 
     },
+    error =>{
+      if(error.status){
+        this.isError= true;
+      }
+      
+    }
 
-    );
+
+    ); 
+    console.log(this.isError)
   }
 }

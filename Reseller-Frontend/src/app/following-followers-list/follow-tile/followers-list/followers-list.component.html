@@ -1,8 +1,6 @@
 <div class ="users" >
     <div *ngFor="let follower of followersList">
        <a routerLink="/user/{{follower.username}}"> {{ follower.username }} </a>
-      
        <img width="30px" height="30px"[src]="follower.imageUrl">
-      
       </div>
   </div>

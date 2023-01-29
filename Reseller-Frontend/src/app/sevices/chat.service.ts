@@ -36,7 +36,7 @@ export class ChatService {
   }
 
   postChat(chat: ChatPayload){
-    return this._http.put<any>("http://localhost:8070/api/message/chat", chat)
+    return this._http.post<any>("http://localhost:8070/api/chat", chat, {responseType: 'text' as 'json'})
   }
 
   postMessage(message: MessagePayload){
