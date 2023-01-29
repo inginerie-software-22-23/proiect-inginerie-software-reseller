@@ -1,23 +1,21 @@
-<form [formGroup]="editForm" (ngSubmit)="saveUser()">
-  <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" formControlName="username" required>
-  </div>
-  <div class="form-group">
-      <label for="fullName">Full Name</label>
-      <input type="text" class="form-control" id="fullName" formControlName="fullName" required>
-  </div>
-  <div class="form-group">
-      <label for="description">Description</label>
-      <textarea rows="1" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" class="form-control" id="description" formControlName="description"></textarea>
-  </div>
-  <!-- <div class="form-group">
-      <label for="imageUrl">Image URL</label>
-      <input type="file" class="form-control" id="imageUrl"  (change)="handleFileInput($event)" formControlName="imageUrl">
-  </div> -->
-  <form [formGroup]="fileForm">
-    <input type="file" formControlName="file" (change)="onFileChange($event)"  accept="image/*" >
-    <button type="submit" class="btn btn-primary" (click)="uploadFile()">Upload</button>
+<div class="container">
+  <form [formGroup]="editForm" (ngSubmit)="saveUser()">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <textarea rows="1" cols="30" (input)="onUsernameInput(username)" #username style="resize: none;" type="text" class="form-control" id="username" formControlName="username" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <textarea rows="1" cols="30" (input)="onFullNameInput(fullName)" #fullName style="resize: none;" class="form-control" id="fullName" formControlName="fullName" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea rows="2" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" class="form-control" id="description" formControlName="description">placeholder="{{user.description}}"</textarea>
+    </div>
+    <form class="upload-file" [formGroup]="fileForm">
+      <input class="choose-btn" type="file" formControlName="file" (change)="onFileChange($event)"  accept="image/*" >
+      <button type="submit" class="upload-btn" (click)="uploadFile()">Upload</button>
+    </form>
+    <button type="submit" class="save-btn">Save</button>
   </form>
-  <button type="submit" class="btn btn-primary">Save</button>
-</form>
+</div>
