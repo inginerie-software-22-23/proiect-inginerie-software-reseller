@@ -1,4 +1,8 @@
-<div class ="users" *ngFor="let follower of followersList">
-    <img class="img" [src]="follower.imageUrl">
-    <a class="user" routerLink="/user/{{follower.username}}"> {{ follower.username }} </a>
+<div class="container">
+    <h1>Followers</h1>
+    <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+    <div class ="users" *ngFor="let follower of followersList">
+        <img class="img" [src]="follower.imageUrl">
+        <a class="user" routerLink="/user/{{follower.username}}"> {{ follower.username }} </a>
+    </div>
 </div>
