@@ -19,6 +19,9 @@
             </span>
             <br>
           <input type="submit" value="Login">
+          <div class="login-failed"  *ngIf='this.isError'>
+            <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>
+          </div>
         </div>
       </form>
     </div>
@@ -28,8 +31,5 @@
       <br>
       <p>Don't have an account?  <a routerLink="/sign-up">Register here</a>.</p>
     </div>
-  </div>
-  <div class="login-failed"  *ngIf='this.isError'>
-    <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>
   </div>
 </body>
