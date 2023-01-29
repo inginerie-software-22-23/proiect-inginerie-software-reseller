@@ -47,13 +47,21 @@
     justify-content: center;
 }
 
-.following-btn, .followers-btn, .posts-btn {
+.following-btn, .followers-btn {
     font-size: 1.2rem;
     padding: 10px 20px;
     margin-left: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.posts-btn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
 .profile-actions {
