@@ -52,23 +52,29 @@ export class MessagesComponent implements OnInit{
    
     this.chatId = this.activateRoute.snapshot.params['id'];
 
-    // this._chatService.getChatById(this.chatId).subscribe(data => {
-    //   this.chat =data;
-    //   this.messages = data.messages;
+    this._profileService.getUserByUsername(this.activeUsername).subscribe((data: User) =>{
+      this.activeUser = data;
+    })
+
+ 
+    this._chatService.getChatById(this.chatId).subscribe( data => {
+      this.chat = data;
+      this.messages = data.messages;
+      const userId = data.firstUserId === this.activeUser.userId ? data.secondUserId : data.firstUserId;
+      this._profileService.getUserById(userId).subscribe(data => {
+        this.chat.sender = data;
+      })
+
+    })
 
 
-    // })
-
-    this.chat = this._chatService.getChat();
-    this.messages = this.chat.messages;
+   
    
 
 
 
     
-    this._profileService.getUserByUsername(this.activeUsername).subscribe((data: User) =>{
-      this.activeUser = data;
-    })
+
     this._profileService.getUserByUsername(this.chat.sender.username).subscribe((data: User) =>{
       this.chatUser = data;
     })
@@ -82,7 +88,7 @@ export class MessagesComponent implements OnInit{
 
     this.sendMessage.chatId = this.chatId;
     this.sendMessage.senderId = this.activeUser.userId;
-    this.sendMessage.recipientId = this.chatUser.userId;
+    this.sendMessage.recipientId = this.chat.sender.userId;
     this.sendMessage.text = this.messageForm.get('text')?.value;
     this.chat.messages.push(this.sendMessage)
     this._chatService.postMessage(this.sendMessage).subscribe(data =>{
@@ -92,12 +98,7 @@ export class MessagesComponent implements OnInit{
     this.messageForm.reset;
   }
 
-//  getChatUser(){
-//   const userId = this.chat.firstUserId === this.activeUser.userId ? this.chat.secondUserId : this.chat.firstUserId;
-//   this._profileService.getUserById(userId).subscribe((data: User) =>{
-//       this.chatUser = data;
-//       this.chat.sender = data;
-//     })
-//  }
+
+
 
 }

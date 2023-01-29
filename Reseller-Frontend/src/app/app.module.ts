@@ -30,6 +30,13 @@ import { SearchProfileComponent } from './search-profile/search-profile.componen
 import { ChatsComponent } from './chats/chats.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+// import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
+
+// import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+// import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+// import { DataFormModule } from 'nativescript-ui-dataform/angular';
+
+
 
 
 
@@ -68,6 +75,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     BrowserAnimationsModule,
     MatIconModule,
     ToastrModule.forRoot(),
+    // NativeScriptUIDataFormModule
 
     
 
