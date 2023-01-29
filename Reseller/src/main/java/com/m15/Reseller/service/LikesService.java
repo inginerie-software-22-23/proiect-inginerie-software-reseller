@@ -48,7 +48,7 @@ public class LikesService {
             notification.setInteractionPost(post);
             notification.setType(NotificationType.LIKE);
             notification.setTimestamp(LocalDateTime.now());
-            notificationRepository.save(notification);
+            notificationService.saveNotification(notification);
         }
 
         return "Success";
