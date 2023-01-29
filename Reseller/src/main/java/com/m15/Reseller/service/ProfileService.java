@@ -110,7 +110,7 @@ public class ProfileService {
         }
         profile.setImageUrl(profilePictureUrl);
         profileRepository.save(profile);
-        return "Success";
+        return profilePictureUrl;
     }
 
     public List<ProfileDto> searchProfile(String username) {

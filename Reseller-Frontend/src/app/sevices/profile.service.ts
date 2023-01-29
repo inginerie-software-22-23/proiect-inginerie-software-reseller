@@ -37,25 +37,9 @@ export class ProfileService {
   updateProfile(username: String, user: User) {
     return this.httpClient.put<LoginResponse>('http://localhost:8070/api/profile/' + username + '/edit', user)
   }
-  // getUserIdByUsername(username: string): Observable<number> {
-  //   return this.httpClient.get<User>('http://localhost:8070/api/profile/' + username)
-  //     .pipe(
-  //       map(user => user.id)
-  //     );
-  // }
 
   getUserById(id:number):Observable<User>{
     return this.httpClient.get<User>('http://localhost:8070/api/profile/id/' + id)
   }
-  // getUserById(id: number): Observable<User> {
-  //   if (this.users.has(id)) {
-  //     return of(this.users.get(id));
-  //   } else {
-  //     return this.httpClient.get<User>('http://localhost:8070/api/profile/' + id).pipe(
-  //       tap(user => this.users.set(id, user))
-  //     );
-  //   }
-  // }
-  
   
 }

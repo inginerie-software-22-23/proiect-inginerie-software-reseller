@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
   chats: ChatPayload[]=[]
 
   imageUrl: string = '';
+  createdChatId!: number;
 
 
   constructor(private _activatedRoute: ActivatedRoute, private _postService: PostsService,
@@ -156,8 +157,9 @@ export class ProfileComponent implements OnInit {
       ]).subscribe(
         result => {
           if(result[0].length == 0 || result[1].length == 0) {
-            reject("One of the users does not have any chats.");
+            //reject("One of the users does not have any chats.");
             this.createChat();
+            this.router.navigate(['/messages/'+ this.createdChatId]);
           }
           else{
             let sharedChats = result[0].filter(chat1 => result[1].find(chat2 => chat1.chatId === chat2.chatId));
@@ -166,18 +168,55 @@ export class ProfileComponent implements OnInit {
               this.router.navigate(['/messages/'+ sharedChats[0].chatId]);
               console.log('au chat'+ sharedChats[0].chatId)
             } else {
-              reject("No chat exists between the two users");
+              //reject("No chat exists between the two users");
               this.createChat();
+              this.router.navigate(['/messages/'+ this.createdChatId]);
             }
           }
         },
         error => {
-          reject(error);
+         // reject(error);
           this.createChat();
+          this.router.navigate(['/messages/'+ this.createdChatId]);
         }
       );
     });
   }
+  // checkIfUsersHaveChat(): Promise<ChatPayload> {
+  //   let user1 = this.name;
+  //   let user2 = this._authService.getUserName();
+  //   return new Promise((resolve, reject) => {
+  //     forkJoin([
+  //       this._chatService.getChatByUsername(user1),
+  //       this._chatService.getChatByUsername(user2)
+  //     ]).subscribe(
+  //       result => {
+  //         if(result[0].length == 0 || result[1].length == 0) {
+  //           reject("One of the users does not have any chats.");
+  //           this.createChat();
+  //         }
+  //         else{
+  //           let sharedChats = result[0].filter(chat1 => result[1].find(chat2 => chat1.chatId === chat2.chatId));
+  //           if (sharedChats.length > 0) {
+  //             resolve(sharedChats[0]);
+  //             this.router.navigate(['/messages/'+ sharedChats[0].chatId]);
+  //             console.log('au chat'+ sharedChats[0].chatId)
+  //           } else {
+  //             reject("No chat exists between the two users");
+  //             this.createChat();
+  //           }
+  //         }
+  //       },
+  //       error => {
+  //         if (error.status !== 201) {
+  //           reject(error);
+  //         }
+  //         this.createChat();
+  //       }
+  //     );
+  //   });
+  // }
+  
 
   
   createChat(){
@@ -190,10 +229,16 @@ export class ProfileComponent implements OnInit {
     }
 
     this._chatService.postChat(chat).subscribe(data => {
-      //console.log(data.chatId);
-      this.router.navigate(['/messages/'+ data.chatId]);
+      if(data.status == 201){
+      const chatString = data;
+      const startIndex = chatString.indexOf('chatId=') + 7;
+      const endIndex = chatString.indexOf(',', startIndex);
+      this.createdChatId = chatString.substring(startIndex, endIndex);
+      
+      }
 
     })
+    
   }
 
 
@@ -210,32 +255,3 @@ export class ProfileComponent implements OnInit {
 
 
 
-    // this._chatService.getChatByUsernames(chatReq).subscribe(data =>{
-    //   this.chats = data;
-     
-    // })
-
-
-
-
-
-    // this._chatService.getChatByUsername(this.name).pipe(
-    //   // takeUntil(this.ngUnsubscribe),
-    //   switchMap((chats: ChatPayload[]) => {
-    //     this.chats = chats;
-    //     return forkJoin(
-    //       chats.map(chat => {
-    //         const userId = chat.firstUserId === this.user.userId ? chat.secondUserId : chat.firstUserId;
-    //         return this._profileService.getUserById(userId);
-    //       })
-    //     );
-    //   })
-    // ).subscribe((users: User[]) => {
-    //   this.chats.forEach((chat, index) => {
-    //     chat.sender = users[index];
-    //     this._chatService.setChat(chat); 
-    //     if(chat.sender.username === this.name){
-    //       this.router.navigate(['/message/'+ chat.chatId]);
-    //   }
-    //   });
-    // });

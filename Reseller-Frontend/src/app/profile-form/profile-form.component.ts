@@ -54,25 +54,14 @@ export class ProfileFormComponent implements OnInit {
       if (this.username === this.editForm.value.username) {     
         this.editForm.value.username = "";  
       }
-
+      console.log(this.editForm.value)
       this._profileService.updateProfile(this.username, this.editForm.value).subscribe(data => {
-        console.log(data)
         this.localStorage.store('authenticationToken', data.authenticationToken);
         this.localStorage.store('username', data.username);
         this.localStorage.store('refreshToken', data.refreshToken);
         this.localStorage.store('expiresAt', data.expiresAt);
         this._router.navigate(['/my-profile'])
       });
-
-     // this.uploadFile();
-      
-    // this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', this.fileForm.value).subscribe(data=>{
-    //   console.log(data);
-    // });
-
-      // postProfileImageUrl(image: File){
-      //   return this._http.post<File>('http://localhost:8070/api/profile/' + username + '/profile-picture', image)
-      // }
     }
   }
 
@@ -105,17 +94,21 @@ export class ProfileFormComponent implements OnInit {
       reader.onload = () => {
         this.editForm.get('imageUrl')?.setValue(reader.result);
       };
+
     }
   }
 
   uploadFile() {
     const formData = new FormData();
-    formData.append('file', this.fileForm.get('file')?.value);
+    if (this.fileForm.get('file')?.value) {}
+    const file: File = this.fileForm.get('file')?.value
+    formData.append("file", file);
+    console.log(formData.get('file'))
     
-    const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
-    this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', formData, { headers: headers })
+    const headers = new HttpHeaders().set('enctype', 'multipart/form-data');
+    this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', formData, { headers: headers, responseType:"text" as "json"})
       .subscribe((response) => {
-        console.log(response)
+        this.editForm.get("imageUrl")?.setValue(response);
       });
   }
 }

@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea rows="2" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" class="form-control" id="description" formControlName="description">placeholder="{{user.description}}"</textarea>
+        <textarea rows="2" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" class="form-control" id="description" formControlName="description"></textarea>
     </div>
     <form class="upload-file" [formGroup]="fileForm">
       <input class="choose-btn" type="file" formControlName="file" (change)="onFileChange($event)"  accept="image/*" >
