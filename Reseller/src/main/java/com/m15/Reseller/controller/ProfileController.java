@@ -51,7 +51,7 @@ public class ProfileController {
     }
 
     @PostMapping("/{username}/profile-picture")
-    public ResponseEntity<String> uploadProfilePicture(@PathVariable("username") String username, @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadProfilePicture(@PathVariable("username") String username, @RequestParam(value = "file") MultipartFile file) {
         return status(HttpStatus.OK).body(profileService.uploadProfilePicture(username, file));
     }
 

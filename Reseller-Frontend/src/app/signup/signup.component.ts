@@ -35,13 +35,13 @@ export class SignupComponent implements OnInit {
   signup() {
 
     this.signupRequestPayload.username = this.signupForm.get('username')?.value;
-    this.signupRequestPayload.username = this.signupForm.get('fullname')?.value;
+    this.signupRequestPayload.fullname = this.signupForm.get('fullname')?.value;
     this.signupRequestPayload.email = this.signupForm.get('email')?.value;
     this.signupRequestPayload.password = this.signupForm.get('password')?.value;
 
     this.authService.signup(this.signupRequestPayload).subscribe(() => {
       console.log('Signup Successful');
-      this.router.navigate(['/sign-up']);
+      this.router.navigate(['/login']);
     }, () => {
       console.log('Signup Failed');
     });
