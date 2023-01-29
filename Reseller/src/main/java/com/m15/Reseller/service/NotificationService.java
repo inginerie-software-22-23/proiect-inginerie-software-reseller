@@ -7,10 +7,13 @@ import com.m15.Reseller.repository.NotificationRepository;
 import com.m15.Reseller.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Not;
+import org.checkerframework.checker.units.qual.N;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,7 +25,10 @@ public class NotificationService {
     private final UserRepository userRepository;
 
     public void saveNotification(Notification notification) {
-        notificationRepository.save(notification);
+        Optional<Notification> notificationOptional = notificationRepository.findById(notification.getNotificationId());
+        if (notificationOptional.isEmpty()) {
+            notificationRepository.save(notification);
+        }
     }
 
     public List<NotificationDto> getNotificationsByUsername(String username) {
