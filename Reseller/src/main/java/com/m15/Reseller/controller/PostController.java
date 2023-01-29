@@ -46,9 +46,9 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getLikesForPost(id));
     }
 
-    @PostMapping("/{id}/product-picture")
-    public ResponseEntity<String> uploadProductPicture(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) {
-        return status(HttpStatus.OK).body(postService.uploadProductPicture(id, file));
+    @PostMapping("/product-picture")
+    public ResponseEntity<String> uploadProductPicture(@RequestParam("file") MultipartFile file) {
+        return status(HttpStatus.OK).body(postService.uploadProductPicture(file));
     }
 
     @GetMapping("/{id}/product-picture")

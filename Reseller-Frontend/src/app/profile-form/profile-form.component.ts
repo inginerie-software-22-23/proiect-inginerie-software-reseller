@@ -54,7 +54,6 @@ export class ProfileFormComponent implements OnInit {
       if (this.username === this.editForm.value.username) {     
         this.editForm.value.username = "";  
       }
-      console.log(this.editForm.value)
       this._profileService.updateProfile(this.username, this.editForm.value).subscribe(data => {
         this.localStorage.store('authenticationToken', data.authenticationToken);
         this.localStorage.store('username', data.username);
@@ -100,7 +99,6 @@ export class ProfileFormComponent implements OnInit {
 
   uploadFile() {
     const formData = new FormData();
-    if (this.fileForm.get('file')?.value) {}
     const file: File = this.fileForm.get('file')?.value
     formData.append("file", file);
     console.log(formData.get('file'))

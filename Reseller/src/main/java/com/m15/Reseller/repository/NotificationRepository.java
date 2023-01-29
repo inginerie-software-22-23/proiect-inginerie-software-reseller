@@ -12,4 +12,5 @@ import java.util.Optional;
 @Transactional
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     List<Notification> findByRecipient(User user);
+    List<Notification> findByTextAndRecipientAndSender(String text, User recipient, User sender);
 }

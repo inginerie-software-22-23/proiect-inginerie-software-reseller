@@ -44,12 +44,12 @@ public class PostService {
 
     public String save(PostRequest postRequest) {
         Post newPost = new Post();
-        newPost.setImageUrl(postRequest.getImageUrl());
         newPost.setDescription(postRequest.getDescription());
         newPost.setTitle(postRequest.getTitle());
         newPost.setPrice(postRequest.getPrice());
         newPost.setUser(authService.getCurrentUser());
         newPost.setCreatedDate(Instant.now());
+        newPost.setImageUrl(postRequest.getImageUrl());
         postRepository.save(newPost);
         return "Success";
     }
@@ -108,14 +108,8 @@ public class PostService {
         return response;
     }
 
-    public String uploadProductPicture(Long id, MultipartFile file) {
-        String productUrl = storageService.storeFile(file, "product-images/");
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new PostNotFoundException("Post not found!"));
-
-        post.setImageUrl(productUrl);
-        postRepository.save(post);
-        return "Success";
+    public String uploadProductPicture(MultipartFile file) {
+        return storageService.storeFile(file, "product-images/");
     }
 
     public String getProductPicture(Long id) throws IOException {
