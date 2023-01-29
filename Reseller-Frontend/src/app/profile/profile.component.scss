@@ -20,6 +20,7 @@
 .username {
     font-size: 30px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 .description {
@@ -78,6 +79,7 @@
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 30px;
+    margin-top: 3px;
 
     &:hover {
         opacity: 0.6;
