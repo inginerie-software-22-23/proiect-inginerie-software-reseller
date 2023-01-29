@@ -82,7 +82,7 @@ export class PostTileComponent implements OnInit {
         console.error(error);
       }
       
-    ); //window.location.reload()
+    ); 
 
     
   }
@@ -101,7 +101,7 @@ export class PostTileComponent implements OnInit {
       }
       
     );
-    window.location.reload()
+    
   }
 
   unsave(post:PostModel) {
@@ -117,7 +117,7 @@ export class PostTileComponent implements OnInit {
       }
       
     );
-    window.location.reload()
+  
   }
 
   unlike(post:PostModel) {
@@ -131,8 +131,7 @@ export class PostTileComponent implements OnInit {
         console.error(error);
       }
       
-    );// window.location.reload()
-    
+    );
   }
 
   likeButtonLogic(post:PostModel){
@@ -142,24 +141,33 @@ export class PostTileComponent implements OnInit {
     let likedPostIndex = this.likesList.findIndex(item => item.postId === like.postId);
     if(likedPostIndex>-1) {
         this.unlike(post);
+        this.likesList.splice(likedPostIndex);
+        post.likesCount--;
       } else {
         this.like(post);
+        this.likesList.push(like);
+        post.likesCount++;
       }
-      window.location.href = window.location.href;
+      
 
   }
+
 
   saveButtonLogic(post: PostModel){
-    let save= new SavedPayload;
-    save.postId = post.id;
-    let savedPostIndex = this.savedList.findIndex(item => item.postId === save.postId);
-    if(savedPostIndex>-1){
-      this.unsave(post)
+      let save= new SavedPayload;
+      save.postId = post.id;
+      let savedPostIndex = this.savedList.findIndex(item => item.postId === save.postId);
+      if(savedPostIndex>-1){
+        this.unsave(post)
+        this.savedList.splice(savedPostIndex);
+        post.savedCount--;
+      }
+      else{
+        this.save(post)
+        this.savedList.push(save);
+        post.savedCount++;
+      }
     }
-    else{
-      this.save(post)
-    }
-  }
 
   }
 

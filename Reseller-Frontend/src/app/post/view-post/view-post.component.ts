@@ -76,18 +76,21 @@ export class ViewPostComponent implements OnInit {
   }
 
   postComment() {
+    this.imageService.getImageUrl(this.user).subscribe(
+      data => {
+        this.commentPayload.url = data;
+      }
+    );
+    this.commentPayload.username = this.user;
     this.commentPayload.text = this.commentForm.get('text')?.value;
     this.commentService.postComment(this.commentPayload).subscribe(
-    {  next : data => {
-      this.commentForm.get('text')?.setValue('');
-      this.getCommentsForPost();
-      
-    }, 
-    error: () => {
-    }
+    {  next : data => { }, 
+    error: () => { }
   } 
     )
-    window.location.reload();
+    this.comments.push(this.commentPayload);
+    this.commentForm.get('text')?.setValue('');
+
   }
 
   onTextAreaInput(textarea: HTMLTextAreaElement) {
@@ -126,16 +129,7 @@ export class ViewPostComponent implements OnInit {
     )
   }
 
-  private getLikesForPost() {
-    this.commentService.getAllCommentsForPost(this.postId).subscribe(
-      {next :data => {
-      this.comments = data;
-    }, 
-    error:() => {
-      
-    }}
-    );
-  }
+
 
   private getProfileUrlForPost(post: PostModel) {
     this.imageService.getImageUrl(post.username).subscribe(
@@ -165,7 +159,7 @@ export class ViewPostComponent implements OnInit {
         console.error(error);
       }
       
-    ); //window.location.reload()
+    );
 
     
   }
@@ -184,9 +178,8 @@ export class ViewPostComponent implements OnInit {
       }
       
     );
-    window.location.reload()
-  }
-
+   
+    }
   unsave(post:PostModel) {
     this.savePayload.postId = post.id;
     this._saveService.deleteSave(this.savePayload.postId).subscribe(
@@ -200,7 +193,7 @@ export class ViewPostComponent implements OnInit {
       }
       
     );
-    window.location.reload()
+   
   }
 
   unlike(post:PostModel) {
@@ -214,7 +207,7 @@ export class ViewPostComponent implements OnInit {
         console.error(error);
       }
       
-    );// window.location.reload()
+    );
     
   }
 
@@ -225,10 +218,14 @@ export class ViewPostComponent implements OnInit {
     let likedPostIndex = this.likesList.findIndex(item => item.postId === like.postId);
     if(likedPostIndex>-1) {
         this.unlike(post);
+        this.likesList.splice(likedPostIndex);
+        post.likesCount--;
       } else {
         this.like(post);
+        this.likesList.push(like);
+        post.likesCount++;
       }
-      window.location.href = window.location.href;
+      
 
   }
 
@@ -239,9 +236,13 @@ export class ViewPostComponent implements OnInit {
       let savedPostIndex = this.savedList.findIndex(item => item.postId === save.postId);
       if(savedPostIndex>-1){
         this.unsave(post)
+        this.savedList.splice(savedPostIndex);
+        post.savedCount--;
       }
       else{
         this.save(post)
+        this.savedList.push(save);
+        post.savedCount++;
       }
     }
 
