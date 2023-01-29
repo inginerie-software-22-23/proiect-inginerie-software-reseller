@@ -24,6 +24,7 @@ public class LikesService {
     private final NotificationRepository notificationRepository;
     private final CommentRepository commentRepository;
     private final AuthService authService;
+    private final NotificationService notificationService;
     public String likePost(LikeDto likeDto) {
         Post post = postRepository.findById(likeDto.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post with id " + likeDto.getPostId() + " not found!"));
@@ -76,7 +77,7 @@ public class LikesService {
             notification.setInteractionPost(comment.getPost());
             notification.setType(NotificationType.LIKE);
             notification.setTimestamp(LocalDateTime.now());
-            notificationRepository.save(notification);
+            notificationService.saveNotification(notification);
         }
 
         return "Success";

@@ -28,6 +28,7 @@ public class FollowService {
     private final UserRepository userRepository;
     private final NotificationRepository notificationRepository;
     private final AuthService authService;
+    private final NotificationService notificationService;
 
     public String followProfile(FollowDto followDto) {
         if (Objects.equals(authService.getCurrentUser().getUserId(), followDto.getFollowed())) {
@@ -55,7 +56,7 @@ public class FollowService {
         notification.setRecipient(followed.getUser());
         notification.setType(NotificationType.FOLLOW);
         notification.setTimestamp(LocalDateTime.now());
-        notificationRepository.save(notification);
+        notificationService.saveNotification(notification);
 
         return "Success";
     }
