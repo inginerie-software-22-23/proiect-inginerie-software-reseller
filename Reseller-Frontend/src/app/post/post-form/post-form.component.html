@@ -3,33 +3,32 @@
         <form class="post-form" [formGroup]="createPostForm" (ngSubmit)="createPost()">
           <div class="form-group">
             <h2 class="heading">Create post</h2>
-           <div class="controls">
-            <input type="text" [formControlName]="'title'" class="form-control" 
-              placeholder="Title" id="title">
-              <span *ngIf="!createPostForm.get('title')?.valid && createPostForm.get('title')?.touched">
-                Please provide a title
+            <div class="controls">
+              <input type="text" [formControlName]="'title'" class="form-control" 
+                placeholder="Title" id="title">
+                <span *ngIf="!createPostForm.get('title')?.valid && createPostForm.get('title')?.touched">
+                  Please provide a title
+                </span>
+              <input type="text" class="form-control" [formControlName]="'imageUrl'"  placeholder="URL" id="imageUrl" required>
+              <span *ngIf="!createPostForm.get('imageUrl')?.valid && createPostForm.get('imageUrl')?.touched">
+                Please provide an image
               </span>
-            <input type="text" class="form-control" [formControlName]="'imageUrl'"  placeholder="URL" id="imageUrl" required>
-            <span *ngIf="!createPostForm.get('imageUrl')?.valid && createPostForm.get('imageUrl')?.touched">
-              Please provide an image
-            </span>
-            <input type="text" class="form-control" [formControlName]="'description'" placeholder="Description" id="description" required >
-            <span *ngIf="!createPostForm.get('description')?.valid && createPostForm.get('description')?.touched">
-              Please provide a description
-            </span>
-            <input type="number" class="form-control" [formControlName]="'price'" id="price" required>
-            <span *ngIf="!createPostForm.get('price')?.valid && createPostForm.get('price')?.touched">
-              Please provide valid number!
-            </span>
-            <span>
-              <div class="buttons">
-                <button (click)="discardPost()" >Discard</button>
-                <button>Post</button>
-              </div>
-            </span>
-        </div>
+              <input type="text" class="form-control" [formControlName]="'description'" placeholder="Description" id="description" required >
+              <span *ngIf="!createPostForm.get('description')?.valid && createPostForm.get('description')?.touched">
+                Please provide a description
+              </span>
+              <input type="number" class="form-control" [formControlName]="'price'" id="price" required>
+              <span *ngIf="!createPostForm.get('price')?.valid && createPostForm.get('price')?.touched">
+                Please provide valid number!
+              </span>
+              <span>
+                <div class="buttons">
+                  <button (click)="discardPost()" >Discard</button>
+                  <button>Post</button>
+                </div>
+              </span>
+            </div>
           </div>
         </form>
       </div>
-   
   </div>
