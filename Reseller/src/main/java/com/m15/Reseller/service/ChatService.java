@@ -42,16 +42,16 @@ public class ChatService {
         }
 
         if (!check.isEmpty()) {
-            return "Chat between these users already exists";
+            return "Chat between users already exists";
         }
 
-        chatRepository.save(
-                Chat.builder()
-                        .firstUser(firstUser)
-                        .secondUser(secondUser)
-                        .build());
+        Chat chat = Chat.builder()
+                .firstUser(firstUser)
+                .secondUser(secondUser)
+                .build();
+        chatRepository.save(chat);
 
-        return "Success";
+        return chat.toString();
     }
 
 
