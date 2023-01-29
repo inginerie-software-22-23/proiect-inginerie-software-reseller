@@ -25,8 +25,8 @@ public class NotificationService {
     private final UserRepository userRepository;
 
     public void saveNotification(Notification notification) {
-        Optional<Notification> notificationOptional = notificationRepository.findById(notification.getNotificationId());
-        if (notificationOptional.isEmpty()) {
+        if (notificationRepository.findByTextAndRecipientAndSender(
+                notification.getText(), notification.getRecipient(), notification.getSender()).isEmpty()) {
             notificationRepository.save(notification);
         }
     }
