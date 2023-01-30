@@ -10,8 +10,8 @@
   background-color: lighten(lightcoral, 19%);
 
   h1 {
-      font-weight: bold;
-      font-size: 40px;
+    font-weight: bold;
+    font-size: 40px;
   }
 
   p {
@@ -33,20 +33,20 @@
   background-color: beige;
 
   img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
   }
 
   a {
-      font-weight: bold;
-      color: black;
-      font-size: 25px;
-      text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-size: 25px;
+    text-decoration: none;
 
-      &:hover {
-          opacity: 0.6;
-      }
+    &:hover {
+      opacity: 0.6;
+    }
   }
 }
