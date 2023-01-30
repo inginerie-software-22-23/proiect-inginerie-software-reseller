@@ -8,15 +8,7 @@
                 placeholder="Title" id="title">
                 <span *ngIf="!createPostForm.get('title')?.valid && createPostForm.get('title')?.touched">
                   Please provide a title
-                </span>
-              <input type="text" class="form-control" [formControlName]="'imageUrl'"  placeholder="URL" id="imageUrl" required>
-              <span *ngIf="!createPostForm.get('imageUrl')?.valid && createPostForm.get('imageUrl')?.touched">
-                Please provide an image
-              </span>
-              <form [formGroup]="fileForm">
-                <input class="input-element" type="file" formControlName="file" (change)="onFileChange($event)" accept="image/*" >
-                <button type="submit" class="btn btn-primary" (click)="uploadFile()">Upload</button>
-              </form>
+                </span> 
             <input type="text" class="form-control" [formControlName]="'description'" placeholder="Description" id="description" required >
             <span *ngIf="!createPostForm.get('description')?.valid && createPostForm.get('description')?.touched">
               Please provide a description
@@ -25,6 +17,10 @@
             <span *ngIf="!createPostForm.get('price')?.valid && createPostForm.get('price')?.touched">
               Please provide valid number!
             </span>
+            <form class="upload-file" [formGroup]="fileForm">
+              <input class="input-element" type="file" formControlName="file" (change)="onFileChange($event)" accept="image/*" >
+              <button type="submit" class="upload-btn" (click)="uploadFile()">Upload</button>
+            </form>
             <span>
               <div class="buttons">
                 <button (click)="discardPost()" >Discard</button>

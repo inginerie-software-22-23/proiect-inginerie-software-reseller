@@ -1,19 +1,26 @@
-<div *ngFor="let message of messages">
-  <div>
-    <ng-template [ngIf]="message.senderId === activeUser.userId">
-      Me:
-      <img class="chat-image" [src]="activeUser.imageUrl" alt="Chat Image">
-    </ng-template>
-    <ng-template [ngIf]="message.senderId !== activeUser.userId">
-      {{chat.sender.username}}:
-      <img class="chat-image" [src]="chat.sender.imageUrl" alt="Chat Image">
-    </ng-template>
-    {{message.text}}
+<div class="container">
+  <div class="chat-container" *ngFor="let message of messages">
+    <div class="messages">
+      <div class="me">
+        <ng-template [ngIf]="message.senderId === activeUser.userId">
+          <img [routerLink]="['/my-profile']" class="chat-image" [src]="activeUser.imageUrl" alt="Chat Image">
+          <p class="meText" [routerLink]="['/my-profile']">Me</p> 
+          <p class="messageMe">{{message.text}}</p>
+        </ng-template>
+      </div>
+      <div class="sender">
+        <ng-template [ngIf]="message.senderId !== activeUser.userId">
+          <img [routerLink]="['/user', chat.sender.username]" class="chat-image" [src]="chat.sender.imageUrl" alt="Chat Image">
+          <p class="senderText" [routerLink]="['/user', chat.sender.username]">{{chat.sender.username}}</p>
+          <p class="messageSender">{{message.text}}</p>   
+        </ng-template>
+      </div>
+    </div>
   </div>
+  <form [formGroup]="messageForm" (ngSubmit)="postMessage()">
+    <div class="sendText">
+      <textarea rows="1" cols="30" (input)="onTextAreaInput(textarea)" #textarea style="resize: none;" [formControlName]="'text'"></textarea>
+      <button type="submit" class="sendButton">Send</button>
+    </div>
+  </form>
 </div>
-<form [formGroup]="messageForm" (ngSubmit)="postMessage()">
-  <div>
-    <textarea rows="1" cols="30" [formControlName]="'text'"></textarea>
-    <button type="submit" class="sendButton">Send</button>
-  </div>
-</form>

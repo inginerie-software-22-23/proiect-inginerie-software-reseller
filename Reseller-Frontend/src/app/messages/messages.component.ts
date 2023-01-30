@@ -100,6 +100,11 @@ export class MessagesComponent implements OnInit{
     this.messageForm.reset();
   }
 
+  onTextAreaInput(textarea: HTMLTextAreaElement) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight - 14 + 'px';
+  }
+
 
 
 
