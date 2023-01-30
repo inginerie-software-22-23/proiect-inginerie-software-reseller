@@ -32,7 +32,7 @@ export class NotificationsComponent implements OnInit{
             notif.url = data;
             let message = notif.text;
             let username = message.split(" ")[0];
-            this.notifUsername = username;
+            notif.username = username;
           }
         );
 

@@ -9,5 +9,5 @@ export class NotificationPayload {
     postId: number = -1;
     url:string = '';
     postUrl:string= '';
-    //user:User= new User;
+    username: string= '';
 }
