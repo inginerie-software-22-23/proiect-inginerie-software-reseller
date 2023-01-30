@@ -6,7 +6,7 @@
   <hr />
   <div class="post-info">
     <div class="image-container">
-      <img width="300px" height="150px" (click)="goToPost(post.id)" [src]="post.imageUrl" alt="">
+      <img (click)="goToPost(post.id)" [src]="post.imageUrl" alt="">
     </div>
     <div class="details-container">
       <p (click)="goToPost(post.id)">{{post.title}}</p>
