@@ -13,7 +13,7 @@ import { ProfileService } from '../sevices/profile.service';
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.scss']
 })
-export class ChatsComponent implements OnInit, OnDestroy {
+export class ChatsComponent implements OnInit {
 
   name = this._authSevice.getUserName()
   chats: ChatPayload[] = []
@@ -24,31 +24,13 @@ export class ChatsComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private _chatService: ChatService, private _authSevice: AuthService, private _profileService: ProfileService, private localStorage: LocalStorageService){
-
-
-
-
+  constructor(private _chatService: ChatService, private _authSevice: AuthService, private _profileService: ProfileService, 
+    private localStorage: LocalStorageService){
 
   }
 
   ngOnInit(): void {
     this.getUser();
-
-
-    // this.subscribeList.push(this._profileService.getUserByUsername(this.name).subscribe( (data: User) =>{
-    //   this.user = data;
-    // }))
-
-    // this.subscribeList.push(this._chatService.getChatByUsername(this.name).subscribe(data => {
-    //   this.chats = data;
-    // }))
-
-
-
-
-
-
   }
 
 
@@ -58,7 +40,6 @@ export class ChatsComponent implements OnInit, OnDestroy {
       this.user = data;
     });
     this._chatService.getChatByUsername(this.name).pipe(
-      // takeUntil(this.ngUnsubscribe),
       switchMap((chats: ChatPayload[]) => {
         this.chats = chats;
         return forkJoin(
@@ -71,22 +52,10 @@ export class ChatsComponent implements OnInit, OnDestroy {
     ).subscribe((users: User[]) => {
       this.chats.forEach((chat, index) => {
         chat.sender = users[index];
-        //this._chatService.setChat(chat);
       });
     });
 
   }
-  // onChatSelected(chat: ChatPayload) {
-  //   this._chatService.setChat(chat);
-
-  // }
-
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next(true);
-    this.ngUnsubscribe.complete();
-  }
-
-
 
 
 }

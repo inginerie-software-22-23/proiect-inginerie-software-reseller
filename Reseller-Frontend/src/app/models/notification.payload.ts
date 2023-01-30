@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class NotificationPayload {
     text: string='';
     timestamp: any;
@@ -7,4 +9,5 @@ export class NotificationPayload {
     postId: number = -1;
     url:string = '';
     postUrl:string= '';
+    //user:User= new User;
 }

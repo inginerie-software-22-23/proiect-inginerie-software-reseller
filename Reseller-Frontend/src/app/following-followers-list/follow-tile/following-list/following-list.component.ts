@@ -11,13 +11,8 @@ import { ProfileService } from 'src/app/sevices/profile.service';
   styleUrls: ['./following-list.component.scss']
 })
 export class FollowingListComponent {
-  followersList: User[]=[];
   followingList: User[]=[];
-
-
   username = this.route.snapshot.params['name'];
-
-
   constructor(private route: ActivatedRoute, private authServ:AuthService, private  _profileService:ProfileService, private _imageService: ImageService) {}
 
   ngOnInit() {
