@@ -8,7 +8,7 @@
         <img class="firstPhoto" [src]="notif.url">
         <a class="postText" *ngIf="notif.post == true ; else userLink" [routerLink]="['/view-post/', notif.postId]">{{notif.text}} <img class="secondPhoto" [src]="notif.postUrl"> </a>
         <ng-template #userLink>
-          <a [routerLink]="['/user', notif.senderId]">{{notif.text}}</a>
+          <a [routerLink]="['/user/', notifUsername]">{{notif.text}}</a>
         </ng-template>
       </div>
       <hr />

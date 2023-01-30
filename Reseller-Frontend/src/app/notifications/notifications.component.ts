@@ -4,6 +4,7 @@ import { AuthService } from '../sevices/auth.service';
 import { ImageService } from '../sevices/image.service';
 import { NotificationsService } from '../sevices/notifications.service';
 import { PostsService } from '../sevices/posts.service';
+import { ProfileService } from '../sevices/profile.service';
 
 @Component({
   selector: 'app-notifications',
@@ -15,8 +16,10 @@ export class NotificationsComponent implements OnInit{
   notificationList: NotificationPayload [] = [new NotificationPayload];
   username = this._authService.getUserName();
   notifications: number = 0;
+  notifUsername:string = '';
 
-  constructor(private _notificationService: NotificationsService, private _authService: AuthService, private _imageService: ImageService){}
+  constructor(private _notificationService: NotificationsService, private _authService: AuthService,
+     private _imageService: ImageService, private _profileService:ProfileService){}
 
   ngOnInit(): void {
     
@@ -27,6 +30,9 @@ export class NotificationsComponent implements OnInit{
         this._imageService.getImageUrl(notif.text.split(" ")[0]).subscribe(
           data => {
             notif.url = data;
+            let message = notif.text;
+            let username = message.split(" ")[0];
+            this.notifUsername = username;
           }
         );
 

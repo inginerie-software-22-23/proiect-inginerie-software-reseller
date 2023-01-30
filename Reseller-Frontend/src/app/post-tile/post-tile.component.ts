@@ -42,8 +42,7 @@ export class PostTileComponent implements OnInit {
 
 
   constructor(private _router: Router, private _likeService: LikesService, private _profileService: ProfileService,
-    private _authService: AuthService, private _saveService: SavedService,  private _postService: PostsService, private imageService:ImageService,
-    private toastr: ToastrService) {
+    private _authService: AuthService, private _saveService: SavedService,  private _postService: PostsService, private imageService:ImageService) {
       
       this.loggedInSubscription = this._authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
   }
@@ -74,11 +73,11 @@ export class PostTileComponent implements OnInit {
     this.likePayload.postId = post.id;
     this._likeService.postLike(this.likePayload).subscribe(
       () => {
-        this.toastr.success('Liked!');
+        console.log('Liked!')
        
       },
       (error: HttpErrorResponse) => {
-        this.toastr.error(error.message);
+       
         console.error(error);
       }
       
@@ -92,11 +91,10 @@ export class PostTileComponent implements OnInit {
     this.savePayload.postId = post.id;
     this._saveService.postSave(this.savePayload).subscribe(
       () => {
-        this.toastr.success('Liked!');
+        console.log('Liked!')
 
       },
       (error: HttpErrorResponse) => {
-        this.toastr.error(error.message);
         console.error(error);
       }
       
@@ -108,11 +106,10 @@ export class PostTileComponent implements OnInit {
     this.savePayload.postId = post.id;
     this._saveService.deleteSave(this.savePayload.postId).subscribe(
       () => {
-        this.toastr.success('Liked!');
+        console.log('Liked!')
 
       },
       (error: HttpErrorResponse) => {
-        this.toastr.error(error.message);
         console.error(error);
       }
       
@@ -127,7 +124,6 @@ export class PostTileComponent implements OnInit {
       
       },
       (error: HttpErrorResponse) => {
-        this.toastr.error(error.message);
         console.error(error);
       }
       

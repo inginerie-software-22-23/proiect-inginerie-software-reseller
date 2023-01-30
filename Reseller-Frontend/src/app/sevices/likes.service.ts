@@ -11,7 +11,7 @@ export class LikesService {
   constructor( private _http: HttpClient) { }
 
   postLike(likePayload: LikePayload): Observable<any> {
-    return this._http.post<any>('http://localhost:8070/api/likes', likePayload);
+    return this._http.post<any>('http://localhost:8070/api/likes', likePayload, {responseType: 'text' as 'json'});
   }
   postLikeForComment(likePayload: LikePayload): Observable<any> {
     return this._http.post<any>('http://localhost:8070/api/likes/comment', likePayload);

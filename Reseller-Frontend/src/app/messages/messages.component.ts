@@ -67,14 +67,6 @@ export class MessagesComponent implements OnInit{
 
     })
 
-
-   
-   
-
-
-
-    
-
     this._profileService.getUserByUsername(this.chat.sender.username).subscribe((data: User) =>{
       this.chatUser = data;
     })
@@ -85,17 +77,18 @@ export class MessagesComponent implements OnInit{
   }
   
   postMessage(){
-
-    this.sendMessage.chatId = this.chatId;
-    this.sendMessage.senderId = this.activeUser.userId;
-    this.sendMessage.recipientId = this.chat.sender.userId;
-    this.sendMessage.text = this.messageForm.get('text')?.value;
-    this.chat.messages.push(this.sendMessage)
-    this._chatService.postMessage(this.sendMessage).subscribe(data =>{
+    const newMessage = {
+      chatId: this.chatId,
+      senderId: this.activeUser.userId,
+      recipientId: this.chat.sender.userId,
+      text: this.messageForm.get('text')?.value
+    };
+    this.messages.push(newMessage)
+    this._chatService.postMessage(newMessage).subscribe(data =>{
       console.log("message posted")
     })
 
-    this.messageForm.reset;
+    this.messageForm.reset();
   }
 
 
