@@ -79,6 +79,8 @@ export class HomeComponent implements OnInit {
     this._imageService.getPostImageUrl(post.id).subscribe(
       data => {
         post.imageUrl = data;
+        console.log(post)
+        console.log(post.imageUrl)
       }
     );
 

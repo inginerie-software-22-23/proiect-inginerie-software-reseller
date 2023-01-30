@@ -70,7 +70,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setUserRole(UserRole.USER);
         user.setCreated(Instant.now());
-        user.setEnabled(false);
+        user.setEnabled(true);
 
         userRepository.save(user);
 
@@ -79,6 +79,7 @@ public class AuthService {
         profile.setUsername(user.getUsername());
         profile.setUser(user);
         profile.setFullName(registerRequest.getFullName());
+        profile.setImageUrl("profile-pictures/9384e2a7-c7fb-46d2-9610-6a36c6d9d05f-user-ge5a12c801_640.png");
         profileRepository.save(profile);
 
         String token = generateVerificationToken(user);
@@ -150,7 +151,7 @@ public class AuthService {
     }
 
     public String forgotPassword(String email) {
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByEmail(email.strip())
                 .orElseThrow(() -> new SpringResellerException("Invalid email!"));
 
         String newPassword = UUID.randomUUID().toString();
@@ -161,6 +162,6 @@ public class AuthService {
                 emailSender.buildForgotPassword(user.getUsername(), newPassword), "Forgot password");
 
         userRepository.save(user);
-        return "Sent new password to email";
+        return "Sent new password to email - " + newPassword;
     }
 }

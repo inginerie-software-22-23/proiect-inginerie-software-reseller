@@ -60,7 +60,6 @@ export class PostTileComponent implements OnInit {
     this._profileService.getUserByUsername(this.user).subscribe((data: User) => {
       this.activeUser = data;
     })
-    console.log(this.likesList)
 
   }
 

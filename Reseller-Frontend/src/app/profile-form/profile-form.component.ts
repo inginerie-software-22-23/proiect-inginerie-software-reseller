@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -20,7 +20,6 @@ export class ProfileFormComponent implements OnInit {
   username: String = '';
   newToken!: any;
   fileForm!: FormGroup;
-  
 
   constructor(private _formBuilder: FormBuilder, private _profileService: ProfileService, private _router : Router, private _authService: AuthService,
     private localStorage: LocalStorageService, private http:HttpClient) {
@@ -51,62 +50,63 @@ export class ProfileFormComponent implements OnInit {
   }
 
   saveUser() { 
-    if (this.editForm.valid && this.fileForm.valid) {   
+    if (this.editForm.valid) {   
       if (this.username === this.editForm.value.username) {     
         this.editForm.value.username = "";  
       }
-
       this._profileService.updateProfile(this.username, this.editForm.value).subscribe(data => {
-        console.log(data)
         this.localStorage.store('authenticationToken', data.authenticationToken);
         this.localStorage.store('username', data.username);
         this.localStorage.store('refreshToken', data.refreshToken);
         this.localStorage.store('expiresAt', data.expiresAt);
         this._router.navigate(['/my-profile'])
       });
-
-     // this.uploadFile();
-      
-    // this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', this.fileForm.value).subscribe(data=>{
-    //   console.log(data);
-    // });
-
-      // postProfileImageUrl(image: File){
-      //   return this._http.post<File>('http://localhost:8070/api/profile/' + username + '/profile-picture', image)
-      // }
     }
   }
 
+  onUsernameInput(textarea: HTMLTextAreaElement) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight - 14 + 'px';
+  }
+  onFullNameInput(textarea: HTMLTextAreaElement) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight - 14 + 'px';
+  }
   onTextAreaInput(textarea: HTMLTextAreaElement) {
     textarea.style.height = 'auto';
-    textarea.style.height = textarea.scrollHeight - 4 + 'px';
+    textarea.style.height = textarea.scrollHeight - 14 + 'px';
   }
+
+
   onFileChange(event: Event) {
     if (event.target instanceof HTMLInputElement && event.target.files && event.target.files.length > 0) {
       const file: File = event.target.files[0];
       this.fileForm.get('file')?.setValue(file);
 
-       // create a new FileReader
-       const reader = new FileReader();
+      // create a new FileReader
+      const reader = new FileReader();
 
-       // read the file as a data URL
-       reader.readAsDataURL(file);
- 
-       // when the file is loaded, set the form control value with the data URL
-       reader.onload = () => {
-         this.editForm.get('imageUrl')?.setValue(reader.result);
-       };
+      // read the file as a data URL
+      reader.readAsDataURL(file);
+
+      // when the file is loaded, set the form control value with the data URL
+      reader.onload = () => {
+        this.editForm.get('imageUrl')?.setValue(reader.result);
+      };
+
     }
   }
 
   uploadFile() {
     const formData = new FormData();
-    formData.append('file', this.fileForm.get('file')?.value);
+    const file: File = this.fileForm.get('file')?.value
+    formData.append("file", file);
+    console.log(formData.get('file'))
     
-    const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
-    this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', formData, { headers: headers })
+    const headers = new HttpHeaders().set('enctype', 'multipart/form-data');
+    this.http.post('http://localhost:8070/api/profile/' + this.username + '/profile-picture', formData, { headers: headers, responseType:"text" as "json"})
       .subscribe((response) => {
-        console.log(response)
+        this.editForm.get("imageUrl")?.setValue(response);
       });
   }
 }

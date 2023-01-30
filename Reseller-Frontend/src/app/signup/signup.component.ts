@@ -41,13 +41,15 @@ export class SignupComponent implements OnInit {
 
     this.authService.signup(this.signupRequestPayload).subscribe(() => {
       console.log('Signup Successful');
+
      
+
+      this.router.navigate(['/login']);
+
     }, () => {
       console.log('Signup Failed');
     });
 
-    this.router.navigate(['/sign-up']);
   }
-
 
 }

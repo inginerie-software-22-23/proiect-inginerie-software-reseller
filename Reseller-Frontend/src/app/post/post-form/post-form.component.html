@@ -1,18 +1,22 @@
 <div class="container">
       <div class="create-post-container ">
-        <form class="post-form" [formGroup]="createPostForm" (ngSubmit)="createPost()">
+        <form class="post-form" [formGroup]="createPostForm">
           <div class="form-group">
             <h2 class="heading">Create post</h2>
-           <div class="controls">
-            <input type="text" [formControlName]="'title'" class="form-control" 
-              placeholder="Title" id="title">
-              <span *ngIf="!createPostForm.get('title')?.valid && createPostForm.get('title')?.touched">
-                Please provide a title
+            <div class="controls">
+              <input type="text" [formControlName]="'title'" class="form-control" 
+                placeholder="Title" id="title">
+                <span *ngIf="!createPostForm.get('title')?.valid && createPostForm.get('title')?.touched">
+                  Please provide a title
+                </span>
+              <input type="text" class="form-control" [formControlName]="'imageUrl'"  placeholder="URL" id="imageUrl" required>
+              <span *ngIf="!createPostForm.get('imageUrl')?.valid && createPostForm.get('imageUrl')?.touched">
+                Please provide an image
               </span>
-            <input type="text" class="form-control" [formControlName]="'imageUrl'"  placeholder="URL" id="imageUrl" required>
-            <span *ngIf="!createPostForm.get('imageUrl')?.valid && createPostForm.get('imageUrl')?.touched">
-              Please provide an image
-            </span>
+              <form [formGroup]="fileForm">
+                <input class="input-element" type="file" formControlName="file" (change)="onFileChange($event)" accept="image/*" >
+                <button type="submit" class="btn btn-primary" (click)="uploadFile()">Upload</button>
+              </form>
             <input type="text" class="form-control" [formControlName]="'description'" placeholder="Description" id="description" required >
             <span *ngIf="!createPostForm.get('description')?.valid && createPostForm.get('description')?.touched">
               Please provide a description
@@ -24,12 +28,11 @@
             <span>
               <div class="buttons">
                 <button (click)="discardPost()" >Discard</button>
-                <button>Post</button>
+                <button (click)="createPost()">Post</button>
               </div>
             </span>
         </div>
           </div>
         </form>
       </div>
-   
   </div>

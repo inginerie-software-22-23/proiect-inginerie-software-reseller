@@ -5,7 +5,7 @@
       <h2 class="username">{{name}}</h2>
       <div class="profile-actions">
         <button class="follow-btn" (click)="follow()" *ngIf="!isFollowed">Follow</button>
-        <button class="follow-btn" (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
+        <button class="unfollow-btn" (click)="unfollow()" *ngIf="isFollowed">Unfollow</button>
         <button class="message-btn" (click) = "checkIfUsersHaveChat()">Message</button>
       </div>
     </div>
