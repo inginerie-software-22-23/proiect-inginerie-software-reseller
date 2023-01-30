@@ -56,8 +56,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     
     this.getUser();
-    //this.verifyIfFollowed()
-    //console.log(this.user)
     this._profileService.getUserByUsername(this.activeUser).subscribe((user:User)=>
     {
       this.activeUser = user;
@@ -65,6 +63,7 @@ export class ProfileComponent implements OnInit {
 
     this._postService.getAllPostsByUser(this.name).subscribe(data => {
       this.posts = data;
+      this.posts = this.posts.reverse();
       this.postLength = data.length;
       this.posts.forEach(post => {
         this.imageService.getPostImageUrl(post.id).subscribe(
