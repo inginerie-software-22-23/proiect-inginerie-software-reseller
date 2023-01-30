@@ -118,14 +118,6 @@ export class ProfileComponent implements OnInit {
       
     
 }
-  // verifyIfFollowed(){
-  //   let isFound = this.activeUserFollowing.findIndex(f => f.profileId === this.followRequest.followed);
-  //   if(isFound > -1){
-  //     this.isFollowed = true;
-  //   } else {
-  //     this.isFollowed = false;
-  //   }
-  // }
 
     follow(){
       this._followService.postFollow(this.followRequest).subscribe(data=>{
@@ -182,42 +174,6 @@ export class ProfileComponent implements OnInit {
       );
     });
   }
-  // checkIfUsersHaveChat(): Promise<ChatPayload> {
-  //   let user1 = this.name;
-  //   let user2 = this._authService.getUserName();
-  //   return new Promise((resolve, reject) => {
-  //     forkJoin([
-  //       this._chatService.getChatByUsername(user1),
-  //       this._chatService.getChatByUsername(user2)
-  //     ]).subscribe(
-  //       result => {
-  //         if(result[0].length == 0 || result[1].length == 0) {
-  //           reject("One of the users does not have any chats.");
-  //           this.createChat();
-  //         }
-  //         else{
-  //           let sharedChats = result[0].filter(chat1 => result[1].find(chat2 => chat1.chatId === chat2.chatId));
-  //           if (sharedChats.length > 0) {
-  //             resolve(sharedChats[0]);
-  //             this.router.navigate(['/messages/'+ sharedChats[0].chatId]);
-  //             console.log('au chat'+ sharedChats[0].chatId)
-  //           } else {
-  //             reject("No chat exists between the two users");
-  //             this.createChat();
-  //           }
-  //         }
-  //       },
-  //       error => {
-  //         if (error.status !== 201) {
-  //           reject(error);
-  //         }
-  //         this.createChat();
-  //       }
-  //     );
-  //   });
-  // }
-  
-
   
   createChat(){
     let chat: ChatPayload = {
