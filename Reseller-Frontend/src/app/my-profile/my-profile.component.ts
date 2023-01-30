@@ -47,6 +47,7 @@ export class MyProfileComponent implements OnInit {
 
     this._postService.getAllPostsByUser(this.username).subscribe(data => {
       this.posts = data;
+      this.posts = this.posts.reverse();
       this.posts.forEach(post => {
         this.imageService.getPostImageUrl(post.id).subscribe(
           data => {

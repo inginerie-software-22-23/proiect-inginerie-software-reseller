@@ -25,6 +25,7 @@ export class NotificationsComponent implements OnInit{
     
     this._notificationService.getAllNotificationsByUser(this.username).subscribe(data => {
       this.notificationList = data;
+      this.notificationList = this.notificationList.reverse();
       this.notifications = data.length;
       this.notificationList.forEach(notif => {
         this._imageService.getImageUrl(notif.text.split(" ")[0]).subscribe(
@@ -47,6 +48,7 @@ export class NotificationsComponent implements OnInit{
 
 
     })
+   
   }
 
 }

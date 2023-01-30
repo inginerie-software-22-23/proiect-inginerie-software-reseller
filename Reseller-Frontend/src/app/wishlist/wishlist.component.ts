@@ -22,6 +22,7 @@ export class WishlistComponent implements OnInit{
   ngOnInit(): void {
     this._savedService.getAllSavesByUser(this.username).subscribe( data => {
       this.wishlist = data; 
+      this.wishlist = this.wishlist.reverse();
       const requests = this.wishlist.map(saved => {
         return this._postsService.getPostById(saved.postId);
       });
