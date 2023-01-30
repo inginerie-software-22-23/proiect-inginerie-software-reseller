@@ -6,6 +6,7 @@ import { User } from '../models/user';
 
 import { AuthService } from '../sevices/auth.service';
 import { ChatService } from '../sevices/chat.service';
+import { ImageService } from '../sevices/image.service';
 import { ProfileService } from '../sevices/profile.service';
 
 @Component({
@@ -20,12 +21,13 @@ export class ChatsComponent implements OnInit {
   user: User = new User;
   private ngUnsubscribe = new Subject();
   private subscribeList: Subscription[] = [];
+  chatImage: string[] = []
 
 
 
 
   constructor(private _chatService: ChatService, private _authSevice: AuthService, private _profileService: ProfileService, 
-    private localStorage: LocalStorageService){
+    private localStorage: LocalStorageService, private imageService: ImageService){
 
   }
 
@@ -36,9 +38,10 @@ export class ChatsComponent implements OnInit {
 
 
   getUser(){
-    this._profileService.getUserByUsername(this.name).subscribe((data:User) => {
+    this._profileService.getUserByUsername(this.name).subscribe((data: User) => {
       this.user = data;
     });
+  
     this._chatService.getChatByUsername(this.name).pipe(
       switchMap((chats: ChatPayload[]) => {
         this.chats = chats;
@@ -53,9 +56,15 @@ export class ChatsComponent implements OnInit {
       this.chats.forEach((chat, index) => {
         chat.sender = users[index];
       });
+      this.chats.forEach(chat => {
+        this.imageService.getImageUrl(chat.sender.username).subscribe(data => {
+          chat.sender.imageUrl = data;
+        });
+      });
     });
-
   }
+  
 
+ 
 
 }
