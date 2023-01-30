@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -114,11 +115,10 @@ public class ProfileService {
     }
 
     public List<ProfileDto> searchProfile(String username) {
-        Profile admin = profileRepository.findByUsername("admin")
-                .orElseThrow(() -> new SpringResellerException("Internal error"));
+        Optional<Profile> admin = profileRepository.findByUsername("admin");
 
         List<Profile> profiles = new java.util.ArrayList<>(profileRepository.findByUsernameStartingWith(username).stream().toList());
-        profiles.remove(admin);
+        admin.ifPresent(profiles::remove);
 
         return  profiles.stream()
                 .map(this::mapToDto)
