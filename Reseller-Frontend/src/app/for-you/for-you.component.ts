@@ -33,6 +33,7 @@ export class ForYouComponent implements OnInit {
       });
       forkJoin(requests).subscribe(data => {
         this.posts = data.flat();
+        this.posts = this.posts.reverse();
         this.posts.forEach(post => {
           this.imageService.getPostImageUrl(post.id).subscribe(
             data => {
@@ -47,6 +48,8 @@ export class ForYouComponent implements OnInit {
         });
       });
     });
+
+   
   }
 }
 

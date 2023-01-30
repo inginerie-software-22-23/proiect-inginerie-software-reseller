@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     this._postService.getAllPosts().subscribe(post => {
       this.posts = post; 
       this.posts = this.posts.reverse();
+
       this.posts.forEach(post => {
         this.setImages(post);
       })
