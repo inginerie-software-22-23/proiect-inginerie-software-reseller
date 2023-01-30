@@ -1,12 +1,109 @@
-.messages{
-    position: center;
-    margin: 25%
+.container {
+  border: 1px solid lightgray;
+  border-radius: 30px;
+  max-width: 1400px;
+  margin: auto;
+  background-color: lightcyan;
 }
-.left-message {
-   margin-left: 12%;
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   }
   
-  .right-message {
-    margin-left: 34%;
+  .messages {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 55%;
+  margin-bottom: 15px;
   }
   
+  .me {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  }
+  
+  .sender {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  }
+  
+  .chat-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  }
+  
+  .meText, .senderText {
+  font-weight: bold;
+  font-size: 19px;
+  margin-top: 10px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+  }
+  
+  .messageMe, .messageSender {
+  padding: 10px;
+  background-color: lightgray;
+  border-radius: 20px;
+  margin-left: 10px;
+  max-width: 80%;
+  overflow-wrap: break-word;
+  font-size: 17px;
+  margin-top: 10px;
+  }
+  
+  form {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin-top: 10px;
+  }
+  
+  textarea {
+  border-radius: 10px;
+  border-color: black;
+  padding: 7px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+  font-size: 17px;
+  margin-right: 10px;
+  }
+  
+  button.sendButton {
+  padding: 10px 20px;
+  background-color: lighten($color: lightcoral, $amount: 12);
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+  }
+
+  .sendText {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px;
+    margin-left: 500px;
+  }
+
+  .messageMe {
+    background-color: lightgreen;
+  }
+
+  .messageSender {
+    background-color: lightblue;
+  }
