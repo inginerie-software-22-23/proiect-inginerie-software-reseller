@@ -1,17 +1,19 @@
 <div *ngFor="let message of messages">
-    <div >
-     
-      <span *ngIf="message.senderId === activeUser.userId; else otherUser">me: </span>
-      <ng-template #otherUser>{{chat.sender.username}}: </ng-template>
-      {{message.text}}
-    </div>
+  <div>
+    <ng-template [ngIf]="message.senderId === activeUser.userId">
+      Me:
+      <img class="chat-image" [src]="activeUser.imageUrl" alt="Chat Image">
+    </ng-template>
+    <ng-template [ngIf]="message.senderId !== activeUser.userId">
+      {{chat.sender.username}}:
+      <img class="chat-image" [src]="chat.sender.imageUrl" alt="Chat Image">
+    </ng-template>
+    {{message.text}}
   </div>
-
-  <form [formGroup]="messageForm" (ngSubmit)="postMessage()">
-    <div >                   
-      <textarea rows="1" cols="30"  [formControlName]="'text'"></textarea>
-      <button type="submit" class="sendButton">Send</button>
-    </div>
-  </form>
-  
-  
+</div>
+<form [formGroup]="messageForm" (ngSubmit)="postMessage()">
+  <div>
+    <textarea rows="1" cols="30" [formControlName]="'text'"></textarea>
+    <button type="submit" class="sendButton">Send</button>
+  </div>
+</form>

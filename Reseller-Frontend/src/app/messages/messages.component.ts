@@ -8,6 +8,7 @@ import { MessagePayload } from '../models/message.payload';
 import { User } from '../models/user';
 import { AuthService } from '../sevices/auth.service';
 import { ChatService } from '../sevices/chat.service';
+import { ImageService } from '../sevices/image.service';
 import { ProfileService } from '../sevices/profile.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class MessagesComponent implements OnInit{
 
 
   constructor(private _chatService: ChatService, private activateRoute: ActivatedRoute, private _authService:AuthService, private _profileService:ProfileService,
-    private localStorage: LocalStorageService){
+    private _imageService: ImageService){
     this.messageForm = new FormGroup({
       text: new FormControl('', Validators.required)
     });
@@ -54,6 +55,9 @@ export class MessagesComponent implements OnInit{
 
     this._profileService.getUserByUsername(this.activeUsername).subscribe((data: User) =>{
       this.activeUser = data;
+      this._imageService.getImageUrl(this.activeUsername).subscribe( data => {
+        this.activeUser.imageUrl = data;
+      })
     })
 
  
@@ -63,7 +67,12 @@ export class MessagesComponent implements OnInit{
       const userId = data.firstUserId === this.activeUser.userId ? data.secondUserId : data.firstUserId;
       this._profileService.getUserById(userId).subscribe(data => {
         this.chat.sender = data;
+        this._imageService.getImageUrl(this.chat.sender.username).subscribe(  data => {
+          this.chat.sender.imageUrl = data;
+        })
       })
+
+
 
     })
 
