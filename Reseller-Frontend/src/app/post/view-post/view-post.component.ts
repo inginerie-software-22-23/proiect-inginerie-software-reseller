@@ -151,11 +151,9 @@ export class ViewPostComponent implements OnInit {
     this.likePayload.postId = post.id;
     this._likeService.postLike(this.likePayload).subscribe(
       () => {
-        //this.toastr.success('Liked!');
        
       },
       (error: HttpErrorResponse) => {
-        //this.toastr.error(error.message);
         console.error(error);
       }
       
@@ -169,11 +167,9 @@ export class ViewPostComponent implements OnInit {
     this.savePayload.postId = post.id;
     this._saveService.postSave(this.savePayload).subscribe(
       () => {
-        //this.toastr.success('Liked!');
 
       },
       (error: HttpErrorResponse) => {
-       // this.toastr.error(error.message);
         console.error(error);
       }
       
@@ -184,11 +180,9 @@ export class ViewPostComponent implements OnInit {
     this.savePayload.postId = post.id;
     this._saveService.deleteSave(this.savePayload.postId).subscribe(
       () => {
-        //this.toastr.success('Liked!');
 
       },
       (error: HttpErrorResponse) => {
-       // this.toastr.error(error.message);
         console.error(error);
       }
       
@@ -203,7 +197,6 @@ export class ViewPostComponent implements OnInit {
       
       },
       (error: HttpErrorResponse) => {
-       // this.toastr.error(error.message);
         console.error(error);
       }
       

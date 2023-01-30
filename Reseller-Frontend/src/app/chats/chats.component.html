@@ -1,13 +1,14 @@
-<div *ngFor="let chat of chats; index as i">
+<!-- <div *ngFor="let chat of chats; index as i">
     <a routerLink="/messages/{{chat.chatId}}">
         {{chat.sender.username}}
         <img class="chat-image" [src]="chat.sender.imageUrl" alt="Chat Image">
     </a>
-</div> 
+</div>  -->
 
-<!-- <div *ngFor="let chat of chats; index as i">
-    <a routerLink="/messages/{{chat.chatId}}">
-        {{chat.sender.username}}
-        <img class="chat-image" [src]="chatImage[i] | async" alt="Chat Image">
-    </a>
-</div> -->
+<div class="container">
+    <h1>Chats</h1>
+    <div class ="users" *ngFor="let chat of chats; index as i">
+        <img class="chat-image" [src]="chat.sender.imageUrl" alt="Chat Image">
+        <a class="user" routerLink="/messages/{{chat.chatId}}"> {{chat.sender.username}} </a>
+    </div>
+</div>
