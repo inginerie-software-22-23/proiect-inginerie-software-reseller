@@ -1,11 +1,11 @@
-<form [formGroup]="searchForm">
-  <input matInput placeholder="Search" formControlName="searchControl">
-</form>
+<div class="search-container">
+  <form [formGroup]="searchForm">
+    <input class="search-input" matInput placeholder="Search" formControlName="searchControl">
+  </form>
+  <button (click)="searchInitiated = true; searchPosts()" class="search-button" id="posts-button">Posts</button>
+  <button (click)="searchInitiated = true; searchUser()" class="search-button" id="users-button">Users</button>
+</div>
 
-<button mat-raised-button color="primary" (click)="searchInitiated = true; searchPosts()">Search Posts</button>
-<button mat-raised-button color="primary" (click)="searchInitiated = true; searchUser()">Search Users</button>
-
-  
 <div class="home-body">
   <div class="container">
     <div class="row">
