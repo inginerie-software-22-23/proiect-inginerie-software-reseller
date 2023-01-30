@@ -26,8 +26,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private _postService: PostsService,private _searchService: SearchService, private _imageService:ImageService, private _authService:AuthService) {  
     this._postService.getAllPosts().subscribe(post => {
-      this.posts = post;
-      this.posts.reverse();
+      this.posts = post; 
+      this.posts = this.posts.reverse();
+
       this.posts.forEach(post => {
         this.setImages(post);
       })

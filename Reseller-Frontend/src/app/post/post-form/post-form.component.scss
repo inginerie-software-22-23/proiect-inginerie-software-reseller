@@ -138,10 +138,8 @@ $pad: 10px;
 
 .grid {
   background: white;
-  //margin: 0 0 $pad 0;
   
   &:after {
-    /* Or @extend clearfix */
     content: "";
     display: table;
     clear: both;
