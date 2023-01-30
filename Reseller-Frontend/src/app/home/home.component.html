@@ -1,32 +1,32 @@
-<!-- 
-  <div class="home-body">
-
-    <div class="container">
-      <div class="row">
-        <hr />
-        <div class="col-md-9">
-          <app-post-tile [posts]="posts"></app-post-tile>
-        </div> -->
-
-<form [formGroup]="searchForm" (ngSubmit)="search()">
-  <input type="text" formControlName="searchControl" >
-  <button type="submit">Search</button>
+<form [formGroup]="searchForm">
+  <input matInput placeholder="Search" formControlName="searchControl">
 </form>
 
-<mat-icon routerLink="/search-profile">search</mat-icon>
+<button mat-raised-button color="primary" (click)="searchInitiated = true; searchPosts()">Search Posts</button>
+<button mat-raised-button color="primary" (click)="searchInitiated = true; searchUser()">Search Users</button>
+
   
 <div class="home-body">
   <div class="container">
     <div class="row">
       <hr />
-      <div class="col-md-9">
-        <div *ngIf="searchResults.length > 0; else showPosts">
-          <app-post-tile [posts]="searchResults"></app-post-tile>
+      <div >
+        <div *ngIf="searchResults.length > 0 && searchInitiated; else noResults">
+          <div *ngIf="searchType === 'posts'">
+            <app-post-tile [posts]="searchResults"></app-post-tile>
+          </div>
+          <div *ngIf="searchType === 'users'">
+            <div *ngFor = "let user of searchResults">
+              <a class="username" [routerLink]="user.username === username? ['/my-profile'] : ['/user', user.username]">{{user.username}}</a>
+            </div>
+          </div>
         </div>
-        <ng-template #showPosts>
-          <app-post-tile [posts]="posts"></app-post-tile>
+        <ng-template #noResults>
+          <p *ngIf="searchInitiated">No results found</p>
         </ng-template>
+      <app-post-tile [posts]="posts"></app-post-tile>
       </div>
     </div>
   </div>
 </div>
+

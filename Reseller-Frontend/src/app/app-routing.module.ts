@@ -15,7 +15,6 @@ import { PostFormComponent } from './post/post-form/post-form.component';
 import { ViewPostComponent } from './post/view-post/view-post.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { ProfileComponent } from './profile/profile.component';
-import { SearchProfileComponent } from './search-profile/search-profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 
@@ -35,7 +34,6 @@ const routes: Routes = [ {path: 'sign-up', component: SignupComponent},
 {path: 'notifications', component: NotificationsComponent},
 {path: 'wishlist', component: WishlistComponent},
 {path: 'edit/:name', component: ProfileFormComponent},
-{path: 'search-profile', component: SearchProfileComponent},
 {path: 'chats', component: ChatsComponent},
 {path: 'messages/:id', component:MessagesComponent},
 {path: 'forgot-password', component:ForgotPasswordComponent}
